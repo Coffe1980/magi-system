@@ -14,8 +14,8 @@
 
 | Núcleo | Papel | Modelo |
 |---|---|---|
-| 🔬 MELCHIOR-1 | Análise lógica e técnica | Gemini 2.0 Flash |
-| 🛡️ BALTHASAR-2 | Avaliação ética e humana | Gemini 2.0 Flash Lite |
+| 🔬 MELCHIOR-1 | Análise lógica e técnica | DeepSeek or OpenAI |
+| 🛡️ BALTHASAR-2 | Avaliação ética e humana | DeepSeek or OpenAI |
 | ⚡ CASPER-3 | Síntese e veredito final | DeepSeek via OpenRouter |
 | 🖥️ ADAM-0 | Engenharia e código | DeepSeek R1 via OpenRouter |
 
