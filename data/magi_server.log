@@ -1,0 +1,1631 @@
+2026-05-25 22:16:11,763 [WARNING] Rodando em HTTP. Em produção use HTTPS com Let's Encrypt.
+2026-05-25 22:16:11,763 [INFO] MAGI Server iniciando em 0.0.0.0:8000
+2026-05-25 22:16:21,105 [WARNING] Rodando em HTTP. Em produção use HTTPS com Let's Encrypt.
+2026-05-25 22:16:21,105 [INFO] MAGI Server iniciando em 0.0.0.0:8000
+2026-05-25 22:16:43,682 [INFO] Usuário criado: admin [admin]
+2026-05-25 22:16:43,683 [WARNING] Admin padrão criado. TROQUE A SENHA: magi_admin_2026
+2026-05-25 22:16:43,928 [INFO] Loading faiss with AVX2 support.
+2026-05-25 22:16:44,000 [INFO] Successfully loaded faiss with AVX2 support.
+2026-05-25 22:16:54,383 [INFO] No device provided, using cpu
+2026-05-25 22:16:54,896 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/modules.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:16:54,910 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/modules.json "HTTP/1.1 200 OK"
+2026-05-25 22:16:55,072 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config_sentence_transformers.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:16:55,073 [WARNING] Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-05-25 22:16:55,081 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config_sentence_transformers.json "HTTP/1.1 200 OK"
+2026-05-25 22:16:55,083 [INFO] Loading SentenceTransformer model from sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2.
+2026-05-25 22:16:55,223 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config_sentence_transformers.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:16:55,231 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config_sentence_transformers.json "HTTP/1.1 200 OK"
+2026-05-25 22:16:55,372 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:16:55,380 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/README.md "HTTP/1.1 200 OK"
+2026-05-25 22:16:55,523 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/modules.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:16:55,536 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/modules.json "HTTP/1.1 200 OK"
+2026-05-25 22:16:55,682 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/sentence_bert_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:16:55,691 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/sentence_bert_config.json "HTTP/1.1 200 OK"
+2026-05-25 22:16:55,831 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/adapter_config.json "HTTP/1.1 404 Not Found"
+2026-05-25 22:16:55,911 [INFO] MAGISystem inicializado com sucesso
+2026-05-25 22:16:55,975 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:16:55,981 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config.json "HTTP/1.1 200 OK"
+2026-05-25 22:16:56,375 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/processor_config.json "HTTP/1.1 404 Not Found"
+2026-05-25 22:16:56,537 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/preprocessor_config.json "HTTP/1.1 404 Not Found"
+2026-05-25 22:16:56,680 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/video_preprocessor_config.json "HTTP/1.1 404 Not Found"
+2026-05-25 22:16:57,055 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/preprocessor_config.json "HTTP/1.1 404 Not Found"
+2026-05-25 22:16:57,196 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:16:57,204 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-05-25 22:16:57,354 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:16:57,373 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config.json "HTTP/1.1 200 OK"
+2026-05-25 22:16:57,520 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:16:57,530 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config.json "HTTP/1.1 200 OK"
+2026-05-25 22:16:57,673 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:16:57,682 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-05-25 22:16:57,822 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:16:57,828 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-05-25 22:16:57,969 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-05-25 22:16:58,116 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-05-25 22:17:00,086 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2 "HTTP/1.1 200 OK"
+2026-05-25 22:17:00,410 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/1_Pooling/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:17:00,418 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/1_Pooling%2Fconfig.json "HTTP/1.1 200 OK"
+2026-05-25 22:17:00,628 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2 "HTTP/1.1 200 OK"
+2026-05-25 22:21:09,297 [INFO] Loading faiss with AVX2 support.
+2026-05-25 22:21:09,311 [INFO] Successfully loaded faiss with AVX2 support.
+2026-05-25 22:21:15,655 [INFO] No device provided, using cpu
+2026-05-25 22:21:16,088 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/modules.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:21:16,098 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/modules.json "HTTP/1.1 200 OK"
+2026-05-25 22:21:16,239 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config_sentence_transformers.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:21:16,240 [WARNING] Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-05-25 22:21:16,250 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config_sentence_transformers.json "HTTP/1.1 200 OK"
+2026-05-25 22:21:16,251 [INFO] Loading SentenceTransformer model from sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2.
+2026-05-25 22:21:16,396 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config_sentence_transformers.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:21:16,410 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config_sentence_transformers.json "HTTP/1.1 200 OK"
+2026-05-25 22:21:16,570 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:21:16,580 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/README.md "HTTP/1.1 200 OK"
+2026-05-25 22:21:16,782 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/modules.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:21:16,798 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/modules.json "HTTP/1.1 200 OK"
+2026-05-25 22:21:16,936 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/sentence_bert_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:21:16,944 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/sentence_bert_config.json "HTTP/1.1 200 OK"
+2026-05-25 22:21:17,091 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/adapter_config.json "HTTP/1.1 404 Not Found"
+2026-05-25 22:21:17,177 [INFO] MAGISystem inicializado com sucesso
+2026-05-25 22:21:17,236 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:21:17,249 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config.json "HTTP/1.1 200 OK"
+2026-05-25 22:21:17,511 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/processor_config.json "HTTP/1.1 404 Not Found"
+2026-05-25 22:21:17,653 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/preprocessor_config.json "HTTP/1.1 404 Not Found"
+2026-05-25 22:21:17,795 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/video_preprocessor_config.json "HTTP/1.1 404 Not Found"
+2026-05-25 22:21:17,940 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/preprocessor_config.json "HTTP/1.1 404 Not Found"
+2026-05-25 22:21:18,079 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:21:18,089 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-05-25 22:21:18,238 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:21:18,244 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config.json "HTTP/1.1 200 OK"
+2026-05-25 22:21:18,386 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:21:18,392 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config.json "HTTP/1.1 200 OK"
+2026-05-25 22:21:18,546 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:21:18,554 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-05-25 22:21:18,692 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:21:18,702 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-05-25 22:21:18,847 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-05-25 22:21:18,993 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-05-25 22:21:20,708 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2 "HTTP/1.1 200 OK"
+2026-05-25 22:21:21,043 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/1_Pooling/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:21:21,052 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/1_Pooling%2Fconfig.json "HTTP/1.1 200 OK"
+2026-05-25 22:21:21,209 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2 "HTTP/1.1 200 OK"
+2026-05-25 22:22:01,261 [INFO] Loading faiss with AVX2 support.
+2026-05-25 22:22:01,275 [INFO] Successfully loaded faiss with AVX2 support.
+2026-05-25 22:22:07,324 [INFO] No device provided, using cpu
+2026-05-25 22:22:07,708 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/modules.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:22:07,718 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/modules.json "HTTP/1.1 200 OK"
+2026-05-25 22:22:07,856 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config_sentence_transformers.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:22:07,856 [WARNING] Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-05-25 22:22:07,870 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config_sentence_transformers.json "HTTP/1.1 200 OK"
+2026-05-25 22:22:07,872 [INFO] Loading SentenceTransformer model from sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2.
+2026-05-25 22:22:08,019 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config_sentence_transformers.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:22:08,028 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config_sentence_transformers.json "HTTP/1.1 200 OK"
+2026-05-25 22:22:08,168 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:22:08,175 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/README.md "HTTP/1.1 200 OK"
+2026-05-25 22:22:08,314 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/modules.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:22:08,324 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/modules.json "HTTP/1.1 200 OK"
+2026-05-25 22:22:08,463 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/sentence_bert_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:22:08,473 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/sentence_bert_config.json "HTTP/1.1 200 OK"
+2026-05-25 22:22:08,621 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/adapter_config.json "HTTP/1.1 404 Not Found"
+2026-05-25 22:22:08,709 [INFO] MAGISystem inicializado com sucesso
+2026-05-25 22:22:08,780 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:22:08,796 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config.json "HTTP/1.1 200 OK"
+2026-05-25 22:22:09,050 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/processor_config.json "HTTP/1.1 404 Not Found"
+2026-05-25 22:22:09,191 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/preprocessor_config.json "HTTP/1.1 404 Not Found"
+2026-05-25 22:22:09,337 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/video_preprocessor_config.json "HTTP/1.1 404 Not Found"
+2026-05-25 22:22:09,500 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/preprocessor_config.json "HTTP/1.1 404 Not Found"
+2026-05-25 22:22:09,634 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:22:09,640 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-05-25 22:22:09,783 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:22:09,793 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config.json "HTTP/1.1 200 OK"
+2026-05-25 22:22:09,933 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:22:09,942 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config.json "HTTP/1.1 200 OK"
+2026-05-25 22:22:10,090 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:22:10,100 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-05-25 22:22:10,240 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:22:10,246 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-05-25 22:22:10,386 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-05-25 22:22:10,525 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-05-25 22:22:12,118 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2 "HTTP/1.1 200 OK"
+2026-05-25 22:22:12,455 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/1_Pooling/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:22:12,463 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/1_Pooling%2Fconfig.json "HTTP/1.1 200 OK"
+2026-05-25 22:22:12,619 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2 "HTTP/1.1 200 OK"
+2026-05-25 22:22:16,516 [INFO] GET / 200 2ms [192.168.1.103]
+2026-05-25 22:22:16,931 [INFO] GET /favicon.ico 404 0ms [192.168.1.103]
+2026-05-25 22:24:09,500 [INFO] GET / 200 1ms [192.168.1.103]
+2026-05-25 22:24:21,776 [INFO] GET / 200 0ms [192.168.1.103]
+2026-05-25 22:27:02,546 [INFO] Loading faiss with AVX2 support.
+2026-05-25 22:27:02,564 [INFO] Successfully loaded faiss with AVX2 support.
+2026-05-25 22:27:09,014 [INFO] No device provided, using cpu
+2026-05-25 22:27:09,536 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/modules.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:27:09,548 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/modules.json "HTTP/1.1 200 OK"
+2026-05-25 22:27:09,694 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config_sentence_transformers.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:27:09,695 [WARNING] Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-05-25 22:27:09,703 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config_sentence_transformers.json "HTTP/1.1 200 OK"
+2026-05-25 22:27:09,705 [INFO] Loading SentenceTransformer model from sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2.
+2026-05-25 22:27:09,847 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config_sentence_transformers.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:27:09,856 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config_sentence_transformers.json "HTTP/1.1 200 OK"
+2026-05-25 22:27:09,997 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:27:10,006 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/README.md "HTTP/1.1 200 OK"
+2026-05-25 22:27:10,150 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/modules.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:27:10,161 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/modules.json "HTTP/1.1 200 OK"
+2026-05-25 22:27:10,303 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/sentence_bert_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:27:10,314 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/sentence_bert_config.json "HTTP/1.1 200 OK"
+2026-05-25 22:27:10,465 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/adapter_config.json "HTTP/1.1 404 Not Found"
+2026-05-25 22:27:10,496 [INFO] MAGISystem inicializado com sucesso
+2026-05-25 22:27:10,608 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:27:10,630 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config.json "HTTP/1.1 200 OK"
+2026-05-25 22:27:10,880 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/processor_config.json "HTTP/1.1 404 Not Found"
+2026-05-25 22:27:11,031 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/preprocessor_config.json "HTTP/1.1 404 Not Found"
+2026-05-25 22:27:11,189 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/video_preprocessor_config.json "HTTP/1.1 404 Not Found"
+2026-05-25 22:27:11,337 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/preprocessor_config.json "HTTP/1.1 404 Not Found"
+2026-05-25 22:27:11,476 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:27:11,487 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-05-25 22:27:11,628 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:27:11,637 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config.json "HTTP/1.1 200 OK"
+2026-05-25 22:27:11,781 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:27:11,788 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config.json "HTTP/1.1 200 OK"
+2026-05-25 22:27:11,926 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:27:11,933 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-05-25 22:27:12,074 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:27:12,083 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-05-25 22:27:12,223 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-05-25 22:27:12,369 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-05-25 22:27:14,035 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2 "HTTP/1.1 200 OK"
+2026-05-25 22:27:14,361 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/1_Pooling/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:27:14,373 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/1_Pooling%2Fconfig.json "HTTP/1.1 200 OK"
+2026-05-25 22:27:14,515 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2 "HTTP/1.1 200 OK"
+2026-05-25 22:27:15,719 [INFO] GET / 200 2ms [192.168.1.103]
+2026-05-25 22:28:27,978 [INFO] Loading faiss with AVX2 support.
+2026-05-25 22:28:27,995 [INFO] Successfully loaded faiss with AVX2 support.
+2026-05-25 22:28:35,478 [INFO] No device provided, using cpu
+2026-05-25 22:28:35,897 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/modules.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:28:35,898 [WARNING] Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-05-25 22:28:35,905 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/modules.json "HTTP/1.1 200 OK"
+2026-05-25 22:28:36,052 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config_sentence_transformers.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:28:36,059 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config_sentence_transformers.json "HTTP/1.1 200 OK"
+2026-05-25 22:28:36,061 [INFO] Loading SentenceTransformer model from sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2.
+2026-05-25 22:28:36,203 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config_sentence_transformers.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:28:36,210 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config_sentence_transformers.json "HTTP/1.1 200 OK"
+2026-05-25 22:28:36,349 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:28:36,358 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/README.md "HTTP/1.1 200 OK"
+2026-05-25 22:28:36,502 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/modules.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:28:36,508 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/modules.json "HTTP/1.1 200 OK"
+2026-05-25 22:28:36,643 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/sentence_bert_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:28:36,651 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/sentence_bert_config.json "HTTP/1.1 200 OK"
+2026-05-25 22:28:36,793 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/adapter_config.json "HTTP/1.1 404 Not Found"
+2026-05-25 22:28:36,931 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:28:36,938 [INFO] MAGISystem inicializado com sucesso
+2026-05-25 22:28:36,940 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config.json "HTTP/1.1 200 OK"
+2026-05-25 22:28:36,975 [INFO] GET / 200 1ms [192.168.1.103]
+2026-05-25 22:28:37,228 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/processor_config.json "HTTP/1.1 404 Not Found"
+2026-05-25 22:28:37,374 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/preprocessor_config.json "HTTP/1.1 404 Not Found"
+2026-05-25 22:28:37,516 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/video_preprocessor_config.json "HTTP/1.1 404 Not Found"
+2026-05-25 22:28:37,660 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/preprocessor_config.json "HTTP/1.1 404 Not Found"
+2026-05-25 22:28:37,799 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:28:37,807 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-05-25 22:28:37,961 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:28:37,972 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config.json "HTTP/1.1 200 OK"
+2026-05-25 22:28:38,117 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:28:38,123 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config.json "HTTP/1.1 200 OK"
+2026-05-25 22:28:38,268 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:28:38,276 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-05-25 22:28:38,425 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:28:38,440 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-05-25 22:28:38,585 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-05-25 22:28:38,732 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-05-25 22:28:40,640 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2 "HTTP/1.1 200 OK"
+2026-05-25 22:28:41,002 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/1_Pooling/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:28:41,238 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/1_Pooling%2Fconfig.json "HTTP/1.1 200 OK"
+2026-05-25 22:28:41,392 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2 "HTTP/1.1 200 OK"
+2026-05-25 22:29:37,560 [INFO] GET / 200 1ms [192.168.1.103]
+2026-05-25 22:30:26,037 [INFO] GET / 200 1ms [192.168.1.103]
+2026-05-25 22:33:04,391 [INFO] Loading faiss with AVX2 support.
+2026-05-25 22:33:04,403 [INFO] Successfully loaded faiss with AVX2 support.
+2026-05-25 22:33:10,927 [INFO] No device provided, using cpu
+2026-05-25 22:33:11,345 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/modules.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:33:11,354 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/modules.json "HTTP/1.1 200 OK"
+2026-05-25 22:33:11,495 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config_sentence_transformers.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:33:11,505 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config_sentence_transformers.json "HTTP/1.1 200 OK"
+2026-05-25 22:33:11,506 [INFO] Loading SentenceTransformer model from sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2.
+2026-05-25 22:33:11,654 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config_sentence_transformers.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:33:11,656 [WARNING] Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-05-25 22:33:11,661 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config_sentence_transformers.json "HTTP/1.1 200 OK"
+2026-05-25 22:33:11,802 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:33:11,810 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/README.md "HTTP/1.1 200 OK"
+2026-05-25 22:33:11,943 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/modules.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:33:11,954 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/modules.json "HTTP/1.1 200 OK"
+2026-05-25 22:33:12,093 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/sentence_bert_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:33:12,100 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/sentence_bert_config.json "HTTP/1.1 200 OK"
+2026-05-25 22:33:12,240 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/adapter_config.json "HTTP/1.1 404 Not Found"
+2026-05-25 22:33:12,312 [INFO] MAGISystem inicializado com sucesso
+2026-05-25 22:33:12,380 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:33:12,394 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config.json "HTTP/1.1 200 OK"
+2026-05-25 22:33:12,645 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/processor_config.json "HTTP/1.1 404 Not Found"
+2026-05-25 22:33:12,787 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/preprocessor_config.json "HTTP/1.1 404 Not Found"
+2026-05-25 22:33:12,933 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/video_preprocessor_config.json "HTTP/1.1 404 Not Found"
+2026-05-25 22:33:13,075 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/preprocessor_config.json "HTTP/1.1 404 Not Found"
+2026-05-25 22:33:13,218 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:33:13,236 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-05-25 22:33:13,379 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:33:13,388 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config.json "HTTP/1.1 200 OK"
+2026-05-25 22:33:13,531 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:33:13,541 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config.json "HTTP/1.1 200 OK"
+2026-05-25 22:33:13,680 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:33:13,691 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-05-25 22:33:13,831 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:33:13,838 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-05-25 22:33:13,978 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-05-25 22:33:14,141 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-05-25 22:33:15,695 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2 "HTTP/1.1 200 OK"
+2026-05-25 22:33:16,021 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/1_Pooling/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:33:16,031 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/1_Pooling%2Fconfig.json "HTTP/1.1 200 OK"
+2026-05-25 22:33:16,178 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2 "HTTP/1.1 200 OK"
+2026-05-25 22:33:26,339 [INFO] GET / 200 3ms [192.168.1.103]
+2026-05-25 22:33:26,493 [INFO] GET /api/status 404 1ms [192.168.1.103]
+2026-05-25 22:33:26,653 [INFO] GET /api/nucleos/status 404 1ms [192.168.1.103]
+2026-05-25 22:33:26,784 [INFO] GET /api/memoria 404 0ms [192.168.1.103]
+2026-05-25 22:33:26,788 [INFO] GET /api/historico 404 0ms [192.168.1.103]
+2026-05-25 22:33:34,940 [INFO] GET /api/status 404 0ms [192.168.1.103]
+2026-05-25 22:33:38,941 [INFO] GET /api/historico 404 1ms [192.168.1.103]
+2026-05-25 22:33:42,942 [INFO] GET /api/status 404 0ms [192.168.1.103]
+2026-05-25 22:33:50,946 [INFO] GET /api/status 404 0ms [192.168.1.103]
+2026-05-25 22:33:50,946 [INFO] GET /api/historico 404 0ms [192.168.1.103]
+2026-05-25 22:33:51,938 [INFO] GET /api/memoria 404 0ms [192.168.1.103]
+2026-05-25 22:33:58,940 [INFO] GET /api/status 404 0ms [192.168.1.103]
+2026-05-25 22:34:02,938 [INFO] GET /api/historico 404 0ms [192.168.1.103]
+2026-05-25 22:34:06,948 [INFO] GET /api/status 404 0ms [192.168.1.103]
+2026-05-25 22:34:14,941 [INFO] GET /api/status 404 0ms [192.168.1.103]
+2026-05-25 22:34:14,942 [INFO] GET /api/historico 404 1ms [192.168.1.103]
+2026-05-25 22:34:16,942 [INFO] GET /api/memoria 404 0ms [192.168.1.103]
+2026-05-25 22:34:22,945 [INFO] GET /api/status 404 1ms [192.168.1.103]
+2026-05-25 22:34:26,940 [INFO] GET /api/historico 404 1ms [192.168.1.103]
+2026-05-25 22:34:30,942 [INFO] GET /api/status 404 1ms [192.168.1.103]
+2026-05-25 22:34:38,946 [INFO] GET /api/status 404 1ms [192.168.1.103]
+2026-05-25 22:34:38,946 [INFO] GET /api/historico 404 1ms [192.168.1.103]
+2026-05-25 22:34:41,940 [INFO] GET /api/memoria 404 0ms [192.168.1.103]
+2026-05-25 22:34:46,951 [INFO] GET /api/status 404 1ms [192.168.1.103]
+2026-05-25 22:34:50,951 [INFO] GET /api/historico 404 1ms [192.168.1.103]
+2026-05-25 22:34:54,947 [INFO] GET /api/status 404 1ms [192.168.1.103]
+2026-05-25 22:35:02,954 [INFO] GET /api/status 404 1ms [192.168.1.103]
+2026-05-25 22:35:02,956 [INFO] GET /api/historico 404 1ms [192.168.1.103]
+2026-05-25 22:35:06,948 [INFO] GET /api/memoria 404 0ms [192.168.1.103]
+2026-05-25 22:35:10,952 [INFO] GET /api/status 404 1ms [192.168.1.103]
+2026-05-25 22:35:14,948 [INFO] GET /api/historico 404 0ms [192.168.1.103]
+2026-05-25 22:35:18,941 [INFO] GET /api/status 404 1ms [192.168.1.103]
+2026-05-25 22:35:31,944 [INFO] GET /api/memoria 404 0ms [192.168.1.103]
+2026-05-25 22:35:56,947 [INFO] GET /api/memoria 404 1ms [192.168.1.103]
+2026-05-25 22:36:13,945 [INFO] GET /api/status 404 0ms [192.168.1.103]
+2026-05-25 22:36:13,946 [INFO] GET /api/historico 404 0ms [192.168.1.103]
+2026-05-25 22:37:14,302 [INFO] Loading faiss with AVX2 support.
+2026-05-25 22:37:14,316 [INFO] Successfully loaded faiss with AVX2 support.
+2026-05-25 22:37:20,619 [INFO] No device provided, using cpu
+2026-05-25 22:37:21,106 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/modules.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:37:21,115 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/modules.json "HTTP/1.1 200 OK"
+2026-05-25 22:37:21,253 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config_sentence_transformers.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:37:21,261 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config_sentence_transformers.json "HTTP/1.1 200 OK"
+2026-05-25 22:37:21,263 [INFO] Loading SentenceTransformer model from sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2.
+2026-05-25 22:37:21,404 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config_sentence_transformers.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:37:21,405 [WARNING] Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-05-25 22:37:21,414 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config_sentence_transformers.json "HTTP/1.1 200 OK"
+2026-05-25 22:37:21,554 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:37:21,563 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/README.md "HTTP/1.1 200 OK"
+2026-05-25 22:37:21,710 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/modules.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:37:21,717 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/modules.json "HTTP/1.1 200 OK"
+2026-05-25 22:37:21,858 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/sentence_bert_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:37:21,868 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/sentence_bert_config.json "HTTP/1.1 200 OK"
+2026-05-25 22:37:22,010 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/adapter_config.json "HTTP/1.1 404 Not Found"
+2026-05-25 22:37:22,032 [INFO] MAGISystem inicializado com sucesso
+2026-05-25 22:37:22,148 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:37:22,156 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config.json "HTTP/1.1 200 OK"
+2026-05-25 22:37:22,422 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/processor_config.json "HTTP/1.1 404 Not Found"
+2026-05-25 22:37:22,563 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/preprocessor_config.json "HTTP/1.1 404 Not Found"
+2026-05-25 22:37:22,701 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/video_preprocessor_config.json "HTTP/1.1 404 Not Found"
+2026-05-25 22:37:22,865 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/preprocessor_config.json "HTTP/1.1 404 Not Found"
+2026-05-25 22:37:23,006 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:37:23,013 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-05-25 22:37:23,152 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:37:23,162 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config.json "HTTP/1.1 200 OK"
+2026-05-25 22:37:23,304 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:37:23,314 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config.json "HTTP/1.1 200 OK"
+2026-05-25 22:37:23,448 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:37:23,463 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-05-25 22:37:23,600 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:37:23,606 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-05-25 22:37:23,747 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-05-25 22:37:23,894 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-05-25 22:37:25,424 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2 "HTTP/1.1 200 OK"
+2026-05-25 22:37:25,737 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/1_Pooling/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:37:25,744 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/1_Pooling%2Fconfig.json "HTTP/1.1 200 OK"
+2026-05-25 22:37:25,885 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2 "HTTP/1.1 200 OK"
+2026-05-25 22:38:13,954 [INFO] GET /api/historico 200 2ms [192.168.1.103]
+2026-05-25 22:38:13,957 [INFO] GET /api/status 200 2ms [192.168.1.103]
+2026-05-25 22:38:13,959 [INFO] GET /api/memoria 200 2ms [192.168.1.103]
+2026-05-25 22:39:13,948 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-25 22:39:13,950 [INFO] GET /api/historico 200 1ms [192.168.1.103]
+2026-05-25 22:39:13,950 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-25 22:39:40,226 [INFO] GET / 200 0ms [192.168.1.103]
+2026-05-25 22:39:41,947 [INFO] GET / 200 0ms [192.168.1.103]
+2026-05-25 22:39:42,521 [INFO] GET / 200 0ms [192.168.1.103]
+2026-05-25 22:39:42,682 [INFO] GET / 200 0ms [192.168.1.103]
+2026-05-25 22:39:43,052 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-25 22:39:43,065 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-25 22:39:43,066 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-25 22:39:43,701 [INFO] GET / 200 0ms [192.168.1.103]
+2026-05-25 22:39:44,020 [INFO] GET / 200 0ms [192.168.1.103]
+2026-05-25 22:39:44,190 [INFO] GET / 200 1ms [192.168.1.103]
+2026-05-25 22:39:44,323 [INFO] GET / 200 0ms [192.168.1.103]
+2026-05-25 22:41:39,488 [INFO] GET / 200 1ms [192.168.1.103]
+2026-05-25 22:44:34,420 [INFO] Loading faiss with AVX2 support.
+2026-05-25 22:44:34,434 [INFO] Successfully loaded faiss with AVX2 support.
+2026-05-25 22:44:41,503 [INFO] No device provided, using cpu
+2026-05-25 22:44:41,924 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/modules.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:44:41,934 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/modules.json "HTTP/1.1 200 OK"
+2026-05-25 22:44:42,073 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config_sentence_transformers.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:44:42,074 [WARNING] Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-05-25 22:44:42,084 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config_sentence_transformers.json "HTTP/1.1 200 OK"
+2026-05-25 22:44:42,087 [INFO] Loading SentenceTransformer model from sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2.
+2026-05-25 22:44:42,248 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config_sentence_transformers.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:44:42,258 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config_sentence_transformers.json "HTTP/1.1 200 OK"
+2026-05-25 22:44:42,402 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:44:42,411 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/README.md "HTTP/1.1 200 OK"
+2026-05-25 22:44:42,550 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/modules.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:44:42,557 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/modules.json "HTTP/1.1 200 OK"
+2026-05-25 22:44:42,701 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/sentence_bert_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:44:42,710 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/sentence_bert_config.json "HTTP/1.1 200 OK"
+2026-05-25 22:44:42,854 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/adapter_config.json "HTTP/1.1 404 Not Found"
+2026-05-25 22:44:42,993 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:44:43,001 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config.json "HTTP/1.1 200 OK"
+2026-05-25 22:44:43,171 [INFO] MAGISystem inicializado com sucesso
+2026-05-25 22:44:43,321 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/processor_config.json "HTTP/1.1 404 Not Found"
+2026-05-25 22:44:43,475 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/preprocessor_config.json "HTTP/1.1 404 Not Found"
+2026-05-25 22:44:43,617 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/video_preprocessor_config.json "HTTP/1.1 404 Not Found"
+2026-05-25 22:44:43,770 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/preprocessor_config.json "HTTP/1.1 404 Not Found"
+2026-05-25 22:44:43,912 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:44:43,918 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-05-25 22:44:44,063 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:44:44,074 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config.json "HTTP/1.1 200 OK"
+2026-05-25 22:44:44,216 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:44:44,222 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config.json "HTTP/1.1 200 OK"
+2026-05-25 22:44:44,367 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:44:44,375 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-05-25 22:44:44,517 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:44:44,527 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-05-25 22:44:44,673 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-05-25 22:44:44,817 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-05-25 22:44:46,854 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2 "HTTP/1.1 200 OK"
+2026-05-25 22:44:47,345 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/1_Pooling/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-25 22:44:47,353 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/1_Pooling%2Fconfig.json "HTTP/1.1 200 OK"
+2026-05-25 22:44:47,498 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2 "HTTP/1.1 200 OK"
+2026-05-25 22:56:52,922 [INFO] GET / 200 1ms [192.168.1.103]
+2026-05-26 22:59:18,158 [INFO] Loading faiss with AVX2 support.
+2026-05-26 22:59:18,233 [INFO] Successfully loaded faiss with AVX2 support.
+2026-05-26 22:59:28,534 [INFO] No device provided, using cpu
+2026-05-26 22:59:29,137 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/modules.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-26 22:59:29,138 [WARNING] Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-05-26 22:59:29,146 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/modules.json "HTTP/1.1 200 OK"
+2026-05-26 22:59:29,293 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config_sentence_transformers.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-26 22:59:29,301 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config_sentence_transformers.json "HTTP/1.1 200 OK"
+2026-05-26 22:59:29,304 [INFO] Loading SentenceTransformer model from sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2.
+2026-05-26 22:59:29,460 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config_sentence_transformers.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-26 22:59:29,470 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config_sentence_transformers.json "HTTP/1.1 200 OK"
+2026-05-26 22:59:29,617 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-05-26 22:59:29,626 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/README.md "HTTP/1.1 200 OK"
+2026-05-26 22:59:29,809 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/modules.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-26 22:59:29,827 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/modules.json "HTTP/1.1 200 OK"
+2026-05-26 22:59:29,991 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/sentence_bert_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-26 22:59:30,002 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/sentence_bert_config.json "HTTP/1.1 200 OK"
+2026-05-26 22:59:30,149 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/adapter_config.json "HTTP/1.1 404 Not Found"
+2026-05-26 22:59:30,297 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-26 22:59:30,305 [INFO] MAGISystem inicializado com sucesso
+2026-05-26 22:59:30,308 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config.json "HTTP/1.1 200 OK"
+2026-05-26 22:59:30,861 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/processor_config.json "HTTP/1.1 404 Not Found"
+2026-05-26 22:59:31,014 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/preprocessor_config.json "HTTP/1.1 404 Not Found"
+2026-05-26 22:59:31,174 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/video_preprocessor_config.json "HTTP/1.1 404 Not Found"
+2026-05-26 22:59:31,330 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/preprocessor_config.json "HTTP/1.1 404 Not Found"
+2026-05-26 22:59:31,480 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-26 22:59:31,488 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-05-26 22:59:31,634 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-26 22:59:31,644 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config.json "HTTP/1.1 200 OK"
+2026-05-26 22:59:31,796 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-26 22:59:31,810 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config.json "HTTP/1.1 200 OK"
+2026-05-26 22:59:31,955 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-26 22:59:31,964 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-05-26 22:59:32,118 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-26 22:59:32,124 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-05-26 22:59:32,268 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-05-26 22:59:32,417 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-05-26 22:59:34,293 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2 "HTTP/1.1 200 OK"
+2026-05-26 22:59:34,641 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/1_Pooling/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-26 22:59:34,653 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/1_Pooling%2Fconfig.json "HTTP/1.1 200 OK"
+2026-05-26 22:59:34,805 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2 "HTTP/1.1 200 OK"
+2026-05-26 22:59:46,540 [INFO] GET / 200 2ms [192.168.1.103]
+2026-05-26 22:59:46,729 [INFO] GET /favicon.ico 404 0ms [192.168.1.103]
+2026-05-26 23:01:27,983 [INFO] Loading faiss with AVX2 support.
+2026-05-26 23:01:27,997 [INFO] Successfully loaded faiss with AVX2 support.
+2026-05-26 23:01:34,436 [INFO] No device provided, using cpu
+2026-05-26 23:01:34,964 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/modules.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-26 23:01:34,975 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/modules.json "HTTP/1.1 200 OK"
+2026-05-26 23:01:35,120 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config_sentence_transformers.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-26 23:01:35,129 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config_sentence_transformers.json "HTTP/1.1 200 OK"
+2026-05-26 23:01:35,131 [INFO] Loading SentenceTransformer model from sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2.
+2026-05-26 23:01:35,282 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config_sentence_transformers.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-26 23:01:35,282 [WARNING] Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-05-26 23:01:35,290 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config_sentence_transformers.json "HTTP/1.1 200 OK"
+2026-05-26 23:01:35,460 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-05-26 23:01:35,470 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/README.md "HTTP/1.1 200 OK"
+2026-05-26 23:01:35,625 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/modules.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-26 23:01:35,631 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/modules.json "HTTP/1.1 200 OK"
+2026-05-26 23:01:35,773 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/sentence_bert_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-26 23:01:35,785 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/sentence_bert_config.json "HTTP/1.1 200 OK"
+2026-05-26 23:01:35,885 [INFO] MAGISystem inicializado com sucesso
+2026-05-26 23:01:36,052 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/adapter_config.json "HTTP/1.1 404 Not Found"
+2026-05-26 23:01:36,200 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-26 23:01:36,208 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config.json "HTTP/1.1 200 OK"
+2026-05-26 23:01:36,465 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/processor_config.json "HTTP/1.1 404 Not Found"
+2026-05-26 23:01:36,616 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/preprocessor_config.json "HTTP/1.1 404 Not Found"
+2026-05-26 23:01:36,764 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/video_preprocessor_config.json "HTTP/1.1 404 Not Found"
+2026-05-26 23:01:36,908 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/preprocessor_config.json "HTTP/1.1 404 Not Found"
+2026-05-26 23:01:37,059 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-26 23:01:37,069 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-05-26 23:01:37,225 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-26 23:01:37,233 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config.json "HTTP/1.1 200 OK"
+2026-05-26 23:01:37,379 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-26 23:01:37,389 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config.json "HTTP/1.1 200 OK"
+2026-05-26 23:01:37,538 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-26 23:01:37,546 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-05-26 23:01:37,693 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-26 23:01:37,703 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-05-26 23:01:37,850 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-05-26 23:01:38,001 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-05-26 23:01:39,794 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2 "HTTP/1.1 200 OK"
+2026-05-26 23:01:40,126 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/1_Pooling/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-26 23:01:40,135 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/1_Pooling%2Fconfig.json "HTTP/1.1 200 OK"
+2026-05-26 23:01:40,303 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2 "HTTP/1.1 200 OK"
+2026-05-26 23:01:47,450 [INFO] GET / 200 2ms [192.168.1.103]
+2026-05-26 23:04:52,863 [INFO] Loading faiss with AVX2 support.
+2026-05-26 23:04:52,886 [INFO] Successfully loaded faiss with AVX2 support.
+2026-05-26 23:04:59,452 [INFO] No device provided, using cpu
+2026-05-26 23:04:59,877 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/modules.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-26 23:04:59,893 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/modules.json "HTTP/1.1 200 OK"
+2026-05-26 23:05:00,042 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config_sentence_transformers.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-26 23:05:00,042 [WARNING] Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-05-26 23:05:00,052 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config_sentence_transformers.json "HTTP/1.1 200 OK"
+2026-05-26 23:05:00,054 [INFO] Loading SentenceTransformer model from sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2.
+2026-05-26 23:05:00,200 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config_sentence_transformers.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-26 23:05:00,212 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config_sentence_transformers.json "HTTP/1.1 200 OK"
+2026-05-26 23:05:00,359 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-05-26 23:05:00,367 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/README.md "HTTP/1.1 200 OK"
+2026-05-26 23:05:00,512 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/modules.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-26 23:05:00,523 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/modules.json "HTTP/1.1 200 OK"
+2026-05-26 23:05:00,673 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/sentence_bert_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-26 23:05:00,682 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/sentence_bert_config.json "HTTP/1.1 200 OK"
+2026-05-26 23:05:00,834 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/adapter_config.json "HTTP/1.1 404 Not Found"
+2026-05-26 23:05:00,891 [INFO] MAGISystem inicializado com sucesso
+2026-05-26 23:05:01,061 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-26 23:05:01,073 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config.json "HTTP/1.1 200 OK"
+2026-05-26 23:05:01,328 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/processor_config.json "HTTP/1.1 404 Not Found"
+2026-05-26 23:05:01,501 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/preprocessor_config.json "HTTP/1.1 404 Not Found"
+2026-05-26 23:05:01,647 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/video_preprocessor_config.json "HTTP/1.1 404 Not Found"
+2026-05-26 23:05:01,787 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/preprocessor_config.json "HTTP/1.1 404 Not Found"
+2026-05-26 23:05:01,936 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-26 23:05:01,947 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-05-26 23:05:02,092 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-26 23:05:02,102 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config.json "HTTP/1.1 200 OK"
+2026-05-26 23:05:02,240 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-26 23:05:02,248 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config.json "HTTP/1.1 200 OK"
+2026-05-26 23:05:02,401 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-26 23:05:02,411 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-05-26 23:05:02,548 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-26 23:05:02,555 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-05-26 23:05:02,713 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-05-26 23:05:02,861 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-05-26 23:05:04,534 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2 "HTTP/1.1 200 OK"
+2026-05-26 23:05:04,856 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/1_Pooling/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-26 23:05:04,866 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/1_Pooling%2Fconfig.json "HTTP/1.1 200 OK"
+2026-05-26 23:05:05,011 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2 "HTTP/1.1 200 OK"
+2026-05-26 23:05:27,005 [INFO] GET / 200 1ms [192.168.1.103]
+2026-05-26 23:05:32,234 [INFO] GET / 200 0ms [192.168.1.103]
+2026-05-26 23:05:37,260 [INFO] GET / 200 1ms [192.168.1.103]
+2026-05-26 23:05:43,242 [INFO] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-05-26 23:05:45,143 [INFO] POST /api/query 200 3160ms [192.168.1.103]
+2026-05-26 23:05:45,144 [INFO] GET / 200 0ms [192.168.1.103]
+2026-05-26 23:05:48,741 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:05:53,936 [INFO] POST /api/query 200 154ms [192.168.1.103]
+2026-05-26 23:06:16,249 [INFO] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-05-26 23:06:18,029 [INFO] POST /api/query 200 2250ms [192.168.1.103]
+2026-05-26 23:07:19,194 [INFO] GET /docs 200 0ms [192.168.1.103]
+2026-05-26 23:07:19,493 [INFO] GET /openapi.json 200 21ms [192.168.1.103]
+2026-05-26 23:07:51,784 [INFO] GET / 200 1ms [192.168.1.103]
+2026-05-26 23:07:51,997 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:07:52,104 [INFO] GET /api/nucleos/status 200 3ms [192.168.1.103]
+2026-05-26 23:07:52,126 [INFO] GET /api/memoria 200 2ms [192.168.1.103]
+2026-05-26 23:07:52,136 [INFO] GET /api/historico 200 1ms [192.168.1.103]
+2026-05-26 23:07:58,470 [INFO] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-05-26 23:08:00,250 [INFO] POST /api/query 200 2397ms [192.168.1.103]
+2026-05-26 23:08:00,252 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:08:00,268 [INFO] GET /api/historico 200 1ms [192.168.1.103]
+2026-05-26 23:08:00,273 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:08:04,150 [INFO] GET /api/historico 200 1ms [192.168.1.103]
+2026-05-26 23:08:08,941 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:08:16,947 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:08:16,948 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:08:17,951 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-26 23:08:24,943 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:08:28,951 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:08:32,947 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:08:40,945 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:08:40,947 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:08:42,954 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-26 23:08:48,955 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:08:52,945 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:08:56,950 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:09:04,956 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:09:04,958 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:09:07,950 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-26 23:09:32,941 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-26 23:09:57,949 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-26 23:10:01,954 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:10:01,956 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:10:22,944 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-26 23:10:43,574 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:10:43,580 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:10:47,943 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-26 23:10:48,953 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:10:52,949 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:10:56,296 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:10:57,404 [INFO] GET / 200 0ms [192.168.1.103]
+2026-05-26 23:10:57,440 [INFO] GET /api/status 200 2ms [192.168.1.103]
+2026-05-26 23:10:57,506 [INFO] GET /api/nucleos/status 200 0ms [192.168.1.103]
+2026-05-26 23:10:57,518 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-26 23:10:57,527 [INFO] GET /api/historico 200 1ms [192.168.1.103]
+2026-05-26 23:11:01,229 [INFO] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-05-26 23:11:02,969 [INFO] POST /api/query 200 2425ms [192.168.1.103]
+2026-05-26 23:11:02,982 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:11:02,985 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:11:05,540 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:11:09,955 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:11:13,944 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:11:21,956 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:11:21,959 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:11:22,948 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-26 23:11:29,951 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:11:33,948 [INFO] GET /api/historico 200 1ms [192.168.1.103]
+2026-05-26 23:11:37,954 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:11:45,942 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:11:45,943 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:11:47,941 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-26 23:11:53,952 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:11:57,944 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:12:01,944 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:12:09,947 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:12:09,949 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:12:12,948 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-26 23:12:17,955 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:12:21,950 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:12:25,944 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:12:33,950 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:12:33,953 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:12:37,943 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-26 23:12:41,952 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:12:45,944 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:12:49,543 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:12:50,284 [INFO] GET / 200 0ms [192.168.1.103]
+2026-05-26 23:12:50,327 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:12:50,391 [INFO] GET /api/nucleos/status 200 1ms [192.168.1.103]
+2026-05-26 23:12:50,417 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-26 23:12:50,429 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:12:55,587 [INFO] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-05-26 23:12:58,619 [INFO] POST /api/query 200 3794ms [192.168.1.103]
+2026-05-26 23:12:58,620 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:12:58,635 [INFO] GET /api/historico 200 1ms [192.168.1.103]
+2026-05-26 23:12:58,637 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:13:02,948 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:13:06,445 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:13:14,440 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:13:14,443 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:13:15,949 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-26 23:13:22,948 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:13:26,964 [INFO] GET /api/historico 200 1ms [192.168.1.103]
+2026-05-26 23:13:30,954 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:13:38,948 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:13:38,950 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:13:40,954 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-26 23:13:46,949 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:13:50,950 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:13:54,954 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:14:02,440 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:14:02,443 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:14:05,444 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-26 23:14:10,950 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:14:14,952 [INFO] GET /api/historico 200 1ms [192.168.1.103]
+2026-05-26 23:14:18,955 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:14:26,954 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:14:26,955 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:14:30,946 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-26 23:14:34,947 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:14:38,440 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:14:42,441 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:14:47,748 [INFO] POST /api/query 200 165ms [192.168.1.103]
+2026-05-26 23:14:47,760 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:14:47,763 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:14:50,922 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:14:50,930 [INFO] GET /api/historico 200 1ms [192.168.1.103]
+2026-05-26 23:14:55,382 [INFO] POST /api/query 200 165ms [192.168.1.103]
+2026-05-26 23:14:55,393 [INFO] GET /api/historico 200 1ms [192.168.1.103]
+2026-05-26 23:14:55,395 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:14:55,444 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-26 23:14:58,441 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:15:01,077 [INFO] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-05-26 23:15:02,895 [INFO] POST /api/query 200 2439ms [192.168.1.103]
+2026-05-26 23:15:02,897 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:15:02,909 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:15:02,913 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:15:06,443 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:15:13,064 [INFO] GET / 200 0ms [192.168.1.103]
+2026-05-26 23:15:13,106 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:15:13,178 [INFO] GET /api/nucleos/status 200 0ms [192.168.1.103]
+2026-05-26 23:15:13,196 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-26 23:15:13,208 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:15:16,640 [INFO] POST /api/query 200 151ms [192.168.1.103]
+2026-05-26 23:15:16,652 [INFO] GET /api/historico 200 1ms [192.168.1.103]
+2026-05-26 23:15:16,654 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:15:21,954 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:15:25,951 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:15:29,941 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:15:37,953 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:15:37,954 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:15:38,944 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-26 23:15:45,943 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:15:49,948 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:15:53,940 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:16:01,954 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:16:01,956 [INFO] GET /api/historico 200 1ms [192.168.1.103]
+2026-05-26 23:16:03,952 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-26 23:16:09,954 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:16:13,941 [INFO] GET /api/historico 200 1ms [192.168.1.103]
+2026-05-26 23:16:25,950 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:16:28,943 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-26 23:16:53,945 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-26 23:17:01,950 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:17:01,952 [INFO] GET /api/historico 200 1ms [192.168.1.103]
+2026-05-26 23:17:18,943 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-26 23:17:38,300 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:17:38,312 [INFO] GET /api/historico 200 1ms [192.168.1.103]
+2026-05-26 23:17:39,217 [INFO] GET / 200 1ms [192.168.1.103]
+2026-05-26 23:17:39,263 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:17:39,317 [INFO] GET /api/nucleos/status 200 0ms [192.168.1.103]
+2026-05-26 23:17:39,335 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-26 23:17:39,347 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:17:41,650 [INFO] POST /api/query 200 154ms [192.168.1.103]
+2026-05-26 23:17:41,663 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:17:41,668 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:17:47,470 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:17:51,363 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:17:57,041 [INFO] Retrying request to /chat/completions in 0.445823 seconds
+2026-05-26 23:17:59,531 [INFO] Retrying request to /chat/completions in 0.805335 seconds
+2026-05-26 23:18:04,448 [INFO] Retrying request to /chat/completions in 0.482607 seconds
+2026-05-26 23:18:06,978 [INFO] Retrying request to /chat/completions in 0.751512 seconds
+2026-05-26 23:18:10,522 [INFO] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-05-26 23:18:11,346 [INFO] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-05-26 23:18:11,370 [INFO] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-05-26 23:18:15,391 [INFO] Retrying request to /chat/completions in 0.382753 seconds
+2026-05-26 23:18:17,830 [INFO] Retrying request to /chat/completions in 0.862147 seconds
+2026-05-26 23:18:21,245 [INFO] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-05-26 23:18:22,908 [INFO] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-05-26 23:18:24,653 [INFO] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-05-26 23:18:26,090 [INFO] Retrying request to /chat/completions in 0.456088 seconds
+2026-05-26 23:18:28,588 [INFO] Retrying request to /chat/completions in 0.990201 seconds
+2026-05-26 23:18:32,164 [INFO] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-05-26 23:18:34,639 [INFO] Retrying request to /chat/completions in 0.381771 seconds
+2026-05-26 23:18:37,063 [INFO] Retrying request to /chat/completions in 0.922339 seconds
+2026-05-26 23:18:45,005 [INFO] POST /api/query 200 50127ms [192.168.1.103]
+2026-05-26 23:18:45,008 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:18:45,009 [INFO] GET /api/status 200 2ms [192.168.1.103]
+2026-05-26 23:18:45,010 [INFO] GET /api/historico 200 2ms [192.168.1.103]
+2026-05-26 23:18:45,010 [INFO] GET /api/memoria 200 2ms [192.168.1.103]
+2026-05-26 23:18:45,011 [INFO] GET /api/status 200 2ms [192.168.1.103]
+2026-05-26 23:18:45,012 [INFO] GET /api/status 200 2ms [192.168.1.103]
+2026-05-26 23:18:45,013 [INFO] GET /api/status 200 2ms [192.168.1.103]
+2026-05-26 23:18:45,014 [INFO] GET /api/historico 200 3ms [192.168.1.103]
+2026-05-26 23:18:45,014 [INFO] GET /api/historico 200 2ms [192.168.1.103]
+2026-05-26 23:18:45,015 [INFO] GET /api/memoria 200 3ms [192.168.1.103]
+2026-05-26 23:18:45,015 [INFO] GET /api/status 200 2ms [192.168.1.103]
+2026-05-26 23:18:45,015 [INFO] GET /api/status 200 2ms [192.168.1.103]
+2026-05-26 23:18:45,016 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:18:45,017 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:18:45,019 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:18:51,366 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:18:51,368 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:18:54,366 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-26 23:18:59,956 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:19:03,951 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:19:07,940 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:19:15,941 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:19:15,944 [INFO] GET /api/historico 200 1ms [192.168.1.103]
+2026-05-26 23:19:19,943 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-26 23:19:23,952 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:19:27,952 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:19:31,950 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:19:39,945 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:19:39,946 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:19:44,950 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-26 23:19:47,940 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:19:51,946 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:20:00,617 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:20:03,360 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:20:03,364 [INFO] GET /api/historico 200 1ms [192.168.1.103]
+2026-05-26 23:20:09,360 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-26 23:20:11,365 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:20:15,359 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:20:19,360 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:20:27,361 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:20:27,363 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:20:34,360 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-26 23:20:35,360 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:20:39,360 [INFO] GET /api/historico 200 1ms [192.168.1.103]
+2026-05-26 23:20:43,360 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:20:51,364 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:20:51,366 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:20:59,360 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:20:59,363 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-26 23:21:03,365 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:21:07,360 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:21:15,360 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:21:15,362 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:21:23,360 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:21:24,361 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-26 23:21:27,360 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:21:31,360 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:21:39,361 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:21:39,363 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:21:47,362 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:21:49,360 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-26 23:21:51,360 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:21:55,360 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:22:03,361 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:22:03,363 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:22:11,362 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:22:14,361 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-26 23:22:15,360 [INFO] GET /api/historico 200 1ms [192.168.1.103]
+2026-05-26 23:22:19,360 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:22:27,360 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:22:27,362 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:22:35,361 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:22:39,361 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:22:39,364 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-26 23:22:43,360 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:22:51,361 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:22:51,362 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:22:59,362 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:23:03,361 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:23:04,361 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-26 23:23:07,361 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:23:15,361 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:23:15,363 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:23:23,362 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:23:27,360 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:23:29,363 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-26 23:23:31,361 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:23:39,361 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:23:39,364 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:23:47,361 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:23:51,360 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:23:54,362 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-26 23:23:55,362 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:24:03,362 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:24:03,365 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:24:11,363 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:24:15,362 [INFO] GET /api/historico 200 1ms [192.168.1.103]
+2026-05-26 23:24:19,362 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:24:19,365 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-26 23:24:21,891 [INFO] GET / 200 0ms [192.168.1.103]
+2026-05-26 23:24:21,931 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:24:21,987 [INFO] GET /api/nucleos/status 200 0ms [192.168.1.103]
+2026-05-26 23:24:22,021 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-26 23:24:22,037 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:24:24,264 [INFO] POST /api/query 200 152ms [192.168.1.103]
+2026-05-26 23:24:24,276 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:24:24,281 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:24:30,051 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:24:33,365 [INFO] Retrying request to /chat/completions in 0.393980 seconds
+2026-05-26 23:24:35,798 [INFO] Retrying request to /chat/completions in 0.874894 seconds
+2026-05-26 23:24:40,772 [INFO] Retrying request to /chat/completions in 0.431407 seconds
+2026-05-26 23:24:43,234 [INFO] Retrying request to /chat/completions in 0.946211 seconds
+2026-05-26 23:24:46,865 [INFO] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-05-26 23:24:47,655 [INFO] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-05-26 23:24:47,679 [INFO] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-05-26 23:24:47,725 [INFO] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-05-26 23:24:51,473 [INFO] Retrying request to /chat/completions in 0.475847 seconds
+2026-05-26 23:24:53,967 [INFO] Retrying request to /chat/completions in 0.902336 seconds
+2026-05-26 23:24:57,439 [INFO] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-05-26 23:24:58,729 [INFO] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-05-26 23:25:01,925 [INFO] Retrying request to /chat/completions in 0.418538 seconds
+2026-05-26 23:25:04,380 [INFO] Retrying request to /chat/completions in 0.759568 seconds
+2026-05-26 23:25:07,702 [INFO] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-05-26 23:25:13,719 [INFO] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-05-26 23:25:15,169 [INFO] Retrying request to /chat/completions in 0.375532 seconds
+2026-05-26 23:25:17,592 [INFO] Retrying request to /chat/completions in 0.813201 seconds
+2026-05-26 23:25:20,917 [INFO] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-05-26 23:25:23,374 [INFO] Retrying request to /chat/completions in 0.468014 seconds
+2026-05-26 23:25:25,889 [INFO] Retrying request to /chat/completions in 0.818889 seconds
+2026-05-26 23:25:30,814 [INFO] Retrying request to /chat/completions in 0.392681 seconds
+2026-05-26 23:25:33,240 [INFO] Retrying request to /chat/completions in 0.833167 seconds
+2026-05-26 23:25:46,472 [INFO] POST /api/query 200 75294ms [192.168.1.103]
+2026-05-26 23:25:46,476 [INFO] GET /api/historico 200 2ms [192.168.1.103]
+2026-05-26 23:25:46,477 [INFO] GET /api/status 200 3ms [192.168.1.103]
+2026-05-26 23:25:46,479 [INFO] GET /api/memoria 200 3ms [192.168.1.103]
+2026-05-26 23:25:46,480 [INFO] GET /api/status 200 3ms [192.168.1.103]
+2026-05-26 23:25:46,481 [INFO] GET /api/memoria 200 5ms [192.168.1.103]
+2026-05-26 23:25:46,483 [INFO] GET /api/status 200 4ms [192.168.1.103]
+2026-05-26 23:25:46,487 [INFO] GET /api/status 200 6ms [192.168.1.103]
+2026-05-26 23:25:46,489 [INFO] GET /api/historico 200 6ms [192.168.1.103]
+2026-05-26 23:25:46,489 [INFO] GET /api/status 200 6ms [192.168.1.103]
+2026-05-26 23:25:46,491 [INFO] GET /api/status 200 6ms [192.168.1.103]
+2026-05-26 23:25:46,492 [INFO] GET /api/historico 200 4ms [192.168.1.103]
+2026-05-26 23:25:46,493 [INFO] GET /api/historico 200 5ms [192.168.1.103]
+2026-05-26 23:25:46,495 [INFO] GET /api/historico 200 4ms [192.168.1.103]
+2026-05-26 23:25:46,495 [INFO] GET /api/status 200 4ms [192.168.1.103]
+2026-05-26 23:25:46,496 [INFO] GET /api/status 200 3ms [192.168.1.103]
+2026-05-26 23:25:46,497 [INFO] GET /api/historico 200 3ms [192.168.1.103]
+2026-05-26 23:25:46,499 [INFO] GET /api/memoria 200 3ms [192.168.1.103]
+2026-05-26 23:25:46,500 [INFO] GET /api/status 200 3ms [192.168.1.103]
+2026-05-26 23:25:46,501 [INFO] GET /api/historico 200 3ms [192.168.1.103]
+2026-05-26 23:25:46,504 [INFO] GET /api/historico 200 1ms [192.168.1.103]
+2026-05-26 23:25:50,051 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:25:58,053 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:25:58,055 [INFO] GET /api/historico 200 1ms [192.168.1.103]
+2026-05-26 23:26:02,052 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-26 23:26:06,051 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:26:10,050 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:26:14,050 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:26:22,052 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:26:22,054 [INFO] GET /api/historico 200 1ms [192.168.1.103]
+2026-05-26 23:26:27,051 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-26 23:26:30,051 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:26:34,051 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:26:38,052 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:26:46,052 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:26:46,054 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:26:50,986 [INFO] GET / 200 1ms [192.168.1.103]
+2026-05-26 23:26:51,025 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:26:51,076 [INFO] GET /api/nucleos/status 200 0ms [192.168.1.103]
+2026-05-26 23:26:51,110 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-26 23:26:51,123 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:26:53,040 [INFO] POST /api/query 200 152ms [192.168.1.103]
+2026-05-26 23:26:53,052 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:26:53,056 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:26:59,136 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:27:03,134 [INFO] GET /api/historico 200 1ms [192.168.1.103]
+2026-05-26 23:27:07,132 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:27:15,135 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:27:15,138 [INFO] GET /api/historico 200 1ms [192.168.1.103]
+2026-05-26 23:27:16,135 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-26 23:27:23,135 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:27:27,135 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:27:31,135 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:27:39,133 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:27:39,137 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:27:41,135 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-26 23:27:47,136 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:27:51,134 [INFO] GET /api/historico 200 1ms [192.168.1.103]
+2026-05-26 23:27:55,134 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:28:03,135 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:28:03,137 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:28:06,134 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-26 23:28:11,135 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:28:15,132 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:28:19,133 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:28:27,134 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:28:27,135 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:28:31,135 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-26 23:28:35,134 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:28:39,135 [INFO] GET /api/historico 200 1ms [192.168.1.103]
+2026-05-26 23:28:43,135 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:28:51,136 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:28:51,138 [INFO] GET /api/historico 200 1ms [192.168.1.103]
+2026-05-26 23:28:56,136 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-26 23:28:59,132 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:29:03,135 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:29:07,135 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:29:15,137 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:29:15,139 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:29:21,136 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-26 23:29:23,139 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:29:27,135 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:29:31,136 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:29:39,136 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:29:39,137 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:29:46,134 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-26 23:29:47,134 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:29:51,136 [INFO] GET /api/historico 200 1ms [192.168.1.103]
+2026-05-26 23:29:55,134 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:30:03,136 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:30:03,138 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:30:11,134 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:30:11,135 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-26 23:30:15,136 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:30:19,136 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:30:27,137 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:30:27,139 [INFO] GET /api/historico 200 1ms [192.168.1.103]
+2026-05-26 23:30:35,136 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:30:36,136 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-26 23:30:39,136 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:30:43,136 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:30:51,137 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:30:51,139 [INFO] GET /api/historico 200 1ms [192.168.1.103]
+2026-05-26 23:30:59,137 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:31:01,135 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-26 23:31:03,136 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:31:07,136 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:31:15,136 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:31:15,137 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:31:23,137 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:31:26,136 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-26 23:31:27,136 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:31:31,136 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:31:39,138 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:31:39,140 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:31:47,134 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:31:51,133 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:31:51,137 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-26 23:31:53,961 [INFO] GET / 200 1ms [192.168.1.103]
+2026-05-26 23:31:54,001 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:31:54,050 [INFO] GET /api/nucleos/status 200 0ms [192.168.1.103]
+2026-05-26 23:31:54,081 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-26 23:31:54,092 [INFO] GET /api/historico 200 1ms [192.168.1.103]
+2026-05-26 23:31:56,288 [INFO] POST /api/query 200 151ms [192.168.1.103]
+2026-05-26 23:31:56,300 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:31:56,303 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:32:02,104 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:32:06,103 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:32:10,104 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:32:18,104 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:32:18,106 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:32:19,104 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-26 23:32:26,104 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:32:30,103 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:32:34,103 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:32:42,104 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:32:42,106 [INFO] GET /api/historico 200 1ms [192.168.1.103]
+2026-05-26 23:32:44,949 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-26 23:32:50,106 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:32:54,948 [INFO] GET /api/historico 200 1ms [192.168.1.103]
+2026-05-26 23:32:58,943 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:33:06,952 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:33:06,953 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:33:09,101 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-26 23:33:14,942 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:33:18,952 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:33:22,957 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:33:30,949 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:33:30,951 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:33:34,948 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-26 23:33:38,946 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:33:42,953 [INFO] GET /api/historico 200 1ms [192.168.1.103]
+2026-05-26 23:33:46,949 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:33:54,950 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:33:54,952 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:33:59,118 [INFO] GET / 200 2ms [192.168.1.103]
+2026-05-26 23:33:59,119 [INFO] GET /api/memoria 200 2ms [192.168.1.103]
+2026-05-26 23:33:59,190 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:33:59,255 [INFO] GET /api/nucleos/status 200 0ms [192.168.1.103]
+2026-05-26 23:33:59,281 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-26 23:33:59,296 [INFO] GET /api/historico 200 1ms [192.168.1.103]
+2026-05-26 23:34:01,360 [INFO] POST /api/query 200 153ms [192.168.1.103]
+2026-05-26 23:34:01,375 [INFO] GET /api/historico 200 1ms [192.168.1.103]
+2026-05-26 23:34:01,378 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:34:07,314 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:34:11,311 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:34:15,312 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:34:23,319 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:34:23,323 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:34:24,316 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-26 23:34:31,313 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:34:35,325 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:34:39,321 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:34:47,316 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:34:47,319 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:34:49,314 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-26 23:34:55,316 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:34:59,314 [INFO] GET /api/historico 200 1ms [192.168.1.103]
+2026-05-26 23:35:03,317 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:35:11,318 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:35:11,321 [INFO] GET /api/historico 200 1ms [192.168.1.103]
+2026-05-26 23:35:14,315 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-26 23:35:19,317 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:35:23,315 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:35:27,315 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:35:41,135 [INFO] Loading faiss with AVX2 support.
+2026-05-26 23:35:41,225 [INFO] Successfully loaded faiss with AVX2 support.
+2026-05-26 23:35:55,972 [INFO] No device provided, using cpu
+2026-05-26 23:35:56,566 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/modules.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-26 23:35:56,595 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/modules.json "HTTP/1.1 200 OK"
+2026-05-26 23:35:56,734 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config_sentence_transformers.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-26 23:35:56,745 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config_sentence_transformers.json "HTTP/1.1 200 OK"
+2026-05-26 23:35:56,748 [INFO] Loading SentenceTransformer model from sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2.
+2026-05-26 23:35:56,895 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config_sentence_transformers.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-26 23:35:56,907 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config_sentence_transformers.json "HTTP/1.1 200 OK"
+2026-05-26 23:35:57,053 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-05-26 23:35:57,066 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/README.md "HTTP/1.1 200 OK"
+2026-05-26 23:35:57,210 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/modules.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-26 23:35:57,218 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/modules.json "HTTP/1.1 200 OK"
+2026-05-26 23:35:57,360 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/sentence_bert_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-26 23:35:57,362 [WARNING] Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-05-26 23:35:57,373 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/sentence_bert_config.json "HTTP/1.1 200 OK"
+2026-05-26 23:35:57,523 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/adapter_config.json "HTTP/1.1 404 Not Found"
+2026-05-26 23:35:57,674 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-26 23:35:57,686 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config.json "HTTP/1.1 200 OK"
+2026-05-26 23:35:58,374 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/processor_config.json "HTTP/1.1 404 Not Found"
+2026-05-26 23:35:58,524 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/preprocessor_config.json "HTTP/1.1 404 Not Found"
+2026-05-26 23:35:58,671 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/video_preprocessor_config.json "HTTP/1.1 404 Not Found"
+2026-05-26 23:35:58,760 [INFO] MAGISystem inicializado com sucesso
+2026-05-26 23:35:58,817 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/preprocessor_config.json "HTTP/1.1 404 Not Found"
+2026-05-26 23:35:58,968 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-26 23:35:58,976 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-05-26 23:35:59,124 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-26 23:35:59,132 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config.json "HTTP/1.1 200 OK"
+2026-05-26 23:35:59,281 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-26 23:35:59,292 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config.json "HTTP/1.1 200 OK"
+2026-05-26 23:35:59,317 [INFO] GET /api/status 200 2ms [192.168.1.103]
+2026-05-26 23:35:59,321 [INFO] GET /api/historico 200 1ms [192.168.1.103]
+2026-05-26 23:35:59,432 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-26 23:35:59,443 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-05-26 23:35:59,585 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-26 23:35:59,600 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-05-26 23:35:59,751 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-05-26 23:35:59,894 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-05-26 23:36:02,717 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2 "HTTP/1.1 200 OK"
+2026-05-26 23:36:03,177 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/1_Pooling/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-26 23:36:03,187 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/1_Pooling%2Fconfig.json "HTTP/1.1 200 OK"
+2026-05-26 23:36:03,337 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2 "HTTP/1.1 200 OK"
+2026-05-26 23:36:04,319 [INFO] GET /api/memoria 200 2ms [192.168.1.103]
+2026-05-26 23:36:07,313 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:36:11,317 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:36:15,956 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:36:23,944 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:36:23,947 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:36:29,943 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-26 23:36:31,949 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:36:35,948 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:36:39,947 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:36:47,947 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:36:47,951 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:36:54,958 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-26 23:36:55,942 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:36:59,952 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:37:03,319 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:37:07,487 [INFO] GET / 200 2ms [192.168.1.103]
+2026-05-26 23:37:07,548 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:37:07,632 [INFO] GET /api/nucleos/status 200 1ms [192.168.1.103]
+2026-05-26 23:37:07,649 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-26 23:37:07,666 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:37:11,372 [INFO] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-05-26 23:37:14,596 [INFO] POST /api/query 200 4909ms [192.168.1.103]
+2026-05-26 23:37:14,616 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:37:14,621 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:37:15,698 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:37:19,707 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:37:23,700 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:37:31,699 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:37:31,701 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:37:32,702 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-26 23:37:36,377 [INFO] Retrying request to /chat/completions in 0.461700 seconds
+2026-05-26 23:37:38,879 [INFO] Retrying request to /chat/completions in 0.965239 seconds
+2026-05-26 23:37:43,914 [INFO] Retrying request to /chat/completions in 0.407076 seconds
+2026-05-26 23:37:46,352 [INFO] Retrying request to /chat/completions in 0.822803 seconds
+2026-05-26 23:37:49,700 [INFO] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-05-26 23:37:50,536 [INFO] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-05-26 23:37:50,595 [INFO] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-05-26 23:37:53,887 [INFO] Retrying request to /chat/completions in 0.433994 seconds
+2026-05-26 23:37:56,360 [INFO] Retrying request to /chat/completions in 0.865569 seconds
+2026-05-26 23:37:59,769 [INFO] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-05-26 23:38:00,893 [INFO] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-05-26 23:38:04,006 [INFO] Retrying request to /chat/completions in 0.456905 seconds
+2026-05-26 23:38:06,509 [INFO] Retrying request to /chat/completions in 0.914227 seconds
+2026-05-26 23:38:10,073 [INFO] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-05-26 23:38:16,571 [INFO] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-05-26 23:38:18,024 [INFO] Retrying request to /chat/completions in 0.499843 seconds
+2026-05-26 23:38:20,557 [INFO] Retrying request to /chat/completions in 0.961554 seconds
+2026-05-26 23:38:24,027 [INFO] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-05-26 23:38:38,140 [INFO] POST /api/query 200 63909ms [192.168.1.103]
+2026-05-26 23:38:38,146 [INFO] GET /api/status 200 4ms [192.168.1.103]
+2026-05-26 23:38:38,148 [INFO] GET /api/historico 200 5ms [192.168.1.103]
+2026-05-26 23:38:38,152 [INFO] GET /api/status 200 7ms [192.168.1.103]
+2026-05-26 23:38:38,157 [INFO] GET /api/status 200 9ms [192.168.1.103]
+2026-05-26 23:38:38,162 [INFO] GET /api/memoria 200 11ms [192.168.1.103]
+2026-05-26 23:38:38,166 [INFO] GET /api/status 200 11ms [192.168.1.103]
+2026-05-26 23:38:38,170 [INFO] GET /api/historico 200 9ms [192.168.1.103]
+2026-05-26 23:38:38,171 [INFO] GET /api/status 200 10ms [192.168.1.103]
+2026-05-26 23:38:38,174 [INFO] GET /api/historico 200 9ms [192.168.1.103]
+2026-05-26 23:38:38,181 [INFO] GET /api/status 200 12ms [192.168.1.103]
+2026-05-26 23:38:38,186 [INFO] GET /api/memoria 200 13ms [192.168.1.103]
+2026-05-26 23:38:38,187 [INFO] GET /api/status 200 13ms [192.168.1.103]
+2026-05-26 23:38:38,190 [INFO] GET /api/historico 200 13ms [192.168.1.103]
+2026-05-26 23:38:38,191 [INFO] GET /api/status 200 9ms [192.168.1.103]
+2026-05-26 23:38:38,193 [INFO] GET /api/historico 200 7ms [192.168.1.103]
+2026-05-26 23:38:38,198 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:38:38,201 [INFO] GET /api/historico 200 1ms [192.168.1.103]
+2026-05-26 23:38:43,703 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:38:43,707 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:38:47,701 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-26 23:38:51,703 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:38:55,698 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:38:59,701 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:39:07,701 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:39:07,702 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:39:12,701 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-26 23:39:13,449 [INFO] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-05-26 23:39:18,152 [INFO] POST /api/query 200 5204ms [192.168.1.103]
+2026-05-26 23:39:18,154 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:39:18,173 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:39:18,179 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:39:19,700 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:39:23,704 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:39:31,702 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:39:31,705 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:39:37,702 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-26 23:39:39,702 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:39:43,702 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:39:47,703 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:39:55,703 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:39:55,705 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:40:02,700 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-26 23:40:03,700 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:40:07,700 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:40:11,699 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:40:19,697 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:40:19,700 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:40:27,702 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:40:27,706 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-26 23:40:31,702 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:40:35,701 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:40:43,703 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:40:43,707 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:40:51,701 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:40:52,701 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-26 23:40:55,698 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:40:59,698 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:41:07,701 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:41:07,705 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:41:15,951 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:41:17,960 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-26 23:41:19,956 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:41:23,952 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:41:31,957 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:41:31,965 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:41:39,958 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:41:42,945 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-26 23:41:43,951 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:41:47,949 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:41:55,951 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:41:55,953 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:42:03,946 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:42:07,943 [INFO] GET /api/historico 200 1ms [192.168.1.103]
+2026-05-26 23:42:07,948 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-26 23:42:11,941 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:43:01,958 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:43:01,961 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:43:01,966 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-26 23:44:01,950 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:44:01,954 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:44:01,958 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-26 23:45:01,955 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:45:01,960 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:45:01,972 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-26 23:45:29,537 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:45:29,543 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:45:29,551 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-26 23:45:31,287 [INFO] GET / 200 1ms [192.168.1.103]
+2026-05-26 23:45:31,344 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:45:31,403 [INFO] GET /api/nucleos/status 200 0ms [192.168.1.103]
+2026-05-26 23:45:31,449 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-26 23:45:31,465 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:45:39,944 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:45:40,699 [INFO] GET / 200 1ms [192.168.1.103]
+2026-05-26 23:45:40,921 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:45:41,132 [INFO] GET /api/nucleos/status 200 1ms [192.168.1.103]
+2026-05-26 23:45:41,161 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-26 23:45:41,182 [INFO] GET /api/historico 200 1ms [192.168.1.103]
+2026-05-26 23:45:43,951 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:45:47,944 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:45:49,198 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:45:54,505 [INFO] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-05-26 23:45:58,122 [INFO] POST /api/query 200 5295ms [192.168.1.103]
+2026-05-26 23:45:58,127 [INFO] GET /api/historico 200 2ms [192.168.1.103]
+2026-05-26 23:45:58,131 [INFO] GET /api/status 200 4ms [192.168.1.103]
+2026-05-26 23:45:58,134 [INFO] GET /api/memoria 200 4ms [192.168.1.103]
+2026-05-26 23:45:58,137 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:45:58,141 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:45:58,154 [INFO] GET /api/historico 200 1ms [192.168.1.103]
+2026-05-26 23:45:58,160 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:46:03,949 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:46:05,204 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:46:05,211 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:46:06,984 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-26 23:46:07,946 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:46:11,947 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:46:13,198 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:46:17,954 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:46:19,940 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:46:19,943 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:46:21,956 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-26 23:46:21,958 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:46:27,943 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:46:29,200 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:46:29,209 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:46:31,201 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-26 23:46:31,942 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:46:35,954 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:46:37,200 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:46:41,201 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:46:43,951 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:46:45,196 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:46:46,946 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-26 23:46:53,201 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:46:53,203 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:46:56,199 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-26 23:47:01,203 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:47:01,954 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:47:01,960 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:47:05,203 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:47:09,203 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:47:11,955 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-26 23:47:17,945 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:47:17,948 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:47:21,956 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-26 23:47:25,209 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:47:29,201 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:47:33,201 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:47:36,953 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-26 23:47:41,201 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:47:41,207 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:47:46,198 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-26 23:47:49,202 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:47:53,200 [INFO] GET /api/historico 200 1ms [192.168.1.103]
+2026-05-26 23:47:57,199 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:48:01,955 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:48:01,961 [INFO] GET /api/historico 200 1ms [192.168.1.103]
+2026-05-26 23:48:01,968 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-26 23:48:05,953 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:48:05,956 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:48:11,945 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-26 23:48:13,954 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:48:17,956 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:48:21,944 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:48:29,953 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:48:29,956 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:48:36,942 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-26 23:48:37,945 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:48:41,945 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:48:45,943 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:48:53,952 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:48:53,956 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:49:01,957 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:49:01,962 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-26 23:49:01,963 [INFO] GET /api/historico 200 2ms [192.168.1.103]
+2026-05-26 23:49:01,965 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:49:01,967 [INFO] GET /api/memoria 200 2ms [192.168.1.103]
+2026-05-26 23:50:01,947 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:50:01,948 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:50:01,950 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:50:01,950 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:50:01,957 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-26 23:50:01,960 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-26 23:50:55,732 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:50:55,737 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:50:55,740 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-26 23:51:01,951 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:51:01,954 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:51:01,956 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-26 23:51:01,963 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:51:05,945 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:51:06,948 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-26 23:51:09,952 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:51:17,947 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:51:17,949 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:51:25,200 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:51:29,199 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:51:31,200 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-26 23:51:33,202 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:51:41,202 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-26 23:51:41,204 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:51:49,199 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:51:53,200 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:51:56,200 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-26 23:51:57,198 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:52:01,950 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:52:01,953 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:52:01,959 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-26 23:52:05,197 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:52:05,200 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:52:13,955 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:52:17,946 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:52:21,943 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:52:21,945 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-26 23:58:08,581 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-26 23:58:08,605 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:58:09,814 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-26 23:58:09,832 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:58:16,952 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:58:18,181 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:58:20,948 [INFO] GET /api/historico 200 1ms [192.168.1.103]
+2026-05-26 23:58:21,952 [INFO] GET /api/historico 200 2ms [192.168.1.103]
+2026-05-26 23:58:24,947 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:58:25,950 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:58:32,953 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:58:32,965 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:58:33,948 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-26 23:58:33,950 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:58:33,957 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:58:34,954 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-26 23:58:40,960 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:58:41,943 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:58:44,957 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:58:45,948 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:58:48,946 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:58:49,948 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:58:56,952 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:58:56,956 [INFO] GET /api/historico 200 1ms [192.168.1.103]
+2026-05-26 23:58:57,952 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:58:57,956 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:58:58,960 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-26 23:58:59,957 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-26 23:59:04,943 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:59:05,952 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-26 23:59:08,944 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:59:09,948 [INFO] GET /api/historico 200 1ms [192.168.1.103]
+2026-05-26 23:59:20,950 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:59:21,958 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-26 23:59:23,945 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-26 23:59:24,948 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-26 23:59:48,949 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-26 23:59:49,952 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-27 00:00:01,946 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-27 00:00:01,948 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-27 00:00:01,951 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-27 00:00:01,953 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-27 00:00:13,949 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-27 00:00:14,954 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-27 00:00:38,948 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-27 00:00:39,949 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-27 00:01:01,952 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-27 00:01:01,954 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-27 00:01:01,958 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-27 00:01:01,962 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-27 00:02:01,953 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-27 00:02:01,955 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-27 00:02:01,958 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-27 00:02:01,958 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-27 00:02:01,962 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-27 00:02:01,964 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-27 00:03:01,946 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-27 00:03:01,950 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-27 00:03:01,951 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-27 00:03:01,954 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-27 00:03:01,954 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-27 00:03:01,957 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-27 00:04:01,963 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-27 00:04:01,965 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-27 00:04:01,967 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-27 00:04:01,969 [INFO] GET /api/historico 200 1ms [192.168.1.103]
+2026-05-27 00:04:01,971 [INFO] GET /api/memoria 200 2ms [192.168.1.103]
+2026-05-27 00:04:01,973 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-27 00:05:01,947 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-27 00:05:01,951 [INFO] GET /api/historico 200 1ms [192.168.1.103]
+2026-05-27 00:05:01,952 [INFO] GET /api/status 200 2ms [192.168.1.103]
+2026-05-27 00:05:01,954 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-27 00:05:01,959 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-27 00:05:01,961 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-27 00:06:00,940 [WARNING] Rodando em HTTP. Em produção use HTTPS com Let's Encrypt.
+2026-05-27 00:06:00,940 [INFO] MAGI Server iniciando em 0.0.0.0:8000
+2026-05-27 00:06:01,955 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-27 00:06:01,959 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-27 00:06:01,960 [INFO] GET /api/historico 200 1ms [192.168.1.103]
+2026-05-27 00:06:01,962 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-27 00:06:01,966 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-27 00:06:01,970 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-27 00:06:33,528 [INFO] Loading faiss with AVX2 support.
+2026-05-27 00:06:33,624 [INFO] Successfully loaded faiss with AVX2 support.
+2026-05-27 00:06:46,782 [INFO] No device provided, using cpu
+2026-05-27 00:06:47,332 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/modules.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-27 00:06:47,333 [WARNING] Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-05-27 00:06:47,344 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/modules.json "HTTP/1.1 200 OK"
+2026-05-27 00:06:47,487 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config_sentence_transformers.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-27 00:06:47,502 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config_sentence_transformers.json "HTTP/1.1 200 OK"
+2026-05-27 00:06:47,504 [INFO] Loading SentenceTransformer model from sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2.
+2026-05-27 00:06:47,701 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config_sentence_transformers.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-27 00:06:47,719 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config_sentence_transformers.json "HTTP/1.1 200 OK"
+2026-05-27 00:06:47,865 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-05-27 00:06:47,877 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/README.md "HTTP/1.1 200 OK"
+2026-05-27 00:06:48,022 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/modules.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-27 00:06:48,035 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/modules.json "HTTP/1.1 200 OK"
+2026-05-27 00:06:48,178 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/sentence_bert_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-27 00:06:48,189 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/sentence_bert_config.json "HTTP/1.1 200 OK"
+2026-05-27 00:06:48,346 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/adapter_config.json "HTTP/1.1 404 Not Found"
+2026-05-27 00:06:48,512 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-27 00:06:48,522 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config.json "HTTP/1.1 200 OK"
+2026-05-27 00:06:48,748 [INFO] Patch velocidade: digitar() sem animação
+2026-05-27 00:06:48,749 [INFO] Patch velocidade: _metacognicao() desativada
+2026-05-27 00:06:48,749 [INFO] Patch velocidade: CoT do CASPER desativado
+2026-05-27 00:06:48,750 [INFO] Patch velocidade: _reflexao_pos_resposta() desativada
+2026-05-27 00:06:48,751 [INFO] Patches de velocidade aplicados — modo servidor ativo
+2026-05-27 00:06:48,752 [INFO] MAGISystem inicializado com sucesso
+2026-05-27 00:06:48,929 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/processor_config.json "HTTP/1.1 404 Not Found"
+2026-05-27 00:06:49,150 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/preprocessor_config.json "HTTP/1.1 404 Not Found"
+2026-05-27 00:06:49,315 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/video_preprocessor_config.json "HTTP/1.1 404 Not Found"
+2026-05-27 00:06:49,472 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/preprocessor_config.json "HTTP/1.1 404 Not Found"
+2026-05-27 00:06:49,615 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-27 00:06:49,627 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-05-27 00:06:49,769 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-27 00:06:49,780 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config.json "HTTP/1.1 200 OK"
+2026-05-27 00:06:49,920 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-27 00:06:49,930 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/config.json "HTTP/1.1 200 OK"
+2026-05-27 00:06:50,073 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-27 00:06:50,083 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-05-27 00:06:50,226 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-27 00:06:50,234 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-05-27 00:06:50,379 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-05-27 00:06:50,519 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-05-27 00:06:52,650 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2 "HTTP/1.1 200 OK"
+2026-05-27 00:06:53,083 [INFO] HTTP Request: HEAD https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/resolve/main/1_Pooling/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-27 00:06:53,095 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/1_Pooling%2Fconfig.json "HTTP/1.1 200 OK"
+2026-05-27 00:06:53,245 [INFO] HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2 "HTTP/1.1 200 OK"
+2026-05-27 00:07:01,951 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-27 00:07:01,953 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-27 00:07:01,955 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-27 00:07:01,957 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-27 00:07:01,959 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-27 00:07:01,960 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-27 00:07:19,560 [INFO] GET / 200 2ms [187.120.28.78]
+2026-05-27 00:07:20,108 [INFO] GET /api/status 200 0ms [187.120.28.78]
+2026-05-27 00:07:20,398 [INFO] GET /api/nucleos/status 200 0ms [187.120.28.78]
+2026-05-27 00:07:20,404 [INFO] GET /favicon.ico 404 0ms [187.120.28.78]
+2026-05-27 00:07:20,639 [INFO] GET /api/memoria 200 1ms [187.120.28.78]
+2026-05-27 00:07:20,870 [INFO] GET /api/historico 200 0ms [187.120.28.78]
+2026-05-27 00:07:31,994 [INFO] Retrying request to /chat/completions in 0.459255 seconds
+2026-05-27 00:07:34,496 [INFO] Retrying request to /chat/completions in 0.890528 seconds
+2026-05-27 00:07:39,469 [INFO] Retrying request to /chat/completions in 0.431046 seconds
+2026-05-27 00:07:41,939 [INFO] Retrying request to /chat/completions in 0.923174 seconds
+2026-05-27 00:07:45,657 [INFO] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-05-27 00:07:46,806 [INFO] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-05-27 00:07:46,936 [INFO] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-05-27 00:07:50,578 [INFO] Retrying request to /chat/completions in 0.435375 seconds
+2026-05-27 00:07:53,045 [INFO] Retrying request to /chat/completions in 0.836360 seconds
+2026-05-27 00:07:57,957 [INFO] Retrying request to /chat/completions in 0.442793 seconds
+2026-05-27 00:08:00,441 [INFO] Retrying request to /chat/completions in 0.879693 seconds
+2026-05-27 00:08:01,952 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-27 00:08:01,954 [INFO] GET /api/historico 200 1ms [192.168.1.103]
+2026-05-27 00:08:01,958 [INFO] GET /api/memoria 200 2ms [192.168.1.103]
+2026-05-27 00:08:01,960 [INFO] GET /api/status 200 2ms [192.168.1.103]
+2026-05-27 00:08:01,961 [INFO] GET /api/historico 200 3ms [192.168.1.103]
+2026-05-27 00:08:01,964 [INFO] GET /api/memoria 200 2ms [192.168.1.103]
+2026-05-27 00:08:03,884 [INFO] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-05-27 00:08:07,544 [INFO] Retrying request to /chat/completions in 0.405360 seconds
+2026-05-27 00:08:09,983 [INFO] Retrying request to /chat/completions in 0.834553 seconds
+2026-05-27 00:08:13,368 [INFO] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-05-27 00:08:15,854 [INFO] Retrying request to /chat/completions in 0.419457 seconds
+2026-05-27 00:08:18,308 [INFO] Retrying request to /chat/completions in 0.770409 seconds
+2026-05-27 00:08:21,601 [INFO] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-05-27 00:08:22,906 [INFO] POST /api/query 200 53897ms [187.120.28.78]
+2026-05-27 00:08:22,909 [INFO] GET /api/status 200 1ms [187.120.28.78]
+2026-05-27 00:08:22,910 [INFO] GET /api/historico 200 2ms [187.120.28.78]
+2026-05-27 00:08:22,911 [INFO] GET /api/status 200 2ms [187.120.28.78]
+2026-05-27 00:08:22,913 [INFO] GET /api/status 200 3ms [187.120.28.78]
+2026-05-27 00:08:22,915 [INFO] GET /api/memoria 200 3ms [187.120.28.78]
+2026-05-27 00:08:22,917 [INFO] GET / 200 4ms [35.196.132.85]
+2026-05-27 00:08:22,919 [INFO] GET /api/status 200 4ms [187.120.28.78]
+2026-05-27 00:08:22,919 [INFO] GET /api/status 200 3ms [187.120.28.78]
+2026-05-27 00:08:22,920 [INFO] GET /api/historico 200 3ms [187.120.28.78]
+2026-05-27 00:08:22,922 [INFO] GET /api/status 200 2ms [187.120.28.78]
+2026-05-27 00:08:22,922 [INFO] GET /api/status 200 2ms [187.120.28.78]
+2026-05-27 00:08:22,923 [INFO] GET /api/historico 200 1ms [187.120.28.78]
+2026-05-27 00:08:23,151 [INFO] GET /api/historico 200 0ms [187.120.28.78]
+2026-05-27 00:08:23,153 [INFO] GET /api/memoria 200 0ms [187.120.28.78]
+2026-05-27 00:08:23,183 [INFO] GET /api/status 200 0ms [187.120.28.78]
+2026-05-27 00:08:23,193 [INFO] GET /api/historico 200 0ms [187.120.28.78]
+2026-05-27 00:08:23,230 [INFO] GET /api/historico 200 0ms [187.120.28.78]
+2026-05-27 00:08:25,309 [INFO] GET /api/status 200 0ms [187.120.28.78]
+2026-05-27 00:08:33,146 [INFO] GET /api/historico 200 1ms [187.120.28.78]
+2026-05-27 00:08:33,148 [INFO] GET /api/status 200 2ms [187.120.28.78]
+2026-05-27 00:08:36,118 [INFO] GET /api/memoria 200 0ms [187.120.28.78]
+2026-05-27 00:08:41,136 [INFO] GET /api/status 200 0ms [187.120.28.78]
+2026-05-27 00:08:45,113 [INFO] GET /api/historico 200 0ms [187.120.28.78]
+2026-05-27 00:08:49,127 [INFO] GET /api/status 200 0ms [187.120.28.78]
+2026-05-27 00:08:58,005 [INFO] GET /api/historico 200 1ms [187.120.28.78]
+2026-05-27 00:08:58,009 [INFO] GET /api/status 200 4ms [187.120.28.78]
+2026-05-27 00:09:01,980 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-27 00:09:01,983 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-27 00:09:01,988 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-27 00:09:01,994 [INFO] GET /api/historico 200 2ms [192.168.1.103]
+2026-05-27 00:09:01,995 [INFO] GET /api/memoria 200 2ms [192.168.1.103]
+2026-05-27 00:09:02,004 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-27 00:09:02,058 [INFO] GET /api/memoria 200 1ms [187.120.28.78]
+2026-05-27 00:09:05,990 [INFO] GET /api/status 200 0ms [187.120.28.78]
+2026-05-27 00:09:09,989 [INFO] GET /api/historico 200 0ms [187.120.28.78]
+2026-05-27 00:09:13,982 [INFO] GET /api/status 200 0ms [187.120.28.78]
+2026-05-27 00:09:22,001 [INFO] GET /api/status 200 0ms [187.120.28.78]
+2026-05-27 00:09:22,004 [INFO] GET /api/historico 200 0ms [187.120.28.78]
+2026-05-27 00:09:27,003 [INFO] GET /api/memoria 200 0ms [187.120.28.78]
+2026-05-27 00:09:29,991 [INFO] GET /api/status 200 0ms [187.120.28.78]
+2026-05-27 00:09:33,995 [INFO] GET /api/historico 200 0ms [187.120.28.78]
+2026-05-27 00:09:37,968 [INFO] GET /api/status 200 0ms [187.120.28.78]
+2026-05-27 00:09:46,005 [INFO] GET /api/historico 200 3ms [187.120.28.78]
+2026-05-27 00:09:46,007 [INFO] GET /api/status 200 4ms [187.120.28.78]
+2026-05-27 00:09:51,998 [INFO] GET /api/memoria 200 1ms [187.120.28.78]
+2026-05-27 00:09:54,015 [INFO] GET /api/status 200 0ms [187.120.28.78]
+2026-05-27 00:10:01,963 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-27 00:10:01,968 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-27 00:10:01,972 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-27 00:10:01,980 [INFO] GET /api/memoria 200 4ms [192.168.1.103]
+2026-05-27 00:10:01,984 [INFO] GET /api/historico 200 2ms [192.168.1.103]
+2026-05-27 00:10:01,985 [INFO] GET /api/memoria 200 2ms [192.168.1.103]
+2026-05-27 00:10:02,032 [INFO] GET /api/status 200 0ms [187.120.28.78]
+2026-05-27 00:10:02,034 [INFO] GET /api/historico 200 1ms [187.120.28.78]
+2026-05-27 00:11:01,956 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-27 00:11:01,963 [INFO] GET /api/status 200 3ms [192.168.1.103]
+2026-05-27 00:11:01,964 [INFO] GET /api/historico 200 3ms [192.168.1.103]
+2026-05-27 00:11:01,968 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-27 00:11:01,968 [INFO] GET /api/historico 200 1ms [192.168.1.103]
+2026-05-27 00:11:01,971 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-27 00:11:02,403 [INFO] GET /api/status 200 1ms [187.120.28.78]
+2026-05-27 00:11:02,405 [INFO] GET /api/memoria 200 3ms [187.120.28.78]
+2026-05-27 00:11:02,406 [INFO] GET /api/historico 200 3ms [187.120.28.78]
+2026-05-27 00:12:01,952 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-27 00:12:01,955 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-27 00:12:01,956 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-27 00:12:01,959 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-27 00:12:01,963 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-27 00:12:01,966 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-27 00:12:02,010 [INFO] GET /api/memoria 200 1ms [187.120.28.78]
+2026-05-27 00:12:02,012 [INFO] GET /api/status 200 2ms [187.120.28.78]
+2026-05-27 00:12:02,013 [INFO] GET /api/historico 200 2ms [187.120.28.78]
+2026-05-27 00:13:01,952 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-27 00:13:01,954 [INFO] GET /api/historico 200 1ms [192.168.1.103]
+2026-05-27 00:13:01,957 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-27 00:13:01,958 [INFO] GET /api/historico 200 1ms [192.168.1.103]
+2026-05-27 00:13:01,962 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-27 00:13:01,966 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-27 00:13:02,021 [INFO] GET /api/historico 200 0ms [187.120.28.78]
+2026-05-27 00:13:02,025 [INFO] GET /api/memoria 200 1ms [187.120.28.78]
+2026-05-27 00:13:02,110 [INFO] GET /api/status 200 0ms [187.120.28.78]
+2026-05-27 00:14:01,949 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-27 00:14:01,953 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-27 00:14:01,958 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-27 00:14:01,962 [INFO] GET /api/historico 200 1ms [192.168.1.103]
+2026-05-27 00:14:01,967 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-27 00:14:01,970 [INFO] GET /api/memoria 200 2ms [192.168.1.103]
+2026-05-27 00:14:02,014 [INFO] GET /api/historico 200 0ms [187.120.28.78]
+2026-05-27 00:14:02,017 [INFO] GET /api/status 200 0ms [187.120.28.78]
+2026-05-27 00:14:02,042 [INFO] GET /api/memoria 200 0ms [187.120.28.78]
+2026-05-27 00:15:01,950 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-27 00:15:01,954 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-27 00:15:01,964 [INFO] GET /api/historico 200 2ms [192.168.1.103]
+2026-05-27 00:15:01,967 [INFO] GET /api/memoria 200 2ms [192.168.1.103]
+2026-05-27 00:15:01,973 [INFO] GET /api/historico 200 3ms [192.168.1.103]
+2026-05-27 00:15:01,974 [INFO] GET /api/memoria 200 2ms [192.168.1.103]
+2026-05-27 00:15:02,012 [INFO] GET /api/historico 200 1ms [187.120.28.78]
+2026-05-27 00:15:02,014 [INFO] GET /api/memoria 200 2ms [187.120.28.78]
+2026-05-27 00:15:02,015 [INFO] GET /api/status 200 2ms [187.120.28.78]
+2026-05-27 00:16:01,965 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-27 00:16:01,967 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-27 00:16:01,971 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-27 00:16:01,976 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-27 00:16:01,979 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-27 00:16:01,982 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-27 00:16:02,064 [INFO] GET /api/memoria 200 1ms [187.120.28.78]
+2026-05-27 00:17:01,952 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-27 00:17:01,958 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-27 00:17:01,959 [INFO] GET /api/memoria 200 2ms [192.168.1.103]
+2026-05-27 00:17:01,961 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-27 00:17:01,965 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-27 00:17:01,970 [INFO] GET /api/historico 200 1ms [192.168.1.103]
+2026-05-27 00:18:01,967 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-27 00:18:01,973 [INFO] GET /api/status 200 0ms [192.168.1.103]
+2026-05-27 00:18:01,983 [INFO] GET /api/historico 200 1ms [192.168.1.103]
+2026-05-27 00:18:01,989 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-27 00:18:02,000 [INFO] GET /api/memoria 200 0ms [192.168.1.103]
+2026-05-27 00:18:02,005 [INFO] GET /api/memoria 200 2ms [192.168.1.103]
+2026-05-27 00:19:01,955 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-27 00:19:01,962 [INFO] GET /api/status 200 1ms [192.168.1.103]
+2026-05-27 00:19:01,963 [INFO] GET /api/historico 200 1ms [192.168.1.103]
+2026-05-27 00:19:01,967 [INFO] GET /api/historico 200 0ms [192.168.1.103]
+2026-05-27 00:19:01,972 [INFO] GET /api/memoria 200 1ms [192.168.1.103]
+2026-05-27 00:19:01,975 [INFO] GET /api/memoria 200 0ms [192.168.1.103]

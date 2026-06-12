@@ -1,0 +1,62 @@
+# ══════════════════════════════════════════════════════════════
+# MAGI System — .gitignore
+# ══════════════════════════════════════════════════════════════
+
+# ── Segredos e credenciais ────────────────────────────────────
+*.env
+Projeto2.env
+.env
+.env.*
+magi_server_config.json        # hash/salt do admin
+
+# ── Cache Python ──────────────────────────────────────────────
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# ── Build / PyInstaller ───────────────────────────────────────
+build/
+dist/
+*.spec
+*.pkg
+*.exe
+
+# ── Dados gerados em runtime ──────────────────────────────────
+data/logs/
+data/memory/
+data/knowledge/
+data/*.jsonl
+data/*.json
+data/*.txt
+data/*.mp3
+magi_fala.mp3
+
+# Arquivos soltos na raiz que são dados de runtime
+magi_*.jsonl
+magi_*.json
+magi_conhecimento.jsonl
+magi_evolucao_skills.jsonl
+magi_sugestoes_evolucao.jsonl
+magi_memoria.jsonl
+magi_log.jsonl
+magi_ego.json
+magi_valence_cache.json
+magi_conhecimento.json
+magi_evolucao_skills.json
+magi_log.json
+magi_memoria.json
+magi_sugestoes_evolucao.json
+
+# ── Backups ───────────────────────────────────────────────────
+backups/
+MAGI_BACKUPS/
+*.bak.*
+
+# ── Áudio gerado ──────────────────────────────────────────────
+*.mp3
+
+# ── Miscelânea ────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+*.log

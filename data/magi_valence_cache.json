@@ -1,0 +1,70 @@
+{
+  "740cffc236e3d8d26882dfce480eafdf": {
+    "importancia": "MÉDIA",
+    "score": 0.47,
+    "razao": "Salvar (MÉDIA) — Utilidade moderada",
+    "dimensoes": {
+      "relevancia": 0.3,
+      "novidade": 0.7,
+      "impacto": 0.44,
+      "duracao": 0.58,
+      "frequencia": 0.3
+    },
+    "tags": [
+      "padrão",
+      "técnico",
+      "decisão"
+    ],
+    "timestamp": "2026-05-12T00:50:54.959975"
+  },
+  "65b77482ebf05a35328745df3c11b4f5": {
+    "importancia": "CRÍTICA",
+    "score": 0.45,
+    "razao": "Salvar SEMPRE — conhecimento crítico ou padrão essencial.",
+    "dimensoes": {
+      "relevancia": 0.5,
+      "novidade": 0.7,
+      "impacto": 0.2,
+      "duracao": 0.5,
+      "frequencia": 0.3
+    },
+    "tags": [
+      "conhecimento"
+    ],
+    "timestamp": "2026-05-12T00:50:54.964953"
+  },
+  "5694abdb197baa81cb7ab58a51b57c4a": {
+    "importancia": "BAIXA",
+    "score": 0.38,
+    "razao": "Salvar (BAIXA) — Utilidade moderada",
+    "dimensoes": {
+      "relevancia": 0.3,
+      "novidade": 0.7,
+      "impacto": 0.2,
+      "duracao": 0.4,
+      "frequencia": 0.3
+    },
+    "tags": [
+      "efêmero"
+    ],
+    "timestamp": "2026-05-12T00:50:54.965701"
+  },
+  "be295850e002a2ae0d056edeed2bd02b": {
+    "importancia": "MÉDIA",
+    "score": 0.56,
+    "razao": "Salvar (MÉDIA) — Utilidade moderada",
+    "dimensoes": {
+      "relevancia": 0.5,
+      "novidade": 0.7,
+      "impacto": 0.61,
+      "duracao": 0.58,
+      "frequencia": 0.3
+    },
+    "tags": [
+      "padrão",
+      "pessoal",
+      "decisão"
+    ],
+    "timestamp": "2026-05-12T00:50:54.966348"
+  }
+}

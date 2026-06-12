@@ -1,0 +1,45 @@
+# ══════════════════════════════════════════════════════════════
+# MAGI System — requirements.txt
+# Instale com: pip install -r requirements.txt --break-system-packages
+# ══════════════════════════════════════════════════════════════
+
+# ── Core ─────────────────────────────────────────────────────
+colorama>=0.4.6
+python-dotenv>=1.0.0
+
+# ── LLMs ─────────────────────────────────────────────────────
+openai>=1.30.0            # OpenAI + OpenRouter (mesma API)
+google-genai>=0.8.0       # Gemini (MELCHIOR, BALTHASAR)
+anthropic>=0.28.0         # Claude (fallback de evolução)
+
+# ── Embeddings / Memória semântica ────────────────────────────
+sentence-transformers>=2.7.0
+faiss-cpu>=1.8.0
+numpy>=1.26.0
+
+# ── RAG (opcional — fallback para FAISS se não instalado) ─────
+chromadb>=0.5.0
+
+# ── Math (opcional — usado em _resolver_matematica) ───────────
+sympy>=1.12
+
+# ── TTS (opcional — usado em _falar) ─────────────────────────
+gTTS>=2.5.0
+pygame>=2.5.0
+
+# ── Server (MagiServer.py) ───────────────────────────────────
+fastapi>=0.111.0
+uvicorn[standard]>=0.30.0
+websockets>=12.0
+
+# ── Testes ───────────────────────────────────────────────────
+pytest>=8.0.0
+pytest-asyncio>=0.23.0
+
+# ── Networking / Web ─────────────────────────────────────────
+requests>=2.31.0          # usado em busca web
+urllib3>=2.0.0
+
+# ── Dataset (magidataset.py) ─────────────────────────────────
+feedparser>=6.0.0         # RSS feeds
+beautifulsoup4>=4.12.0    # parsing HTML

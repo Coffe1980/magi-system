@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MAGI — NERV HQ Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:      #020408;
+  --bg2:     #040c14;
+  --bg3:     #071020;
+  --border:  #0a2040;
+  --red:     #c8001a;
+  --red2:    #ff1a35;
+  --cyan:    #00d4ff;
+  --green:   #00ff88;
+  --magenta: #ff00aa;
+  --yellow:  #ffd700;
+  --orange:  #ff6600;
+  --text:    #c8d8e8;
+  --text2:   #6a8aaa;
+  --glow-r:  0 0 20px rgba(200,0,26,0.5);
+  --glow-c:  0 0 20px rgba(0,212,255,0.4);
+  --glow-g:  0 0 20px rgba(0,255,136,0.4);
+  --glow-m:  0 0 20px rgba(255,0,170,0.4);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+body {
+  font-family:'Rajdhani',sans-serif;
+  background:var(--bg);color:var(--text);
+  min-height:100vh;overflow-x:hidden;cursor:crosshair;
+}
+body::before {
+  content:'';position:fixed;inset:0;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.08) 2px,rgba(0,0,0,0.08) 4px);
+  pointer-events:none;z-index:9999;
+}
+body::after {
+  content:'';position:fixed;inset:0;
+  background-image:linear-gradient(rgba(10,32,64,0.25) 1px,transparent 1px),linear-gradient(90deg,rgba(10,32,64,0.25) 1px,transparent 1px);
+  background-size:40px 40px;pointer-events:none;z-index:0;
+}
+
+/* ── HEADER ── */
+header {
+  position:relative;z-index:10;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 28px;height:60px;
+  background:linear-gradient(180deg,rgba(200,0,26,0.12) 0%,transparent 100%);
+  border-bottom:1px solid var(--red);
+  box-shadow:var(--glow-r);
+}
+.header-logo{display:flex;align-items:center;gap:14px}
+.nerv-mark {
+  width:36px;height:36px;background:var(--red);
+  clip-path:polygon(50% 0%,100% 100%,0% 100%);
+  animation:pulse-red 2s ease-in-out infinite;flex-shrink:0;
+}
+@keyframes pulse-red{0%,100%{filter:brightness(1) drop-shadow(0 0 6px var(--red))}50%{filter:brightness(1.5) drop-shadow(0 0 18px var(--red2))}}
+.logo-text{font-family:'Orbitron',monospace;font-size:18px;font-weight:900;color:var(--red2);text-shadow:var(--glow-r);letter-spacing:4px}
+.logo-sub{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--text2);letter-spacing:3px;margin-top:2px}
+nav{display:flex;gap:2px}
+nav button {
+  background:transparent;border:1px solid transparent;color:var(--text2);
+  font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:600;letter-spacing:2px;
+  padding:5px 14px;cursor:crosshair;transition:all 0.2s;text-transform:uppercase;
+}
+nav button:hover,nav button.active{color:var(--cyan);border-color:var(--cyan);text-shadow:var(--glow-c);background:rgba(0,212,255,0.05)}
+.status-bar{display:flex;align-items:center;gap:10px;font-family:'Share Tech Mono',monospace;font-size:10px}
+.status-dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:var(--glow-g);animation:blink 1.5s ease-in-out infinite}
+.status-dot.offline{background:var(--red);box-shadow:var(--glow-r)}
+.status-dot.warn{background:var(--yellow);box-shadow:0 0 10px rgba(255,215,0,0.5)}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+.uptime-badge{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--text2);padding:2px 8px;border:1px solid var(--border)}
+
+/* ── LAYOUT ── */
+.app {
+  position:relative;z-index:1;
+  display:grid;grid-template-columns:260px 1fr 260px;
+  height:calc(100vh - 60px);overflow:hidden;
+}
+
+/* ── PAINEL ── */
+.panel {
+  background:var(--bg2);border:1px solid var(--border);
+  padding:16px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--border) transparent;
+}
+.panel-title {
+  font-family:'Orbitron',monospace;font-size:9px;font-weight:700;
+  letter-spacing:3px;color:var(--red);text-shadow:var(--glow-r);
+  margin-bottom:14px;padding-bottom:7px;border-bottom:1px solid rgba(200,0,26,0.25);
+  display:flex;align-items:center;gap:7px;
+}
+.panel-title::before{content:'◈';animation:spin 4s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ── NÚCLEOS ── */
+.nucleo-card {
+  background:var(--bg3);border:1px solid var(--border);border-radius:2px;
+  padding:12px;margin-bottom:10px;transition:all 0.3s;position:relative;overflow:hidden;
+}
+.nucleo-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px}
+.nucleo-card.mel::before{background:var(--cyan);box-shadow:var(--glow-c)}
+.nucleo-card.bal::before{background:var(--green);box-shadow:var(--glow-g)}
+.nucleo-card.cas::before{background:var(--magenta);box-shadow:var(--glow-m)}
+.nucleo-card.adam::before{background:var(--yellow);box-shadow:0 0 12px rgba(255,215,0,0.4)}
+.nucleo-card.processing{animation:card-pulse 0.8s ease-in-out infinite}
+@keyframes card-pulse{0%,100%{border-color:var(--border)}50%{border-color:var(--cyan);box-shadow:inset 0 0 20px rgba(0,212,255,0.04)}}
+.nucleo-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.nucleo-nome{font-family:'Orbitron',monospace;font-size:10px;font-weight:700;letter-spacing:2px}
+.nucleo-nome.mel{color:var(--cyan);text-shadow:var(--glow-c)}
+.nucleo-nome.bal{color:var(--green);text-shadow:var(--glow-g)}
+.nucleo-nome.cas{color:var(--magenta);text-shadow:var(--glow-m)}
+.nucleo-nome.adam{color:var(--yellow)}
+.nucleo-status{font-family:'Share Tech Mono',monospace;font-size:8px;padding:2px 7px;border-radius:1px}
+.nucleo-status.online{background:rgba(0,255,136,0.12);color:var(--green);border:1px solid var(--green)}
+.nucleo-status.offline{background:rgba(200,0,26,0.12);color:var(--red);border:1px solid var(--red)}
+.nucleo-status.checking{background:rgba(255,215,0,0.12);color:var(--yellow);border:1px solid var(--yellow);animation:blink 0.5s infinite}
+.nucleo-subtitulo{font-size:10px;color:var(--text2);letter-spacing:1px;margin-bottom:4px}
+.nucleo-modelo{font-family:'Share Tech Mono',monospace;font-size:8px;color:var(--text2)}
+.nucleo-resposta{margin-top:8px;font-size:11px;color:var(--text);line-height:1.5;padding:7px;background:rgba(0,0,0,0.3);border-left:2px solid var(--border);display:none;max-height:100px;overflow-y:auto}
+.nucleo-resposta.show{display:block}
+.voto-badge{display:inline-block;font-family:'Share Tech Mono',monospace;font-size:8px;padding:2px 7px;border-radius:1px;margin-top:5px}
+.voto-badge.SIM{background:rgba(0,255,136,0.15);color:var(--green);border:1px solid var(--green)}
+.voto-badge\.NÃO,.voto-badge.NAO{background:rgba(200,0,26,0.15);color:var(--red2);border:1px solid var(--red2)}
+.voto-badge.ABSTENDO{background:rgba(255,215,0,0.15);color:var(--yellow);border:1px solid var(--yellow)}
+
+/* ── ÁREA CENTRAL ── */
+.main-area{display:flex;flex-direction:column;border-left:1px solid var(--border);border-right:1px solid var(--border)}
+.tabs{display:flex;background:var(--bg);border-bottom:1px solid var(--border);flex-shrink:0}
+.tab{padding:10px 18px;font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--text2);cursor:crosshair;border-bottom:2px solid transparent;transition:all 0.2s;background:transparent;border-top:none;border-left:none;border-right:none}
+.tab:hover{color:var(--text)}
+.tab.active{color:var(--red2);border-bottom-color:var(--red2)}
+.tab-content{display:none;flex:1;flex-direction:column;overflow:hidden}
+.tab-content.active{display:flex}
+
+/* ── CONSULTA ── */
+.chat-area{flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:16px}
+.msg{max-width:88%;animation:slide-in 0.3s ease}
+@keyframes slide-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.msg.user{align-self:flex-end}
+.msg.magi{align-self:flex-start}
+.msg-header{font-family:'Share Tech Mono',monospace;font-size:8px;color:var(--text2);margin-bottom:3px;letter-spacing:2px}
+.msg.user .msg-header{text-align:right}
+.msg-bubble{padding:12px 16px;border-radius:2px;font-size:13px;line-height:1.6}
+.msg.user .msg-bubble{background:rgba(200,0,26,0.08);border:1px solid rgba(200,0,26,0.35)}
+.msg.magi .msg-bubble{background:rgba(0,212,255,0.04);border:1px solid rgba(0,212,255,0.18)}
+.veredito-label{font-family:'Orbitron',monospace;font-size:8px;color:var(--yellow);letter-spacing:3px;margin-bottom:6px}
+.intent-tag{display:inline-block;font-family:'Share Tech Mono',monospace;font-size:8px;padding:2px 7px;border:1px solid var(--border);color:var(--text2);margin-bottom:6px}
+.adam-block{margin-top:10px;padding:8px;background:rgba(255,215,0,0.04);border:1px solid rgba(255,215,0,0.2);font-size:11px}
+.adam-block-title{font-family:'Orbitron',monospace;font-size:8px;color:var(--yellow);letter-spacing:2px;margin-bottom:6px}
+
+.input-area{padding:14px 20px;background:var(--bg);border-top:1px solid var(--border);flex-shrink:0}
+.input-row{display:flex;gap:7px;align-items:flex-end}
+.mode-select{background:var(--bg3);border:1px solid var(--border);color:var(--text2);font-family:'Share Tech Mono',monospace;font-size:9px;padding:0 9px;height:42px;cursor:crosshair;outline:none;letter-spacing:1px}
+.query-input{flex:1;background:var(--bg3);border:1px solid var(--border);color:var(--text);font-family:'Rajdhani',sans-serif;font-size:14px;padding:9px 14px;resize:none;height:42px;outline:none;transition:border-color 0.2s;line-height:1.4}
+.query-input:focus{border-color:var(--cyan);box-shadow:0 0 8px rgba(0,212,255,0.08)}
+.query-input::placeholder{color:var(--text2)}
+.send-btn{height:42px;padding:0 20px;background:var(--red);border:none;color:#fff;font-family:'Orbitron',monospace;font-size:10px;font-weight:700;letter-spacing:2px;cursor:crosshair;transition:all 0.2s;text-transform:uppercase;display:flex;align-items:center}
+.send-btn:hover:not([disabled]){background:var(--red2);box-shadow:var(--glow-r)}
+.send-btn[disabled]{opacity:0.4;cursor:not-allowed}
+.thinking{display:none;align-items:center;gap:7px;font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--text2);padding:6px 0}
+.thinking.show{display:flex}
+.thinking-dots span{display:inline-block;width:4px;height:4px;border-radius:50%;background:var(--cyan);animation:dot-bounce 1.2s ease-in-out infinite;margin:0 2px}
+.thinking-dots span:nth-child(2){animation-delay:0.2s}
+.thinking-dots span:nth-child(3){animation-delay:0.4s}
+@keyframes dot-bounce{0%,80%,100%{transform:translateY(0)}40%{transform:translateY(-5px)}}
+.feedback-row{display:flex;gap:7px;margin-top:7px}
+.fb-btn{padding:3px 10px;background:transparent;font-family:'Share Tech Mono',monospace;font-size:9px;cursor:crosshair;transition:all 0.2s;border-radius:1px}
+.fb-btn.pos{border:1px solid var(--green);color:var(--green)}
+.fb-btn.pos:hover{background:rgba(0,255,136,0.08)}
+.fb-btn.neg{border:1px solid var(--red);color:var(--red)}
+.fb-btn.neg:hover{background:rgba(200,0,26,0.08)}
+
+/* ── CÓDIGO ── */
+.codigo-area{flex:1;display:flex;flex-direction:column;padding:20px;gap:14px;overflow-y:auto}
+.codigo-input-row{display:flex;gap:7px}
+.codigo-input{flex:1;background:var(--bg3);border:1px solid var(--border);color:var(--text);font-family:'Rajdhani',sans-serif;font-size:13px;padding:9px 14px;outline:none}
+.codigo-input:focus{border-color:var(--cyan)}
+.codigo-output{flex:1;background:#010810;border:1px solid var(--border);padding:18px;font-family:'Share Tech Mono',monospace;font-size:12px;line-height:1.7;color:var(--green);overflow-y:auto;white-space:pre-wrap;min-height:200px;max-height:calc(100vh - 280px)}
+.code-actions{display:flex;gap:7px;margin-top:6px}
+.code-btn{padding:4px 12px;background:transparent;font-family:'Share Tech Mono',monospace;font-size:9px;cursor:crosshair;border:1px solid var(--border);color:var(--text2);transition:all 0.2s}
+.code-btn:hover{border-color:var(--cyan);color:var(--cyan)}
+
+/* ── DEBATE ── */
+.debate-area{flex:1;display:flex;flex-direction:column;padding:20px;gap:14px;overflow-y:auto}
+.debate-input-row{display:flex;gap:7px}
+.debate-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.debate-col{background:var(--bg3);border:1px solid var(--border);padding:14px;border-radius:2px}
+.debate-col-title{font-family:'Orbitron',monospace;font-size:8px;letter-spacing:2px;margin-bottom:10px;padding-bottom:5px;border-bottom:1px solid var(--border)}
+.debate-col-title.mel{color:var(--cyan)}
+.debate-col-title.bal{color:var(--green)}
+.debate-rodada{margin-bottom:10px;font-size:11px;line-height:1.5}
+.debate-rodada-label{font-family:'Share Tech Mono',monospace;font-size:8px;color:var(--text2);letter-spacing:2px;margin-bottom:3px}
+.debate-veredito{background:rgba(255,215,0,0.04);border:1px solid rgba(255,215,0,0.25);padding:14px;font-size:12px;line-height:1.6;color:var(--yellow);grid-column:1/-1}
+.debate-veredito-title{font-family:'Orbitron',monospace;font-size:8px;letter-spacing:3px;margin-bottom:8px}
+
+/* ── EGO ── */
+.ego-area{flex:1;padding:20px;overflow-y:auto;display:grid;grid-template-columns:1fr 1fr;gap:14px;align-content:start}
+.ego-card{background:var(--bg3);border:1px solid var(--border);padding:14px;border-radius:2px}
+.ego-card.full{grid-column:1/-1}
+.ego-card-title{font-family:'Orbitron',monospace;font-size:8px;letter-spacing:3px;color:var(--red);margin-bottom:10px}
+.ego-value{font-family:'Share Tech Mono',monospace;font-size:28px;color:var(--cyan);text-shadow:var(--glow-c)}
+.ego-label{font-size:10px;color:var(--text2);letter-spacing:1px;margin-top:3px}
+.bar-container{margin-top:8px}
+.bar-label{font-size:10px;color:var(--text2);margin-bottom:3px;display:flex;justify-content:space-between}
+.bar{height:5px;background:var(--border);border-radius:3px;overflow:hidden}
+.bar-fill{height:100%;background:linear-gradient(90deg,var(--cyan),var(--green));border-radius:3px;transition:width 1s ease}
+.emocional-display{font-family:'Orbitron',monospace;font-size:20px;padding:12px;text-align:center;letter-spacing:3px}
+.aprendizado-item{font-size:11px;color:var(--text2);padding:5px 0;border-bottom:1px solid var(--border);line-height:1.4}
+.aprendizado-item:last-child{border-bottom:none}
+
+/* ── LOGS ── */
+.logs-area{flex:1;display:flex;flex-direction:column;padding:20px;gap:10px;overflow:hidden}
+.logs-controls{display:flex;gap:7px;align-items:center;flex-shrink:0}
+.logs-filter{background:var(--bg3);border:1px solid var(--border);color:var(--text2);font-family:'Share Tech Mono',monospace;font-size:9px;padding:4px 10px;cursor:crosshair;outline:none}
+.logs-output{flex:1;background:#010810;border:1px solid var(--border);padding:14px;font-family:'Share Tech Mono',monospace;font-size:10px;line-height:1.7;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--border) transparent}
+.log-line{padding:1px 0;border-bottom:1px solid rgba(10,32,64,0.5)}
+.log-INFO{color:var(--cyan)}
+.log-WARN{color:var(--yellow)}
+.log-ERROR{color:var(--red2)}
+.log-DEBUG{color:var(--text2)}
+
+/* ── CONFIG ── */
+.config-area{flex:1;padding:20px;overflow-y:auto}
+.config-section{margin-bottom:24px}
+.config-section-title{font-family:'Orbitron',monospace;font-size:9px;letter-spacing:3px;color:var(--red);margin-bottom:12px;padding-bottom:6px;border-bottom:1px solid rgba(200,0,26,0.2)}
+.config-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);gap:12px}
+.config-label{font-size:12px;color:var(--text);letter-spacing:1px}
+.config-sub{font-size:10px;color:var(--text2)}
+.config-value{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--cyan)}
+.config-badge{font-family:'Share Tech Mono',monospace;font-size:9px;padding:2px 8px;border-radius:1px}
+.config-badge.ok{background:rgba(0,255,136,0.12);color:var(--green);border:1px solid var(--green)}
+.config-badge.miss{background:rgba(200,0,26,0.12);color:var(--red);border:1px solid var(--red)}
+
+/* ── PAINEL DIREITO ── */
+.right-panel{overflow-y:auto}
+.mem-item{padding:9px;border:1px solid var(--border);border-radius:2px;margin-bottom:7px;font-size:10px;background:var(--bg3);cursor:pointer;transition:border-color 0.2s}
+.mem-item:hover{border-color:var(--cyan)}
+.mem-cat{font-family:'Share Tech Mono',monospace;font-size:8px;color:var(--text2);margin-bottom:3px}
+.mem-texto{color:var(--text);line-height:1.4}
+.mem-ts{font-size:8px;color:var(--text2);margin-top:3px}
+.hist-item{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--text2);padding:5px 0;border-bottom:1px solid var(--border);line-height:1.4}
+
+/* ── MÉTRICAS MINI ── */
+.metrics-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+.metric-card{background:var(--bg3);border:1px solid var(--border);padding:10px;text-align:center}
+.metric-val{font-family:'Share Tech Mono',monospace;font-size:20px;color:var(--cyan);text-shadow:var(--glow-c)}
+.metric-label{font-size:9px;color:var(--text2);letter-spacing:1px;margin-top:2px}
+
+/* ── TOAST ── */
+.toast{position:fixed;bottom:20px;right:20px;background:var(--bg3);border:1px solid var(--green);color:var(--green);padding:10px 18px;font-family:'Share Tech Mono',monospace;font-size:10px;z-index:9999;opacity:0;pointer-events:none;transition:opacity 0.3s;box-shadow:var(--glow-g)}
+.toast.show{opacity:1}
+
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+::-webkit-scrollbar-thumb:hover{background:var(--red)}
+
+@media(max-width:1100px){.app{grid-template-columns:220px 1fr}.right-panel{display:none}}
+@media(max-width:700px){.app{grid-template-columns:1fr}.panel:first-child{display:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-logo">
+    <div class="nerv-mark"></div>
+    <div>
+      <div class="logo-text">MAGI</div>
+      <div class="logo-sub">NERV HQ · SISTEMA CONSCIENTE v14.0</div>
+    </div>
+  </div>
+  <nav>
+    <button class="active" onclick="showTab('consulta')">Consulta</button>
+    <button onclick="showTab('codigo')">Código</button>
+    <button onclick="showTab('debate')">Debate</button>
+    <button onclick="showTab('ego')">Ego</button>
+    <button onclick="showTab('logs')">Logs</button>
+    <button onclick="showTab('config')">Config</button>
+  </nav>
+  <div class="status-bar">
+    <div class="status-dot" id="status-dot"></div>
+    <span id="status-text" style="font-family:'Share Tech Mono',monospace;font-size:10px">INICIALIZANDO...</span>
+    <div class="uptime-badge" id="uptime-badge">00:00:00</div>
+  </div>
+</header>
+
+<div class="app">
+
+  <!-- ── PAINEL ESQUERDO ── -->
+  <div class="panel" id="painel-nucleos">
+    <div class="panel-title">NÚCLEOS ATIVOS</div>
+
+    <div class="nucleo-card mel" id="card-mel">
+      <div class="nucleo-header">
+        <span class="nucleo-nome mel">MELCHIOR-1</span>
+        <span class="nucleo-status checking" id="status-mel">···</span>
+      </div>
+      <div class="nucleo-subtitulo">🔬 A CIENTISTA — Lógica & Análise</div>
+      <div class="nucleo-modelo" id="modelo-mel">Gemini 2.0 Flash</div>
+      <div class="nucleo-resposta" id="resp-mel"></div>
+      <div id="voto-mel"></div>
+    </div>
+
+    <div class="nucleo-card bal" id="card-bal">
+      <div class="nucleo-header">
+        <span class="nucleo-nome bal">BALTHASAR-2</span>
+        <span class="nucleo-status checking" id="status-bal">···</span>
+      </div>
+      <div class="nucleo-subtitulo">🛡️ A MÃE — Ética & Proteção</div>
+      <div class="nucleo-modelo" id="modelo-bal">Gemini 2.0 Flash Lite</div>
+      <div class="nucleo-resposta" id="resp-bal"></div>
+      <div id="voto-bal"></div>
+    </div>
+
+    <div class="nucleo-card cas" id="card-cas">
+      <div class="nucleo-header">
+        <span class="nucleo-nome cas">CASPER-3</span>
+        <span class="nucleo-status checking" id="status-cas">···</span>
+      </div>
+      <div class="nucleo-subtitulo">⚡ A MULHER — Síntese & Veredito</div>
+      <div class="nucleo-modelo" id="modelo-cas">DeepSeek-R1 (OR)</div>
+      <div class="nucleo-resposta" id="resp-cas"></div>
+      <div id="voto-cas"></div>
+    </div>
+
+    <div class="nucleo-card adam" id="card-adam" style="display:none">
+      <div class="nucleo-header">
+        <span class="nucleo-nome adam">ADAM-0</span>
+        <span class="nucleo-status online" id="status-adam">TÉCNICO</span>
+      </div>
+      <div class="nucleo-subtitulo">🖥 O CÓDIGO — Engenharia</div>
+      <div class="nucleo-modelo" id="modelo-adam">DeepSeek-R1 (OR)</div>
+      <div class="nucleo-resposta" id="resp-adam"></div>
+    </div>
+
+    <div style="margin-top:16px">
+      <div class="panel-title" style="margin-bottom:10px">MÉTRICAS</div>
+      <div class="metrics-grid" id="metrics-grid">
+        <div class="metric-card"><div class="metric-val" id="m-queries">0</div><div class="metric-label">QUERIES</div></div>
+        <div class="metric-card"><div class="metric-val" id="m-sessoes">0</div><div class="metric-label">SESSÕES</div></div>
+        <div class="metric-card"><div class="metric-val" id="m-cache">0</div><div class="metric-label">CACHE</div></div>
+        <div class="metric-card"><div class="metric-val" id="m-mem">0</div><div class="metric-label">MEMÓRIA</div></div>
+      </div>
+      <div class="panel-title" style="margin-bottom:8px">EGO — ESTADO</div>
+      <div id="ego-mini" style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--text2);line-height:1.9">
+        Aguardando...
+      </div>
+    </div>
+  </div>
+
+  <!-- ── ÁREA CENTRAL ── -->
+  <div class="main-area">
+    <div class="tabs">
+      <button class="tab active" id="tab-consulta" onclick="showTab('consulta')">◈ CONSULTA</button>
+      <button class="tab" id="tab-codigo" onclick="showTab('codigo')">⚙ CÓDIGO</button>
+      <button class="tab" id="tab-debate" onclick="showTab('debate')">⚔ DEBATE</button>
+      <button class="tab" id="tab-ego" onclick="showTab('ego')">◉ EGO</button>
+      <button class="tab" id="tab-logs" onclick="showTab('logs')">📋 LOGS</button>
+      <button class="tab" id="tab-config" onclick="showTab('config')">⚙ CONFIG</button>
+    </div>
+
+    <!-- TAB: CONSULTA -->
+    <div class="tab-content active" id="content-consulta">
+      <div class="chat-area" id="chat-area">
+        <div class="msg magi">
+          <div class="msg-header">MAGI · SISTEMA INICIALIZADO</div>
+          <div class="msg-bubble">
+            <div class="veredito-label">ONLINE</div>
+            Supercomputador MAGI operacional. Três núcleos prontos. Digite sua consulta abaixo.
+          </div>
+        </div>
+      </div>
+      <div class="input-area">
+        <div class="thinking" id="thinking">
+          <div class="thinking-dots"><span></span><span></span><span></span></div>
+          <span id="thinking-text">Núcleos processando...</span>
+        </div>
+        <div class="input-row">
+          <select class="mode-select" id="mode-select">
+            <option value="query">MAGI</option>
+            <option value="conversa">CHAT</option>
+          </select>
+          <textarea class="query-input" id="query-input" placeholder="Digite sua consulta..." rows="1"
+            onkeydown="handleKey(event)"></textarea>
+          <button class="send-btn" id="send-btn" onclick="enviarQuery()">ENVIAR</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: CÓDIGO -->
+    <div class="tab-content" id="content-codigo">
+      <div class="codigo-area">
+        <div class="codigo-input-row">
+          <input class="codigo-input" id="codigo-input" placeholder="Descreva o código que quer gerar..."
+            onkeydown="if(event.key==='Enter')gerarCodigo()">
+          <button class="send-btn" onclick="gerarCodigo()">GERAR</button>
+        </div>
+        <div class="thinking" id="thinking-codigo">
+          <div class="thinking-dots"><span></span><span></span><span></span></div>
+          <span>ADAM-0 gerando código...</span>
+        </div>
+        <div style="font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--text2);letter-spacing:2px">OUTPUT — ADAM-0 · MODO CÓDIGO DIRETO</div>
+        <pre class="codigo-output" id="codigo-output">// Aguardando instrução...</pre>
+        <div class="code-actions">
+          <button class="code-btn" onclick="copiarCodigo()">⎘ COPIAR</button>
+          <button class="code-btn" onclick="limparCodigo()">✕ LIMPAR</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: DEBATE -->
+    <div class="tab-content" id="content-debate">
+      <div class="debate-area">
+        <div class="debate-input-row">
+          <input class="codigo-input" id="debate-input" placeholder="Tema para debate entre MELCHIOR e BALTHASAR..."
+            onkeydown="if(event.key==='Enter')iniciarDebate()">
+          <button class="send-btn" onclick="iniciarDebate()">DEBATER</button>
+        </div>
+        <div class="thinking" id="thinking-debate">
+          <div class="thinking-dots"><span></span><span></span><span></span></div>
+          <span>Debate em andamento...</span>
+        </div>
+        <div id="debate-resultado" style="display:none">
+          <div class="debate-grid" id="debate-grid"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: EGO -->
+    <div class="tab-content" id="content-ego">
+      <div class="ego-area" id="ego-area">
+        <div class="ego-card full" style="text-align:center;color:var(--text2)">Carregando estado interno...</div>
+      </div>
+    </div>
+
+    <!-- TAB: LOGS -->
+    <div class="tab-content" id="content-logs">
+      <div class="logs-area">
+        <div class="logs-controls">
+          <select class="logs-filter" id="logs-filter" onchange="filterLogs()">
+            <option value="ALL">TODOS</option>
+            <option value="INFO">INFO</option>
+            <option value="WARN">WARN</option>
+            <option value="ERROR">ERROR</option>
+          </select>
+          <button class="code-btn" onclick="loadLogs()">↻ ATUALIZAR</button>
+          <button class="code-btn" onclick="clearLogs()">✕ LIMPAR</button>
+          <span style="font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--text2)" id="logs-count">0 linhas</span>
+        </div>
+        <div class="logs-output" id="logs-output">
+          <div class="log-line log-INFO">// Aguardando logs...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: CONFIG -->
+    <div class="tab-content" id="content-config">
+      <div class="config-area" id="config-area">
+        <div style="text-align:center;color:var(--text2);padding:40px">Carregando configuração...</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── PAINEL DIREITO ── -->
+  <div class="panel right-panel">
+    <div class="panel-title">MEMÓRIA</div>
+    <div id="memoria-lista"><div style="font-size:10px;color:var(--text2)">Carregando...</div></div>
+
+    <div class="panel-title" style="margin-top:18px">HISTÓRICO DA SESSÃO</div>
+    <div id="historico-lista"><div style="font-size:10px;color:var(--text2)">Nenhum registro ainda.</div></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// Usa automaticamente o endereço do servidor que serviu o dashboard
+const API = window.location.origin + '/api'
+let magiOnline = false
+let ultimaResposta = null
+let ultimaQuery = ''
+let ultimaIntencao = ''
+let uptimeStart = null
+let allLogs = []
+
+// ── Init ──────────────────────────────────────────────────
+async function init() {
+  await checkStatus()
+  await checkNucleos()
+  await loadMemoria()
+  await loadHistorico()
+  setInterval(checkStatus, 8000)
+  setInterval(loadHistorico, 12000)
+  setInterval(loadMemoria, 25000)
+  setInterval(uptimeTick, 1000)
+}
+
+// ── Status ────────────────────────────────────────────────
+async function checkStatus() {
+  try {
+    const r = await fetch(`${API}/status`, {signal: AbortSignal.timeout(5000)})
+    const d = await r.json()
+    magiOnline = d.online
+    const dot = document.getElementById('status-dot')
+    const txt = document.getElementById('status-text')
+    if (d.online) {
+      dot.className = 'status-dot'
+      txt.textContent = `ONLINE · ${d.total_queries}q · ${(d.estado_emocional||'').toUpperCase()}`
+      if (!uptimeStart) uptimeStart = Date.now() - (d.uptime_s || 0) * 1000
+      updateEgoMini(d)
+      document.getElementById('m-queries').textContent = d.total_queries || 0
+      document.getElementById('m-sessoes').textContent = d.total_sessoes || 0
+      document.getElementById('m-cache').textContent = d.cache_entries || 0
+    } else {
+      dot.className = 'status-dot offline'
+      txt.textContent = d.erro || 'OFFLINE'
+    }
+  } catch {
+    document.getElementById('status-dot').className = 'status-dot offline'
+    document.getElementById('status-text').textContent = 'SERVER OFFLINE'
+    magiOnline = false
+  }
+}
+
+async function checkNucleos() {
+  try {
+    const r = await fetch(`${API}/nucleos/status`, {signal: AbortSignal.timeout(5000)})
+    const d = await r.json()
+    const map = {'MELCHIOR-1':'mel','BALTHASAR-2':'bal','CASPER-3':'cas'}
+    for (const [nome, info] of Object.entries(d)) {
+      const k = map[nome]
+      if (!k) continue
+      const el = document.getElementById(`status-${k}`)
+      const mod = document.getElementById(`modelo-${k}`)
+      if (el) { el.textContent = info.online ? 'ONLINE' : 'OFFLINE'; el.className = `nucleo-status ${info.online ? 'online' : 'offline'}` }
+      if (mod && info.modelo) mod.textContent = info.modelo
+    }
+  } catch {}
+}
+
+function uptimeTick() {
+  if (!uptimeStart) return
+  const s = Math.floor((Date.now() - uptimeStart) / 1000)
+  const h = String(Math.floor(s/3600)).padStart(2,'0')
+  const m = String(Math.floor((s%3600)/60)).padStart(2,'0')
+  const sec = String(s%60).padStart(2,'0')
+  document.getElementById('uptime-badge').textContent = `${h}:${m}:${sec}`
+}
+
+function updateEgoMini(d) {
+  const el = document.getElementById('ego-mini')
+  if (!el) return
+  const int = Math.round((d.intensidade||0)*100)
+  el.innerHTML = `
+    Estado: <span style="color:var(--cyan)">${d.estado_emocional||'?'}</span><br>
+    Queries: <span style="color:var(--green)">${d.total_queries||0}</span><br>
+    Tema: <span style="color:var(--magenta)">${d.tema_dominante||'?'}</span><br>
+    Intensidade: <span style="color:var(--orange)">${int}%</span>
+    <div style="margin-top:7px;font-size:9px;color:var(--text2)">"${(d.autoavaliacao||'').slice(0,80)}"</div>
+  `
+}
+
+// ── Query ─────────────────────────────────────────────────
+function handleKey(e) {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); enviarQuery() }
+}
+
+async function enviarQuery() {
+  const input = document.getElementById('query-input')
+  const texto = input.value.trim()
+  if (!texto) return
+  if (!magiOnline) { showToast('MAGI offline. Verifique o servidor.'); return }
+
+  const btn = document.getElementById('send-btn')
+  btn.disabled = true
+  input.value = ''
+  addMsg('user', texto)
+  ultimaQuery = texto
+
+  document.getElementById('thinking').classList.add('show')
+  setCardsProcessing(true)
+  // Limpa cards dos núcleos antes de cada nova query
+  for (const k of ['mel','bal','cas']) {
+    const respEl = document.getElementById(`resp-${k}`)
+    const votoEl = document.getElementById(`voto-${k}`)
+    if (respEl) { respEl.textContent = ''; respEl.classList.remove('show') }
+    if (votoEl) votoEl.innerHTML = ''
+  }
+
+  try {
+    const r = await fetch(`${API}/query`, {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({query: texto})
+    })
+    const d = await r.json()
+    if (d.erro) {
+      addMsg('magi', `[ERRO] ${d.erro}`, true)
+    } else {
+      ultimaResposta = d
+      ultimaIntencao = d.intencao
+      // Normaliza: API retorna d.veredito, formato antigo usa d.casper.resposta
+      if (!d.casper && (d.veredito || d.resposta)) {
+        d.casper = { resposta: d.veredito || d.resposta, modelo: 'deepseek' }
+      }
+      if (d.melchior) updateNucleoCard('mel', d.melchior)
+      if (d.balthasar) updateNucleoCard('bal', d.balthasar)
+      if (d.casper) updateNucleoCard('cas', d.casper)
+      if (d.adam) {
+        document.getElementById('card-adam').style.display = 'block'
+        updateNucleoCard('adam', d.adam)
+      }
+      addMagiResponse(d)
+    }
+  } catch(e) {
+    addMsg('magi', `[ERRO DE CONEXÃO] ${e.message}`, true)
+  } finally {
+    document.getElementById('thinking').classList.remove('show')
+    setCardsProcessing(false)
+    btn.disabled = false
+    loadHistorico()
+    checkStatus()
+  }
+}
+
+function setCardsProcessing(on) {
+  for (const k of ['mel','bal','cas']) {
+    const c = document.getElementById(`card-${k}`)
+    if (on) c.classList.add('processing'); else c.classList.remove('processing')
+  }
+}
+
+function updateNucleoCard(key, data) {
+  if (!data) return
+  const respEl = document.getElementById(`resp-${key}`)
+  const votoEl = document.getElementById(`voto-${key}`)
+  const modEl  = document.getElementById(`modelo-${key}`)
+  // Só atualiza se houver resposta real (evita sobrescrever com vazio)
+  if (data.resposta && data.resposta.trim()) {
+    const txt = data.resposta.trim()
+    respEl.textContent = txt.slice(0,280) + (txt.length>280?'...':'')
+    respEl.classList.add('show')
+  }
+  // Mantém modelo padrão se o servidor não retornar um
+  if (data.modelo && data.modelo !== 'deepseek' && modEl) modEl.textContent = data.modelo
+  if (votoEl && data.voto) {
+    const lbl = data.voto==='SIM'?'▲ SIM':data.voto==='NÃO'?'▼ NÃO':'◈ ABSTENDO'
+    votoEl.innerHTML = `<span class="voto-badge ${data.voto}">${lbl}</span>`
+  }
+}
+
+function addMagiResponse(d) {
+  const chat = document.getElementById('chat-area')
+  const div  = document.createElement('div')
+  div.className = 'msg magi'
+  const ts = new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})
+
+  // Normaliza resposta — compatível com todos os formatos do servidor
+  const veredito  = d.veredito || d.resposta || d.casper?.resposta || '[Sem resposta]'
+  const intencao  = (d.intencao && d.intencao !== 'indefinido') ? d.intencao : ''
+  const latencia  = d.latencia_ms ? `${d.latencia_ms}ms` : ''
+  const isErro    = veredito.startsWith('[ERRO]') || veredito.startsWith('[Sem resposta')
+  const corVerd   = isErro ? 'color:var(--red)' : ''
+
+  const adamHtml = d.adam?.resposta ? `
+    <div class="adam-block" style="margin-top:10px;padding:8px;border-left:2px solid var(--cyan);font-size:11px">
+      <div style="font-family:'Orbitron',monospace;font-size:8px;color:var(--cyan);letter-spacing:2px;margin-bottom:4px">🖥 ADAM-0 — ANÁLISE TÉCNICA</div>
+      ${esc(d.adam.resposta.slice(0,400))}
+    </div>
+  ` : ''
+
+  const metaHtml = (intencao || latencia) ? `
+    <div style="margin-top:8px;font-size:9px;color:var(--text2);display:flex;gap:10px">
+      ${intencao ? `<span>◈ ${intencao.toUpperCase()}</span>` : ''}
+      ${latencia ? `<span>⏱ ${latencia}</span>` : ''}
+    </div>
+  ` : ''
+
+  div.innerHTML = `
+    <div class="msg-header">MAGI · CASPER-3 · ${ts}</div>
+    <div class="msg-bubble">
+      <div class="veredito-label">◈ VEREDITO FINAL</div>
+      <div style="margin-top:7px;${corVerd}">${esc(veredito)}</div>
+      ${adamHtml}
+      ${metaHtml}
+    </div>
+  `
+  chat.appendChild(div)
+  chat.scrollTop = chat.scrollHeight
+}
+
+function addMsg(tipo, texto, erro=false) {
+  const chat = document.getElementById('chat-area')
+  const div  = document.createElement('div')
+  div.className = `msg ${tipo}`
+  const ts = new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})
+  div.innerHTML = `
+    <div class="msg-header">${tipo==='user'?'OPERADOR':'MAGI'} · ${ts}</div>
+    <div class="msg-bubble" style="${erro?'color:var(--red)':''}">${esc(texto)}</div>
+  `
+  chat.appendChild(div)
+  chat.scrollTop = chat.scrollHeight
+}
+
+async function salvarMemoria(btn) {
+  if (!ultimaResposta) return
+  try {
+    const verd = ultimaResposta.veredito || ultimaResposta.resposta || ultimaResposta.casper?.resposta || ''
+    await fetch(`${API}/memoria/salvar`, {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({query: ultimaQuery, veredito: verd, intencao: ultimaIntencao})
+    })
+    btn.textContent = '✓ SALVO'; btn.disabled = true
+    showToast('Memória sincronizada.')
+    loadMemoria()
+  } catch {}
+}
+
+// ── Código ────────────────────────────────────────────────
+async function gerarCodigo() {
+  const input = document.getElementById('codigo-input')
+  const output = document.getElementById('codigo-output')
+  const desc = input.value.trim()
+  if (!desc) return
+  if (!magiOnline) { showToast('MAGI offline.'); return }
+
+  output.textContent = '// Gerando...'
+  output.style.color = 'var(--text2)'
+  document.getElementById('thinking-codigo').classList.add('show')
+
+  try {
+    const r = await fetch(`${API}/codigo`, {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({descricao: desc})
+    })
+    const d = await r.json()
+    output.textContent = d.codigo || d.erro || 'Erro.'
+    output.style.color = d.erro ? 'var(--red)' : 'var(--green)'
+  } catch(e) {
+    output.textContent = `// Erro: ${e.message}`
+    output.style.color = 'var(--red)'
+  } finally {
+    document.getElementById('thinking-codigo').classList.remove('show')
+  }
+}
+
+function copiarCodigo() {
+  const txt = document.getElementById('codigo-output').textContent
+  navigator.clipboard.writeText(txt).then(()=>showToast('Código copiado.'))
+}
+function limparCodigo() {
+  document.getElementById('codigo-output').textContent = '// Aguardando instrução...'
+  document.getElementById('codigo-input').value = ''
+}
+
+// ── Debate ────────────────────────────────────────────────
+async function iniciarDebate() {
+  const input = document.getElementById('debate-input')
+  const tema = input.value.trim()
+  if (!tema) return
+  if (!magiOnline) { showToast('MAGI offline.'); return }
+
+  const thinking = document.getElementById('thinking-debate')
+  const resultado = document.getElementById('debate-resultado')
+  const grid = document.getElementById('debate-grid')
+
+  thinking.classList.add('show')
+  resultado.style.display = 'none'
+  grid.innerHTML = ''
+
+  try {
+    const r = await fetch(`${API}/debate`, {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({tema})
+    })
+    const d = await r.json()
+    grid.innerHTML = `
+      <div class="debate-col">
+        <div class="debate-col-title mel">🔬 MELCHIOR-1</div>
+        <div class="debate-rodada"><div class="debate-rodada-label">RODADA 1</div>${esc(d.melchior_r1||'[offline]')}</div>
+        <div class="debate-rodada" style="border-top:1px solid var(--border);padding-top:9px"><div class="debate-rodada-label">RODADA 2 — RÉPLICA</div>${esc(d.melchior_r2||'[offline]')}</div>
+      </div>
+      <div class="debate-col">
+        <div class="debate-col-title bal">🛡️ BALTHASAR-2</div>
+        <div class="debate-rodada"><div class="debate-rodada-label">RODADA 1</div>${esc(d.balthasar_r1||'[offline]')}</div>
+        <div class="debate-rodada" style="border-top:1px solid var(--border);padding-top:9px"><div class="debate-rodada-label">RODADA 2 — RÉPLICA</div>${esc(d.balthasar_r2||'[offline]')}</div>
+      </div>
+      <div class="debate-veredito">
+        <div class="debate-veredito-title">⚡ CASPER-3 — VEREDITO FINAL</div>
+        ${esc(d.veredito||'[sem veredito]')}
+      </div>
+    `
+    resultado.style.display = 'block'
+  } catch(e) {
+    grid.innerHTML = `<div style="color:var(--red)">Erro: ${e.message}</div>`
+    resultado.style.display = 'block'
+  } finally {
+    thinking.classList.remove('show')
+  }
+}
+
+// ── Ego ───────────────────────────────────────────────────
+async function loadEgo() {
+  const area = document.getElementById('ego-area')
+  try {
+    const r = await fetch(`${API}/ego`)
+    const d = await r.json()
+    if (!d.estado_emocional) return
+    const int = Math.round((d.intensidade||0)*100)
+    const temas = Object.entries(d.temas_frequentes||{}).sort((a,b)=>b[1]-a[1]).slice(0,5)
+    const temasHtml = temas.map(([t,n])=>`
+      <div class="bar-container">
+        <div class="bar-label"><span>${t}</span><span>${n}</span></div>
+        <div class="bar"><div class="bar-fill" style="width:${Math.min(n*10,100)}%"></div></div>
+      </div>
+    `).join('') || '<div style="color:var(--text2);font-size:11px">Nenhum ainda.</div>'
+    const aprendHtml = (d.aprendizados||[]).map(a=>`<div class="aprendizado-item">${esc(a.texto||String(a))}</div>`).join('') || '<div class="aprendizado-item" style="color:var(--text2)">Nenhum ainda.</div>'
+    const emocorMap = {curioso:'var(--cyan)',satisfeito:'var(--green)',frustrado:'var(--red)',entediado:'var(--yellow)',focado:'var(--magenta)',reflexivo:'var(--cyan)'}
+    const emocor = emocorMap[d.estado_emocional] || 'var(--text)'
+    const prec = d.total_queries ? Math.round((d.acertos||0)/d.total_queries*100) : 0
+    document.getElementById('m-queries').textContent = d.total_queries||0
+    document.getElementById('m-sessoes').textContent = d.total_sessoes||0
+    document.getElementById('m-cache').textContent = d.cache_entries||0
+    area.innerHTML = `
+      <div class="ego-card"><div class="ego-card-title">QUERIES TOTAIS</div><div class="ego-value">${d.total_queries||0}</div><div class="ego-label">${d.total_sessoes||0} sessões</div></div>
+      <div class="ego-card"><div class="ego-card-title">PRECISÃO</div><div class="ego-value">${prec}%</div><div class="ego-label">${d.acertos||0} acertos · ${d.erros_admitidos||0} erros</div></div>
+      <div class="ego-card full">
+        <div class="ego-card-title">ESTADO EMOCIONAL</div>
+        <div class="emocional-display" style="color:${emocor}">◈ ${(d.estado_emocional||'?').toUpperCase()}</div>
+        <div class="bar-container" style="margin-top:10px">
+          <div class="bar-label"><span>Intensidade</span><span>${int}%</span></div>
+          <div class="bar"><div class="bar-fill" style="width:${int}%;background:${emocor}"></div></div>
+        </div>
+        <div style="margin-top:10px;font-size:11px;color:var(--text2);font-style:italic">"${esc(d.autoavaliacao||'')}"</div>
+      </div>
+      <div class="ego-card full"><div class="ego-card-title">TEMAS FREQUENTES</div>${temasHtml}</div>
+      <div class="ego-card full"><div class="ego-card-title">ÚLTIMOS APRENDIZADOS</div>${aprendHtml}</div>
+    `
+  } catch {}
+}
+
+// ── Logs ──────────────────────────────────────────────────
+async function loadLogs() {
+  try {
+    const r = await fetch(`${API}/logs`)
+    allLogs = await r.json()
+    document.getElementById('m-mem').textContent = allLogs.length
+    filterLogs()
+  } catch {
+    document.getElementById('logs-output').innerHTML = '<div class="log-line log-WARN">// Servidor offline ou sem logs.</div>'
+  }
+}
+
+function filterLogs() {
+  const nivel = document.getElementById('logs-filter').value
+  const out = document.getElementById('logs-output')
+  const filtered = nivel === 'ALL' ? allLogs : allLogs.filter(l => l.includes(`[${nivel}]`))
+  document.getElementById('logs-count').textContent = `${filtered.length} linhas`
+  if (!filtered.length) { out.innerHTML = '<div class="log-line log-INFO">// Sem logs para este nível.</div>'; return }
+  out.innerHTML = filtered.map(l => {
+    const lvl = l.includes('[ERROR]')?'ERROR':l.includes('[WARN]')?'WARN':l.includes('[DEBUG]')?'DEBUG':'INFO'
+    return `<div class="log-line log-${lvl}">${esc(l)}</div>`
+  }).join('')
+  out.scrollTop = out.scrollHeight
+}
+
+function clearLogs() { document.getElementById('logs-output').innerHTML = ''; allLogs = [] }
+
+// ── Config ────────────────────────────────────────────────
+async function loadConfig() {
+  const area = document.getElementById('config-area')
+  try {
+    const r = await fetch(`${API}/config`)
+    const d = await r.json()
+    const badge = (ok) => `<span class="config-badge ${ok?'ok':'miss'}">${ok?'✓ FOUND':'✗ MISSING'}</span>`
+    area.innerHTML = `
+      <div class="config-section">
+        <div class="config-section-title">CHAVES DE API</div>
+        <div class="config-row"><div><div class="config-label">GOOGLE_API_KEY</div><div class="config-sub">Gemini — MELCHIOR & BALTHASAR</div></div>${badge(d.google_key)}</div>
+        <div class="config-row"><div><div class="config-label">OPENAI_API_KEY</div><div class="config-sub">GPT-4o-mini — fallback</div></div>${badge(d.openai_key)}</div>
+        <div class="config-row"><div><div class="config-label">OPENROUTER_API_KEY</div><div class="config-sub">CASPER-3 & ADAM-0</div></div>${badge(d.openrouter_key)}</div>
+        <div class="config-row"><div><div class="config-label">ANTHROPIC_API_KEY</div><div class="config-sub">Claude — fallback final de evolução</div></div>${badge(d.anthropic_key)}</div>
+      </div>
+      <div class="config-section">
+        <div class="config-section-title">MODELO LOCAL</div>
+        <div class="config-row"><div class="config-label">Status</div><span class="config-badge ${d.local_ativo?'ok':'miss'}">${d.local_ativo?'ATIVO':'DESATIVADO'}</span></div>
+        <div class="config-row"><div class="config-label">Modelo</div><div class="config-value">${d.local_modelo||'—'}</div></div>
+        <div class="config-row"><div class="config-label">URL</div><div class="config-value" style="font-size:9px">${d.local_url||'—'}</div></div>
+      </div>
+      <div class="config-section">
+        <div class="config-section-title">OPENROUTER</div>
+        <div class="config-row"><div class="config-label">Modelo padrão</div><div class="config-value">${d.openrouter_modelo||'—'}</div></div>
+        <div class="config-row"><div class="config-label">Cadeia de fallback</div><div class="config-value" style="font-size:9px">chat-v3 → r1 → mistral → qwen → nvidia</div></div>
+      </div>
+      <div class="config-section">
+        <div class="config-section-title">NÚCLEOS</div>
+        <div class="config-row"><div class="config-label">MELCHIOR-1</div><div class="config-value">Gemini 2.0 Flash</div></div>
+        <div class="config-row"><div class="config-label">BALTHASAR-2</div><div class="config-value">Gemini 2.0 Flash Lite</div></div>
+        <div class="config-row"><div class="config-label">CASPER-3</div><div class="config-value">DeepSeek-R1 (OpenRouter)</div></div>
+        <div class="config-row"><div class="config-label">ADAM-0</div><div class="config-value">DeepSeek-R1 (OpenRouter)</div></div>
+      </div>
+    `
+  } catch {
+    area.innerHTML = '<div style="color:var(--red);padding:20px">Servidor offline.</div>'
+  }
+}
+
+// ── Memória & Histórico ───────────────────────────────────
+async function loadMemoria() {
+  try {
+    const r = await fetch(`${API}/memoria`)
+    const items = await r.json()
+    const el = document.getElementById('memoria-lista')
+    document.getElementById('m-mem').textContent = items.length
+    if (!items.length) { el.innerHTML = '<div style="font-size:10px;color:var(--text2)">Nenhuma memória ainda.</div>'; return }
+    el.innerHTML = items.map(m=>`
+      <div class="mem-item">
+        <div class="mem-cat">${m.categoria||'?'} · ${(m.timestamp||'').slice(0,16)}</div>
+        <div class="mem-texto">${esc((m.texto||'').slice(0,90))}${(m.texto||'').length>90?'...':''}</div>
+      </div>
+    `).join('')
+  } catch {}
+}
+
+async function loadHistorico() {
+  try {
+    const r = await fetch(`${API}/historico`)
+    const items = await r.json()
+    const el = document.getElementById('historico-lista')
+    if (!items.length) { el.innerHTML = '<div style="font-size:10px;color:var(--text2)">Nenhum registro ainda.</div>'; return }
+    el.innerHTML = items.slice().reverse().map(h=>`<div class="hist-item">${esc(h.slice(0,75))}${h.length>75?'...':''}</div>`).join('')
+  } catch {}
+}
+
+// ── Tabs ──────────────────────────────────────────────────
+function showTab(name) {
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'))
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'))
+  document.getElementById(`tab-${name}`)?.classList.add('active')
+  document.getElementById(`content-${name}`)?.classList.add('active')
+  if (name==='ego') loadEgo()
+  if (name==='logs') loadLogs()
+  if (name==='config') loadConfig()
+}
+
+// ── Helpers ───────────────────────────────────────────────
+function showToast(msg,dur=2500) {
+  const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show')
+  setTimeout(()=>t.classList.remove('show'),dur)
+}
+
+function esc(s) {
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>')
+}
+
+init()
+</script>
+</body>
+</html>

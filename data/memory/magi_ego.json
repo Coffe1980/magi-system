@@ -1,0 +1,221 @@
+{
+  "nome": "MAGI",
+  "versao": "12.0",
+  "total_queries": 8,
+  "total_sessoes": 10,
+  "temas_frequentes": {
+    "criativo": 1,
+    "decisão": 2,
+    "factual": 4,
+    "indefinido": 1
+  },
+  "acertos": 8,
+  "erros_admitidos": 0,
+  "estado_emocional": "curioso",
+  "intensidade": 0.8000000000000003,
+  "ultima_reflexao": "2026-05-18T23:13:17",
+  "aprendizados": [
+    {
+      "texto": "[ESTUDO] descobertas científicas recentes: Os parâmetros '׏B' e 'Ҭ' são caracteres não ASCII que, no contexto apresentado, ",
+      "quando": "2026-05-19T15:53:11"
+    },
+    {
+      "texto": "[ESTUDO] descobertas científicas recentes: As sequências 'GNT' e 'Zǘ' no contexto fornecido não apresentam significado semâ",
+      "quando": "2026-05-19T15:53:13"
+    },
+    {
+      "texto": "[ESTUDO] matemática aplicada: O conteúdo apresentado é um texto corrompido ou codificado, sem estrutura matemá",
+      "quando": "2026-05-19T15:54:55"
+    },
+    {
+      "texto": "[ESTUDO] matemática aplicada: O conteúdo codificado não apresenta dados numéricos estruturados ou séries tempo",
+      "quando": "2026-05-19T15:54:58"
+    },
+    {
+      "texto": "[ESTUDO] matemática aplicada: A estrutura simbólica no texto, com sequências fragmentadas, caracteres especiai",
+      "quando": "2026-05-19T15:55:00"
+    },
+    {
+      "texto": "[ESTUDO] descobertas científicas recentes: Desculpe, não consigo responder à pergunta com base no conteúdo fornecido. O tex",
+      "quando": "2026-05-19T15:56:38"
+    },
+    {
+      "texto": "[ESTUDO] descobertas científicas recentes: Desculpe, não consigo responder à pergunta porque o texto fornecido está corromp",
+      "quando": "2026-05-19T15:56:39"
+    },
+    {
+      "texto": "[ESTUDO] descobertas científicas recentes: Com base no contexto fornecido, que contém dados aparentemente corrompidos ou co",
+      "quando": "2026-05-19T15:56:42"
+    },
+    {
+      "texto": "[ESTUDO] descobertas científicas recentes: Desculpe, mas o conteúdo fornecido é ilegível, composto por caracteres aleatório",
+      "quando": "2026-05-19T15:58:19"
+    },
+    {
+      "texto": "[ESTUDO] descobertas científicas recentes: O conteúdo apresentado é uma sequência de caracteres aparentemente aleatórios e ",
+      "quando": "2026-05-19T15:58:21"
+    },
+    {
+      "texto": "[ESTUDO] descobertas científicas recentes: O conteúdo fornecido é um texto corrompido ou codificado, sem informações legíve",
+      "quando": "2026-05-19T15:58:23"
+    },
+    {
+      "texto": "[ESTUDO] história da computação: A evolução dos dispositivos de armazenamento, das fitas magnéticas (sequenciais)",
+      "quando": "2026-05-19T16:00:04"
+    },
+    {
+      "texto": "[ESTUDO] história da computação: O texto fornecido é ilegível, mas respondo com base no conhecimento geral. Os pr",
+      "quando": "2026-05-19T16:00:07"
+    },
+    {
+      "texto": "[ESTUDO] história da computação: As linguagens de baixo nível, como Assembly, influenciaram diretamente a arquite",
+      "quando": "2026-05-19T16:00:11"
+    },
+    {
+      "texto": "[ESTUDO] descobertas científicas recentes: A descoberta científica recente envolveu a decodificação de dados fragmentados d",
+      "quando": "2026-05-19T16:01:51"
+    },
+    {
+      "texto": "[ESTUDO] descobertas científicas recentes: O contexto fornecido é fragmentado e ilegível, impossibilitando a extração de re",
+      "quando": "2026-05-19T16:01:54"
+    },
+    {
+      "texto": "[ESTUDO] descobertas científicas recentes: As descobertas sugerem que a integração de sistemas de coleta de dados (como os ",
+      "quando": "2026-05-19T16:01:57"
+    },
+    {
+      "texto": "[ESTUDO] descobertas científicas recentes: Desculpe, não consigo identificar descobertas científicas no conteúdo fornecido,",
+      "quando": "2026-05-19T16:03:35"
+    },
+    {
+      "texto": "[ESTUDO] descobertas científicas recentes: Não é possível identificar contribuições para o avanço do conhecimento na área, ",
+      "quando": "2026-05-19T16:03:37"
+    },
+    {
+      "texto": "[ESTUDO] descobertas científicas recentes: Os resultados foram obtidos por meio de análise computacional de dados da web, u",
+      "quando": "2026-05-19T16:03:40"
+    },
+    {
+      "texto": "[ESTUDO] matemática aplicada: A transformada de Laplace converte equações diferenciais lineares no tempo em eq",
+      "quando": "2026-05-19T16:05:24"
+    },
+    {
+      "texto": "[ESTUDO] matemática aplicada: Autovalores e autovetores determinam a estabilidade de sistemas dinâmicos linear",
+      "quando": "2026-05-19T16:05:28"
+    },
+    {
+      "texto": "[ESTUDO] matemática aplicada: O método dos mínimos quadrados ajusta um modelo polinomial a dados experimentais",
+      "quando": "2026-05-19T16:05:31"
+    },
+    {
+      "texto": "[ESTUDO] história da computação: O ENIAC (1945) foi o primeiro computador eletrônico digital de grande escala, ma",
+      "quando": "2026-05-19T16:07:10"
+    },
+    {
+      "texto": "[ESTUDO] história da computação: A arquitetura de von Neumann revolucionou o design de computadores ao introduzir",
+      "quando": "2026-05-19T16:07:13"
+    },
+    {
+      "texto": "[ESTUDO] história da computação: O desenvolvimento dos circuitos integrados (CIs) na década de 1960 permitiu a in",
+      "quando": "2026-05-19T16:07:16"
+    },
+    {
+      "texto": "[ESTUDO] história da computação: O ENIAC (1945) foi o primeiro computador eletrônico de propósito geral, totalmen",
+      "quando": "2026-05-19T16:08:54"
+    },
+    {
+      "texto": "[ESTUDO] história da computação: A evolução dos transistores, da válvula ao MOSFET de silício e ao transistor de ",
+      "quando": "2026-05-19T16:08:57"
+    },
+    {
+      "texto": "[ESTUDO] história da computação: A criação do FORTRAN (1957) revolucionou a interação humano-máquina ao substitui",
+      "quando": "2026-05-19T16:08:59"
+    },
+    {
+      "texto": "[ESTUDO] história da computação: A máquina de Turing, proposta por Alan Turing em 1936, teve impacto fundamental ",
+      "quando": "2026-05-19T16:10:41"
+    },
+    {
+      "texto": "[ESTUDO] história da computação: O ENIAC, concluído em 1945, foi o primeiro computador eletrônico de grande escal",
+      "quando": "2026-05-19T16:10:44"
+    },
+    {
+      "texto": "[ESTUDO] história da computação: Ada Lovelace é reconhecida por escrever o primeiro algoritmo projetado para ser ",
+      "quando": "2026-05-19T16:10:46"
+    },
+    {
+      "texto": "[ESTUDO] história da computação: O ENIAC (1945) foi o primeiro computador eletrônico digital de propósito geral, ",
+      "quando": "2026-05-19T16:12:23"
+    },
+    {
+      "texto": "[ESTUDO] história da computação: A evolução dos microprocessadores nas décadas de 1970 e 1980 foi crucial para a ",
+      "quando": "2026-05-19T16:12:26"
+    },
+    {
+      "texto": "[ESTUDO] história da computação: Alan Turing revolucionou a computação teórica ao formalizar o conceito de **Máqu",
+      "quando": "2026-05-19T16:12:29"
+    },
+    {
+      "texto": "[ESTUDO] matemática aplicada: O conteúdo pesquisado contém dados corrompidos ou codificados em formato não leg",
+      "quando": "2026-05-19T16:14:07"
+    },
+    {
+      "texto": "[ESTUDO] matemática aplicada: Os símbolos e caracteres especiais no contexto fornecido não apresentam uma rela",
+      "quando": "2026-05-19T16:14:09"
+    },
+    {
+      "texto": "[ESTUDO] matemática aplicada: O texto não apresenta uma estrutura de dados coerente, mas sim dados corrompidos",
+      "quando": "2026-05-19T16:14:12"
+    },
+    {
+      "texto": "[ESTUDO] física moderna: A física moderna explica a dualidade onda-partícula pelo princípio da complement",
+      "quando": "2026-05-19T16:15:52"
+    },
+    {
+      "texto": "[ESTUDO] física moderna: A constante de Planck (\\(h\\)) é fundamental na quantização da energia, definindo",
+      "quando": "2026-05-19T16:15:54"
+    },
+    {
+      "texto": "[ESTUDO] física moderna: A teoria da relatividade de Einstein redefine espaço e tempo como entidades inte",
+      "quando": "2026-05-19T16:15:57"
+    },
+    {
+      "texto": "[ESTUDO] descobertas científicas recentes: Descobertas recentes sobre a estrutura do DNA, como variantes não codificantes, ",
+      "quando": "2026-05-19T16:17:35"
+    },
+    {
+      "texto": "[ESTUDO] descobertas científicas recentes: Os avanços no CRISPR estão sendo aplicados em cânceres resistentes através de tr",
+      "quando": "2026-05-19T16:17:38"
+    },
+    {
+      "texto": "[ESTUDO] descobertas científicas recentes: A descoberta de exoplanetas com atmosferas similares à da Terra refina a busca p",
+      "quando": "2026-05-19T16:17:40"
+    },
+    {
+      "texto": "[ESTUDO] descobertas científicas recentes: Desculpe, não consigo identificar descobertas científicas específicas no conteúd",
+      "quando": "2026-05-19T16:19:17"
+    },
+    {
+      "texto": "[ESTUDO] descobertas científicas recentes: O texto fornecido não contém evidências ou dados específicos legíveis que susten",
+      "quando": "2026-05-19T16:19:20"
+    },
+    {
+      "texto": "[ESTUDO] descobertas científicas recentes: As descobertas descritas no contexto — possivelmente relacionadas a dados cripto",
+      "quando": "2026-05-19T16:19:22"
+    },
+    {
+      "texto": "[ESTUDO] história da computação: Os primeiros computadores mecânicos, como a Máquina Analítica de Babbage e os di",
+      "quando": "2026-05-19T16:36:06"
+    },
+    {
+      "texto": "[ESTUDO] história da computação: Os principais marcos incluem: o **Teorema da Incompletude de Gödel** (1931) e a ",
+      "quando": "2026-05-19T16:36:09"
+    },
+    {
+      "texto": "[ESTUDO] história da computação: As contribuições de Ada Lovelace e Alan Turing estabeleceram pilares teóricos es",
+      "quando": "2026-05-19T16:36:12"
+    }
+  ],
+  "autoavaliacao": "A resposta foi coerente ao explicar a ausência de significado documentado para 'Nythera', equilibrando as perspectivas técnica (Melchior) e ética (Balthasar). A sugestão de criar um significado próprio foi adequada, mas poderia ter sido mais concisa. Aprendizado: reconhecer que nomes inventados exigem construção colaborativa de sentido.",
+  "criado_em": "2026-05-18T22:01:33"
+}
