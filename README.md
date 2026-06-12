@@ -43,7 +43,7 @@
 
 ```bash
 # 1. Clone o repositório
-git clone https://github.com/seu-usuario/magi-system.git
+git clone https://github.com/Coffe1980/magi-system.git
 cd magi-system
 
 # 2. Instale as dependências
