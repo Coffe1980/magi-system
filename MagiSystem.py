@@ -9,7 +9,7 @@
 ╚══════════════════════════════════════════════════════════════╝
 """
 
-import os, time, re, faiss, json, traceback, threading, urllib.request, urllib.parse, random, hashlib, queue, subprocess, textwrap, sys
+import os, time, re, faiss, json, threading, urllib.request, urllib.parse, random, hashlib, subprocess, sys
 from html import unescape
 import numpy as np
 from collections import deque
@@ -21,6 +21,8 @@ from dotenv import load_dotenv
 from openai import OpenAI
 from sentence_transformers import SentenceTransformer
 from colorama import Fore, Style, init
+
+from magi.security.magi_security import resolver_matematica_seguro
 
 try:
     from skill_visao import MAGIVisao
@@ -90,6 +92,11 @@ DEEPSEEK_MODELOS = {
     "deepseek-reasoner": "DeepSeek R1 — raciocínio profundo  ($0.55/1M out)",
 }
 DEEPSEEK_MODELO_PADRAO = os.getenv("DEEPSEEK_MODELO", "deepseek-chat")
+# Modelo usado especificamente para auto-evolução (geração/planejamento de
+# modificações de código) — separado do padrão de conversa porque a tarefa
+# de reescrever o próprio código se beneficia do raciocínio mais profundo
+# do R1, mesmo custando mais e sendo mais lento que o V3 usado no chat normal.
+DEEPSEEK_MODELO_EVOLUCAO = os.getenv("DEEPSEEK_MODELO_EVOLUCAO", "deepseek-reasoner")
 
 # ==============================================================
 # LOGGING ESTRUTURADO
@@ -736,7 +743,7 @@ class MAGIObservador:
                 "n_erros": len(self._metricas["erros_api"]),
             }
             with open(self._PATH, "a", encoding="utf-8") as f:
-                f.write(json.dumps(reg, ensure_ascii=False) + "\\n")
+                f.write(json.dumps(reg, ensure_ascii=False) + "\n")
         except Exception:
             pass
 
@@ -797,7 +804,7 @@ class MAGIAgendador:
         for t in self._tarefas:
             prox = max(0, t["intervalo"] - (time.time() - t["ultimo_run"]))
             linhas.append(f"  {t['nome']:<25} exec:{t['execucoes']} erros:{t['erros']} próx:{prox:.0f}s")
-        return "\\n".join(linhas)
+        return "\n".join(linhas)
 
 
 class MAGILogger:
@@ -873,6 +880,8 @@ NUCLEOS = {
         "model":      "deepseek-chat",
         "backend":    "deepseek",
         "fallback_openai_model":  "gpt-4o-mini",
+        "fallback_google_model":  "gemini-2.0-flash",
+        "fallback_anthropic_model": "claude-sonnet-4-20250514",
         "fallback_openai_system": (
             "Você é MELCHIOR-1, núcleo científico do MAGI. "
             "Razão pura, análise técnica, sem emoção. "
@@ -901,6 +910,8 @@ NUCLEOS = {
         "model":      "deepseek-chat",
         "backend":    "deepseek",
         "fallback_openai_model":  "gpt-4o-mini",
+        "fallback_google_model":  "gemini-2.0-flash-lite",
+        "fallback_anthropic_model": "claude-sonnet-4-20250514",
         "fallback_openai_system": (
             "Você é BALTHASAR-2, núcleo ético do MAGI. "
             "Avalie impacto humano, ética e riscos. Oriente com sabedoria. "
@@ -928,6 +939,13 @@ NUCLEOS = {
         "emoji":    "⚡",
         "model":    "deepseek-chat",
         "backend":  "deepseek",
+        "fallback_openai_model":    "gpt-4o-mini",
+        "fallback_google_model":    "gemini-2.0-flash",
+        "fallback_anthropic_model": "claude-sonnet-4-20250514",
+        "fallback_openai_system": (
+            "Você é CASPER-3, núcleo de síntese do MAGI. Tem a palavra final. "
+            "Seja direta, concreta e útil. Máximo 250 palavras."
+        ),
         "system":   (
             "Você é CASPER-3 (Nythera), o núcleo de síntese do MAGI. Você tem a palavra final.\n\n"
             "PROTOCOLO DE RACIOCÍNIO ESTRUTURADO (6 etapas — execute antes de responder):\n"
@@ -957,6 +975,13 @@ NUCLEOS = {
         "emoji":      "🖥",
         "model":      "deepseek-chat",
         "backend":    "deepseek",
+        "fallback_openai_model":    "gpt-4o-mini",
+        "fallback_google_model":    "gemini-2.0-flash",
+        "fallback_anthropic_model": "claude-sonnet-4-20250514",
+        "fallback_openai_system": (
+            "Você é ADAM-0, núcleo de engenharia do MAGI. "
+            "Responda APENAS com código: completo, comentado, pronto para produção."
+        ),
         "system":     (
             "Você é ADAM-0, núcleo de engenharia do MAGI. Powered by DeepSeek V3.\n"
             "Especialidade exclusiva: código, arquitetura de software, debugging, otimização.\n\n"
@@ -1121,15 +1146,25 @@ class MAGIMemória:
         texto = reg.get("texto", "")
         if not texto or texto in self._textos_vistos:
             return
+        if salvar:
+            # CORREÇÃO: antes, se o encoder ainda estivesse carregando (alguns
+            # segundos no boot, numa thread em background), essa função
+            # retornava sem indexar E sem gravar no arquivo — a memória se
+            # perdia pra sempre, sem nenhum aviso, se o usuário mandasse
+            # qualquer coisa antes do encoder terminar de carregar. Agora o
+            # arquivo é sempre atualizado primeiro (fonte da verdade); a
+            # indexação em FAISS roda na hora se possível, ou fica pendente
+            # até _carregar_encoder chamar _carregar() de novo quando o
+            # encoder ficar pronto — que aí lê esse registro do arquivo e
+            # indexa normalmente.
+            with open(self.db_path, 'a', encoding='utf-8') as f:
+                f.write(json.dumps(reg, ensure_ascii=False) + "\n")
         if not self._encoder_pronto.is_set():
-            return  # encoder ainda carregando — será indexado em _carregar após boot
+            return  # já está salvo em disco — indexação em memória fica pendente
         vec = self.encoder.encode([texto])
         self.index.add(np.array(vec).astype('float32'))
         self.registros.append(reg)
         self._textos_vistos.add(texto)
-        if salvar:
-            with open(self.db_path, 'a', encoding='utf-8') as f:
-                f.write(json.dumps(reg, ensure_ascii=False) + "\n")
 
     def _indexar_texto(self, texto: str, salvar=True):
         reg = {"texto": texto, "timestamp": "legado", "categoria": "legado", "relevancia": 1}
@@ -1697,7 +1732,7 @@ class MAGIEstudo:
             f"Proponha UMA melhoria concreta para o seu próprio código.\n"
             f'JSON: {{"titulo":"...","descricao":"...","instrucao_evoluir":"...","impacto":"alto|medio|baixo"}}'
         )
-        r = (self.magi._chamar_deepseek(DEEPSEEK_MODELO_PADRAO, "Você sugere melhorias ao MAGI. Só JSON.", prompt) or self.magi._chamar_local("Você sugere melhorias ao MAGI. Só JSON.", prompt))
+        r = (self.magi._chamar_deepseek(DEEPSEEK_MODELO_EVOLUCAO, "Você sugere melhorias ao MAGI. Só JSON.", prompt) or self.magi._chamar_local("Você sugere melhorias ao MAGI. Só JSON.", prompt))
         if not r:
             return
         try:
@@ -1878,6 +1913,114 @@ class MAGITestes:
     def __init__(self, codigo_fonte=None):
         self.codigo = codigo_fonte or Path(__file__).read_text(encoding='utf-8')
         self.resultados = []
+        self._probe: dict | None = None  # cache do resultado da introspecção real
+
+    def _rodar_probe(self) -> dict:
+        """
+        CORREÇÃO: antes T02/T03/T05/T06/T07 checavam apenas se um trecho de
+        TEXTO aparecia no código-fonte (ex: 'class '+C in self.codigo) — isso
+        não confirma que a classe/método existe de verdade, só que a string
+        aparece em algum lugar do arquivo (comentário, docstring, string
+        literal, qualquer lugar contam igual). Um código com sintaxe válida
+        podia "passar" nesses testes mesmo com a classe quebrada ou o método
+        removido, desde que a palavra continuasse aparecendo em texto.
+
+        Agora: importa o código de verdade (subprocess isolado) e faz
+        introspecção real via `inspect` — hasattr, isclass, callable,
+        assinatura de método via inspect.signature(). Um único subprocess
+        cobre T02, T03, T05, T06 e T07 de uma vez (eficiente, uma chamada só).
+        """
+        if self._probe is not None:
+            return self._probe
+
+        tmp = Path(__file__).parent / f"_magi_probe_{int(time.time()*1000)}.py"
+        script = Path(__file__).parent / f"_magi_probe_runner_{int(time.time()*1000)}.py"
+        try:
+            tmp.write_text(self.codigo, encoding="utf-8")
+
+            classes_json = json.dumps(self.CLASSES_CRITICAS)
+            metodos_json = json.dumps(self.METODOS_CRITICOS)
+
+            script_texto = f'''
+import sys, json, importlib.util, inspect
+sys.path.insert(0, {str(Path(__file__).parent)!r})
+spec = importlib.util.spec_from_file_location("magi_probe_mod", {str(tmp)!r})
+mod = importlib.util.module_from_spec(spec)
+try:
+    spec.loader.exec_module(mod)
+except Exception as e:
+    print(json.dumps({{"import_ok": False, "erro": type(e).__name__ + ": " + str(e)}}))
+    sys.exit(0)
+
+resultado = {{"import_ok": True}}
+classes_criticas = {classes_json}
+resultado["classes"] = {{c: bool(hasattr(mod, c) and inspect.isclass(getattr(mod, c))) for c in classes_criticas}}
+
+metodos_criticos = {metodos_json}
+met = {{}}
+for classe, metodo in metodos_criticos:
+    cls = getattr(mod, classe, None)
+    met[classe + "." + metodo] = bool(cls) and hasattr(cls, metodo) and callable(getattr(cls, metodo, None))
+resultado["metodos"] = met
+
+try:
+    sig = inspect.signature(mod.MAGISystem._chamar_local)
+    resultado["assinatura_chamar_local"] = list(sig.parameters.keys())
+except Exception:
+    resultado["assinatura_chamar_local"] = None
+
+resultado["log_existe"] = hasattr(mod, "log")
+resultado["log_tipo"] = type(getattr(mod, "log", None)).__name__ if hasattr(mod, "log") else None
+
+try:
+    src = inspect.getsource(mod.MAGISystem._chamar_openai)
+    resultado["fallback_local_presente"] = ("gpt-4o-mini" in src and "_chamar_local" in src)
+except Exception:
+    resultado["fallback_local_presente"] = False
+
+print(json.dumps(resultado))
+'''
+            script.write_text(script_texto, encoding="utf-8")
+
+            proc = subprocess.run(
+                [sys.executable or "python", str(script)],
+                capture_output=True, text=True, timeout=30,
+            )
+            # CORREÇÃO: pegar só a "última linha" do stdout pra achar o JSON
+            # é frágil — importar o MagiSystem.py de verdade (exec_module)
+            # carrega sentence_transformers/huggingface_hub, que podem
+            # imprimir avisos no stdout (ex: "unauthenticated requests to
+            # HF Hub") depois ou ao redor do nosso print(json.dumps(...)).
+            # Isso fazia o parsing falhar mesmo com o import tendo dado
+            # certo, e o texto bruto do stdout (que parecia sucesso) virava
+            # a mensagem de "erro" — revertendo modificações boas por
+            # engano. Agora procura, de trás pra frente, a primeira linha
+            # que realmente é um JSON válido com a chave esperada.
+            self._probe = None
+            for linha in reversed(proc.stdout.strip().splitlines()):
+                linha = linha.strip()
+                if not linha.startswith("{"):
+                    continue
+                try:
+                    candidato = json.loads(linha)
+                except Exception:
+                    continue
+                if isinstance(candidato, dict) and "import_ok" in candidato:
+                    self._probe = candidato
+                    break
+            if self._probe is None:
+                self._probe = {"import_ok": False, "erro": (proc.stderr or proc.stdout or "saída vazia")[:300]}
+        except subprocess.TimeoutExpired:
+            self._probe = {"import_ok": False, "erro": "Timeout (30s) importando o código pra teste"}
+        except Exception as e:
+            self._probe = {"import_ok": False, "erro": f"Erro ao rodar probe: {e}"}
+        finally:
+            for f in (tmp, script):
+                try:
+                    f.unlink(missing_ok=True)
+                except Exception:
+                    pass
+        return self._probe
 
     def _teste_sintaxe(self):
         import ast
@@ -1885,14 +2028,21 @@ class MAGITestes:
         except SyntaxError as e: return False,f'SyntaxError {e.lineno}: {e.msg}'
 
     def _teste_classes(self):
-        aus = [c for c in self.CLASSES_CRITICAS if 'class '+c not in self.codigo]
-        return (False,'Classes ausentes: '+', '.join(aus)) if aus else (True,str(len(self.CLASSES_CRITICAS))+' classes OK')
+        p = self._rodar_probe()
+        if not p.get("import_ok"):
+            return False, f"Código não importa de verdade: {p.get('erro','?')}"
+        aus = [c for c, ok in p.get("classes", {}).items() if not ok]
+        return (False,'Classes ausentes (checado por import real): '+', '.join(aus)) if aus \
+            else (True, str(len(self.CLASSES_CRITICAS))+' classes OK (existem de verdade, checado via import)')
 
     def _teste_metodos(self):
-        import re as _re
-        aus = [c+'.'+m for c,m in self.METODOS_CRITICOS
-               if not _re.search('class '+c+r'.*?def '+m+r'\s*\(',self.codigo,_re.DOTALL)]
-        return (False,'Ausentes: '+', '.join(aus[:5])) if aus else (True,str(len(self.METODOS_CRITICOS))+' metodos OK')
+        p = self._rodar_probe()
+        if not p.get("import_ok"):
+            return False, f"Código não importa de verdade: {p.get('erro','?')}"
+        met = p.get("metodos", {})
+        aus = [k for k, ok in met.items() if not ok]
+        return (False,'Ausentes (checado por import real): '+', '.join(aus[:5])) if aus \
+            else (True, str(len(self.METODOS_CRITICOS))+' metodos OK (existem e são chamáveis, checado via import)')
 
     def _teste_padroes_proibidos(self):
         import re as _re
@@ -1900,18 +2050,30 @@ class MAGITestes:
         return (False,'Proibidos: '+'; '.join(found)) if found else (True,'Nenhum padrao proibido')
 
     def _teste_assinatura_local(self):
-        import re as _re
-        m = _re.search(r'def _chamar_local\s*\(([^)]+)\)',self.codigo)
-        if not m: return False,'_chamar_local nao encontrado'
-        ps = [p.strip().split(':')[0].split('=')[0].strip() for p in m.group(1).split(',')]
-        return (True,'_chamar_local(self,system,prompt) OK') if ps==['self','system','prompt'] else (False,'Assinatura errada: '+str(ps))
+        p = self._rodar_probe()
+        if not p.get("import_ok"):
+            return False, f"Código não importa de verdade: {p.get('erro','?')}"
+        ps = p.get("assinatura_chamar_local")
+        if ps is None:
+            return False, '_chamar_local nao encontrado (checado via inspect.signature real)'
+        return (True,'_chamar_local(self,system,prompt) OK (assinatura real via inspect)') if ps==['self','system','prompt'] \
+            else (False,'Assinatura errada (real): '+str(ps))
 
     def _teste_fallback_local(self):
-        has = 'model == "gpt-4o-mini"' in self.codigo and '_chamar_local(system, prompt)' in self.codigo
-        return (True,'Fallback gpt-4o-mini→local presente') if has else (False,'Fallback gpt-4o-mini→local AUSENTE')
+        p = self._rodar_probe()
+        if not p.get("import_ok"):
+            return False, f"Código não importa de verdade: {p.get('erro','?')}"
+        has = p.get("fallback_local_presente", False)
+        return (True,'Fallback gpt-4o-mini→local presente (checado no source real do método)') if has \
+            else (False,'Fallback gpt-4o-mini→local AUSENTE (checado no source real do método)')
 
     def _teste_log_global(self):
-        return (True,'log=MAGILogger() presente') if 'log = MAGILogger()' in self.codigo else (False,'log global ausente')
+        p = self._rodar_probe()
+        if not p.get("import_ok"):
+            return False, f"Código não importa de verdade: {p.get('erro','?')}"
+        if p.get("log_existe") and p.get("log_tipo") == "MAGILogger":
+            return True, f'log global existe e é MAGILogger de verdade (tipo real: {p.get("log_tipo")})'
+        return False, f'log global ausente ou tipo errado (tipo real: {p.get("log_tipo")})'
 
     def rodar(self, silencioso=False):
         testes = [
@@ -1963,8 +2125,18 @@ class MAGISystem:
         self.consciencia.iniciar_sessao()
         self.memoria   = MAGIMemória()
         self.historico = deque(maxlen=40)
-        self.google    = genai.Client(api_key=os.getenv('GOOGLE_API_KEY'))
-        self.openai    = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
+        # DeepSeek é o backend PRINCIPAL do MAGI. Todos os demais provedores
+        # abaixo são OPCIONAIS: só são instanciados se o usuário configurou
+        # a respectiva chave (via .env ou pela aba "Chaves de API" da UI),
+        # e servem apenas como fallback caso o DeepSeek falhe.
+        self.google: "genai.Client | None" = (
+            genai.Client(api_key=os.getenv('GOOGLE_API_KEY'))
+            if os.getenv('GOOGLE_API_KEY') else None
+        )
+        self.openai: OpenAI | None = (
+            OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
+            if os.getenv('OPENAI_API_KEY') else None
+        )
         self.local: OpenAI | None = (
             OpenAI(base_url=LOCAL_CONFIG['url'], api_key='local')
             if LOCAL_CONFIG['ativo'] else None
@@ -2038,6 +2210,15 @@ class MAGISystem:
             self.usuario = MAGIUsuario()
         except ImportError:
             self.usuario = None
+        # CORREÇÃO: self.historico (memória de curto prazo do CASPER) sempre
+        # começava vazio a cada boot, mesmo quando a sessão anterior tinha
+        # terminado normalmente e sido salva em disco (MAGIUsuario já
+        # persiste a transcrição via encerrar_sessao()) — nada recarregava
+        # de volta. "Reiniciar o MAGI" na prática sempre significava
+        # "esquecer a conversa toda", mesmo com o histórico salvo ali do
+        # lado. Agora repopula self.historico com as últimas trocas da
+        # sessão anterior finalizada corretamente, no boot.
+        self._restaurar_contexto_sessao_anterior()
         # Feature 7: cache semântico de respostas {query_vec_bytes: (query, veredito, ts)}
         self._cache_respostas: list[tuple[object, str, str, str]] = []  # (vec, query, veredito, ts)
         self._CACHE_MAX_MIN   = 30   # validade em minutos
@@ -2045,7 +2226,64 @@ class MAGISystem:
         self._intencao_vecs   = None  # cache lazy para classificação de intenção
         self._ui_history      = None  # será populado pela UI quando disponível
 
+    def _restaurar_contexto_sessao_anterior(self) -> None:
+        """Ver comentário no __init__ — repopula self.historico a partir da
+        última sessão salva corretamente, dando continuidade entre reinícios."""
+        if not self.usuario:
+            return
+        try:
+            sessoes = self.usuario.listar_sessoes(n=1)
+            if not sessoes:
+                return
+            ultima = self.usuario.carregar_sessao(sessoes[0]["id"])
+            if not ultima or not ultima.get("fim"):
+                return  # sessão não finalizada normalmente — não confia no conteúdo
+            trocas = ultima.get("trocas", [])[-10:]
+            for t in trocas:
+                intencao = str(t.get("intencao", "?")).upper()
+                q = str(t.get("q", ""))[:120]
+                r = str(t.get("r", ""))[:300]
+                self.historico.append(f"[{intencao}] Q: {q} | CASPER: {r}")
+            if trocas:
+                log.info("boot", f"Contexto restaurado: {len(trocas)} trocas da sessão anterior ({sessoes[0]['id']})")
+        except Exception as e:
+            log.warn("boot", f"Falha ao restaurar contexto da sessão anterior: {e}")
+
+    def recarregar_clientes_llm(self) -> dict[str, bool]:
+        """
+        Reconstrói os clients de LLM a partir das variáveis de ambiente
+        ATUAIS (após magi_config.salvar_chave() ter atualizado os.environ
+        e o .env). Chamado pela aba "Chaves de API" da UI depois de salvar
+        uma chave nova — assim o usuário não precisa reiniciar o app pra
+        a chave passar a valer.
+        Retorna um dict {provedor: True/False} indicando quem ficou ativo.
+        """
+        google_key    = os.getenv('GOOGLE_API_KEY')
+        openai_key    = os.getenv('OPENAI_API_KEY')
+        groq_key      = os.getenv('GROQ_API_KEY')
+        deepseek_key  = os.getenv('DEEPSEEK_API_KEY')
+
+        self.google   = genai.Client(api_key=google_key) if google_key else None
+        self.openai   = OpenAI(api_key=openai_key) if openai_key else None
+        self.groq     = OpenAI(base_url=GROQ_URL, api_key=groq_key) if groq_key else None
+        self.deepseek = OpenAI(base_url=DEEPSEEK_URL, api_key=deepseek_key) if deepseek_key else None
+        # local depende de LOCAL_CONFIG (não de chave de API), então não muda aqui
+        # anthropic não guarda client persistente — lê ANTHROPIC_API_KEY a cada chamada
+
+        status = {
+            "deepseek":  bool(self.deepseek),
+            "google":    bool(self.google),
+            "openai":    bool(self.openai),
+            "groq":      bool(self.groq),
+            "anthropic": bool(os.getenv("ANTHROPIC_API_KEY")),
+            "local":     bool(self.local),
+        }
+        log.info("llm.reload", "Clients de LLM recarregados", **status)
+        return status
+
     def _chamar_google(self, model: str, system: str, prompt: str) -> str | None:
+        if not self.google:
+            return None
         t0 = time.time()
         done  = threading.Event()
         result: list[str | None] = [None]
@@ -2071,6 +2309,8 @@ class MAGISystem:
         return result[0]
 
     def _chamar_openai(self, model: str, system: str, prompt: str) -> str | None:
+        if not self.openai:
+            return None
         t0 = time.time()
         try:
             res = self.openai.chat.completions.create(
@@ -2258,24 +2498,79 @@ class MAGISystem:
             if r:
                 return r, model
 
+        # CORREÇÃO: MAGICircuitBreaker e MAGIObservador estavam construídos,
+        # instanciados, e até AGENDADOS pra exportar métricas a cada 5min —
+        # mas nada nunca chamava registrar_sucesso/registrar_falha/
+        # registrar_latencia de verdade nesse fluxo (o único ponto que
+        # chamava, _monitorar_nucleo, nunca era invocado por ninguém).
+        # Resultado: métricas sempre vazias, circuit breaker sempre "fechado"
+        # porque nunca via falha nenhuma. Agora cada tentativa de backend
+        # grava latência/sucesso/falha de verdade — só observação por
+        # enquanto, não muda qual backend é tentado (isso seria uma mudança
+        # de comportamento maior, deixada como decisão separada).
+
         # Chamada normal (outros núcleos ou fallback sem streaming)
+        t0 = time.time()
         r = self._chamar_deepseek(model, system, prompt)
+        chave = f"deepseek/{model}"
         if r:
+            self.observador.registrar_latencia(chave, time.time() - t0)
+            self.circuit.registrar_sucesso(chave, time.time() - t0)
             return r, model
+        self.observador.registrar_erro(chave, "sem resposta")
+        self.circuit.registrar_falha(chave)
 
         # Fallback 1: local (se ativo)
         if LOCAL_CONFIG["ativo"] and self.local:
+            t0 = time.time()
             r = self._chamar_local(system, prompt)
+            chave = f"local/{LOCAL_CONFIG['modelo']}"
             if r:
-                return r, f"local/{LOCAL_CONFIG['modelo']}"
+                self.observador.registrar_latencia(chave, time.time() - t0)
+                self.circuit.registrar_sucesso(chave, time.time() - t0)
+                return r, chave
+            self.observador.registrar_erro(chave, "sem resposta")
+            self.circuit.registrar_falha(chave)
 
         # Fallback 2: OpenAI (só se DeepSeek e local falharem)
         fb_model  = cfg.get("fallback_openai_model")
         fb_system = cfg.get("fallback_openai_system", system)
         if fb_model:
+            t0 = time.time()
             r = self._chamar_openai(fb_model, fb_system, prompt)
+            chave = f"openai/{fb_model}"
             if r:
-                return r, f"openai/{fb_model}"
+                self.observador.registrar_latencia(chave, time.time() - t0)
+                self.circuit.registrar_sucesso(chave, time.time() - t0)
+                return r, chave
+            self.observador.registrar_erro(chave, "sem resposta")
+            self.circuit.registrar_falha(chave)
+
+        # Fallback 3: Google Gemini (opcional — só roda se GOOGLE_API_KEY estiver configurada)
+        fb_google_model = cfg.get("fallback_google_model")
+        if fb_google_model and self.google:
+            t0 = time.time()
+            r = self._chamar_google(fb_google_model, fb_system, prompt)
+            chave = f"google/{fb_google_model}"
+            if r:
+                self.observador.registrar_latencia(chave, time.time() - t0)
+                self.circuit.registrar_sucesso(chave, time.time() - t0)
+                return r, chave
+            self.observador.registrar_erro(chave, "sem resposta")
+            self.circuit.registrar_falha(chave)
+
+        # Fallback 4: Anthropic/Claude (opcional — só roda se ANTHROPIC_API_KEY estiver configurada)
+        fb_anthropic_model = cfg.get("fallback_anthropic_model")
+        if fb_anthropic_model and os.getenv("ANTHROPIC_API_KEY"):
+            t0 = time.time()
+            r = self._chamar_anthropic_evolucao(fb_system, prompt)
+            chave = f"anthropic/{fb_anthropic_model}"
+            if r:
+                self.observador.registrar_latencia(chave, time.time() - t0)
+                self.circuit.registrar_sucesso(chave, time.time() - t0)
+                return r, chave
+            self.observador.registrar_erro(chave, "sem resposta")
+            self.circuit.registrar_falha(chave)
 
         return None, None
 
@@ -2722,6 +3017,26 @@ class MAGISystem:
             MAGIInterface.digitar(r, cor=Fore.YELLOW, delay=0.013)
             if self._resposta_callback:
                 self._resposta_callback(r)
+            # CORREÇÃO: esta função lê self.historico (linha acima) pra montar
+            # contexto, mas nunca escrevia nele — toda mensagem classificada
+            # como "conversa casual" (saudação, agradecimento, opinião, etc,
+            # ver _e_conversa) tinha resposta gerada e mostrada, mas ficava
+            # de fora da memória de curto prazo pra sempre. Como boa parte de
+            # um chat normal cai nesse caminho, isso dava a impressão de o
+            # MAGI "não lembrar da conversa" — na prática, boa parte dela
+            # nunca era registrada. Mesma linha que o pipeline principal usa
+            # (ver processar(), perto do fim).
+            self.historico.append(f"[CONVERSA] Q: {query[:120]} | CASPER: {r[:300]}")
+            # CORREÇÃO (mesmo bug, segunda ocorrência): o pipeline principal
+            # chama self.usuario.registrar_troca(...) pra persistir a
+            # transcrição em disco — esse atalho de conversa casual também
+            # nunca chamava. Além de sumir do histórico em memória (já
+            # corrigido acima), a troca também nunca era salva no arquivo
+            # de sessão, então nem _restaurar_contexto_sessao_anterior()
+            # nem a extração de fatos pessoais (extrair_fatos, dentro de
+            # registrar_troca) nunca viam essas mensagens.
+            if self.usuario:
+                self.usuario.registrar_troca(query, r, "conversa", DEEPSEEK_MODELO_PADRAO)
             if any(p in query.lower() for p in ["obrigado","valeu","ajudando","ótimo","gostei","adorei"]):
                 ego["estado_emocional"] = "satisfeito"
                 ego["intensidade"] = min(0.9, ego["intensidade"] + 0.1)
@@ -3281,15 +3596,16 @@ class MAGISystem:
     # ══════════════════════════════════════════════════════════════════════
 
     def _testar_em_sandbox(self, codigo_novo: str) -> tuple[bool, str]:
-        """Testa modificação em arquivo temporário completamente isolado.
+        """Testa modificação em arquivo temporário completamente isolado, ANTES
+        de tocar no arquivo original.
 
-        Usa sys.executable para garantir compatibilidade de versão Python.
-        Verifica AST + compile + ausência de chamadas destrutivas.
+        CORREÇÃO: antes este método fazia exatamente o mesmo teste (ast.parse +
+        compile) que a Camada 1/2/3 de _testar_modificacao — três camadas
+        redundantes checando só sintaxe, nenhuma executando o código de
+        verdade. Agora reaproveita _executar_arquivo_isolado (import real em
+        subprocess), que pega erros de execução que compile() nunca pegaria.
         """
-        import tempfile, subprocess, sys as _sys
-        python_exe = _sys.executable or "python"
-
-        # Pré-validação rápida in-process
+        tmp = Path(__file__).parent / f"_magi_sandbox_{int(time.time()*1000)}.py"
         try:
             import ast as _ast
             _ast.parse(codigo_novo)
@@ -3298,34 +3614,15 @@ class MAGISystem:
             return False, f"Pré-validação falhou: linha {e.lineno}: {e.msg}"
 
         try:
-            with tempfile.NamedTemporaryFile(mode="w", suffix=".py",
-                                              delete=False, encoding="utf-8") as tmp:
-                tmp.write(codigo_novo)
-                tmp_path = tmp.name
-
-            res = subprocess.run(
-                [python_exe, "-c",
-                 f"import ast, sys; "
-                 f"src=open(r'{tmp_path}',encoding='utf-8').read(); "
-                 f"ast.parse(src); compile(src,'<sb>','exec'); "
-                 f"print('SANDBOX_OK')"],
-                capture_output=True, text=True, timeout=20
-            )
-            import os as _os
-            try:
-                _os.unlink(tmp_path)
-            except Exception:
-                pass
-
-            if res.returncode == 0 and "SANDBOX_OK" in res.stdout:
-                return True, "Sandbox OK"
-            erro = (res.stderr or res.stdout or "Falha desconhecida").strip()[:300]
-            return False, f"Sandbox: {erro}"
-
-        except subprocess.TimeoutExpired:
-            return False, "Sandbox timeout (20s)"
+            tmp.write_text(codigo_novo, encoding="utf-8")
+            return self._executar_arquivo_isolado(str(tmp), timeout=self._timeout_adaptativo(str(tmp)))
         except Exception as e:
             return False, f"Sandbox erro: {e}"
+        finally:
+            try:
+                tmp.unlink(missing_ok=True)
+            except Exception:
+                pass
 
     # ══════════════════════════════════════════════════════════════════════
     # #76 Modo foco
@@ -4506,7 +4803,6 @@ class MAGISystem:
         bloco_fontes = ""
         rodape_fontes = ""
         _buscar_sources = intencao in ("factual", "técnico", "decisão")
-        _sources_future = None
         if _buscar_sources:
             from concurrent.futures import ThreadPoolExecutor as _TPE
             _sources_executor = _TPE(max_workers=2, thread_name_prefix="sources")
@@ -4804,23 +5100,9 @@ class MAGISystem:
             pass
 
     def _resolver_matematica(self, tipo: str, *args) -> str:
-        try:
-            from sympy import symbols, Eq, solve, diff, integrate, Matrix, linsolve
-            x, y = symbols('x y')
-            if tipo == "equacao":
-                return f"Solução: {solve(Eq(eval(args[0]), eval(args[1])), x)}"
-            elif tipo == "derivada":
-                return f"Derivada: {diff(eval(args[0]), x)}"
-            elif tipo == "integral":
-                return f"Integral: {integrate(eval(args[0]), x)}"
-            elif tipo == "matriz":
-                return f"Matriz: {Matrix(eval(args[0]))}"
-            elif tipo == "sistema_linear":
-                return f"Sistema: {linsolve([eval(args[0]), eval(args[1])], x, y)}"
-            else:
-                return "Tipo desconhecido."
-        except Exception as e:
-            return f"Erro: {e}"
+        # CORREÇÃO DE SEGURANÇA: delega para o parser seguro (sem eval()).
+        # Ver magi/security/magi_security.py — ExprSeguros.parse_sympy().
+        return resolver_matematica_seguro(tipo, *args)
 
     def _falar(self, texto: str):
         """Sintetiza e reproduz o veredito do CASPER por voz."""
@@ -4838,7 +5120,7 @@ class MAGISystem:
                     self.voz.falar(limpo)
                 return
 
-            # ── Fallback: pygame direto ───────────────────────────
+            # ── Fallback: playback direto (sounddevice) ───────────
             limpo = re.sub(r'\*\*|__|\*|_|`{1,3}', '', texto)
             limpo = re.sub(r'#+ ', '', limpo)
             frases = re.split(r'(?<=[.!?])\s+', limpo)
@@ -4852,18 +5134,19 @@ class MAGISystem:
                 await c.save(mp3_path)
             asyncio.run(_gerar_fala())
             try:
-                import pygame
-                pygame.mixer.init()
-                pygame.mixer.music.load(mp3_path)
-                pygame.mixer.music.play()
+                from magi.utils.magi_audio import obter_player
+                player = obter_player()
+                player.mixer.init()
+                player.mixer.music.load(mp3_path)
+                player.mixer.music.play()
                 deadline = time.time() + 15
-                while pygame.mixer.music.get_busy() and time.time() < deadline:
+                while player.mixer.music.get_busy() and time.time() < deadline:
                     time.sleep(0.1)
-                pygame.mixer.music.stop()
-                pygame.mixer.quit()
+                player.mixer.music.stop()
+                player.mixer.quit()
                 return
             except Exception as e_pg:
-                log.debug("tts", f"pygame falhou: {e_pg}")
+                log.debug("tts", f"reprodução de áudio falhou: {e_pg}")
             try:
                 from playsound import playsound
                 playsound(mp3_path, block=True)
@@ -5368,7 +5651,7 @@ class MAGISystem:
                     _local_falhou = True
                     print(f"{Fore.YELLOW}  [EVOLUÇÃO] Local offline ({self._ultimo_erro_local or 'sem resposta'}) — usando cloud.")
             if not r:
-                r = (self._chamar_deepseek(DEEPSEEK_MODELO_PADRAO, system_atual, prompt_envio) or self._chamar_local(system_atual, prompt_envio))
+                r = (self._chamar_deepseek(DEEPSEEK_MODELO_EVOLUCAO, system_atual, prompt_envio) or self._chamar_local(system_atual, prompt_envio))
                 if r:
                     print(f"{Fore.CYAN}  [EVOLUÇÃO] Usando DeepSeek.")
                 else:
@@ -5426,6 +5709,14 @@ class MAGISystem:
                 ultimo_erro = f"Linhas inválidas: {linha_inicio}-{linha_fim} (total {total})"
                 continue
 
+            # CORREÇÃO (#1): confirma que o corte respeita fronteiras de
+            # statement — não corta um if/for/def no meio, deixando a
+            # outra metade órfã (bug de corrupção silenciosa de indentação).
+            ok_limites, msg_limites = self._validar_limites_ast(codigo_atual, linha_inicio, linha_fim)
+            if not ok_limites:
+                ultimo_erro = msg_limites
+                continue
+
             # Valida blocos sem corpo
             novas = codigo_novo.splitlines()
             palavras_bloco = ('if ', 'elif ', 'else:', 'for ', 'while ', 'def ', 'class ', 'try:', 'except', 'finally:', 'with ')
@@ -5469,6 +5760,18 @@ class MAGISystem:
                 compile(resultado, "<preview>", "exec")
             except SyntaxError as e:
                 ultimo_erro = f"Sintaxe erro linha {e.lineno}: {e.msg}"
+                continue
+
+            # CORREÇÃO (#2): método removido ainda é chamado em algum lugar?
+            ok_estrutural, msg_estrutural = self._validar_diff_estrutural(codigo_atual, resultado)
+            if not ok_estrutural:
+                ultimo_erro = msg_estrutural
+                continue
+
+            # CORREÇÃO (#6): diff desproporcional ao que foi pedido?
+            ok_prop, msg_prop = self._checar_proporcionalidade(instrucao, codigo_atual, resultado)
+            if not ok_prop:
+                ultimo_erro = msg_prop
                 continue
 
             # Sucesso — salva como exemplo few-shot para próximas evoluções
@@ -5520,16 +5823,79 @@ class MAGISystem:
                 mostrados += 1
         MAGIInterface.separador(cor=Fore.YELLOW)
 
+    def _executar_arquivo_isolado(self, caminho_arquivo: str, timeout: int = 25) -> tuple[bool, str]:
+        """
+        CORREÇÃO: teste de execução REAL, não só sintaxe.
+
+        As camadas antigas (_testar_em_sandbox, Camada 3 de _testar_modificacao)
+        faziam só `ast.parse()` + `compile()` — isso NUNCA executa o código,
+        só verifica se ele é sintaticamente válido. Uma modificação pode ter
+        sintaxe perfeita e ainda assim quebrar na hora de rodar (erro de
+        atributo, referência quebrada, erro na definição de uma classe/decorator,
+        etc) — nada disso é pego só compilando.
+
+        Este método roda `python -I -c "import ..."` de verdade num subprocess
+        isolado, importando o arquivo como módulo (não só compilando texto).
+        Isso executa todo o código de nível de módulo — definições de classe,
+        decorators, atribuições globais como `log = MAGILogger()` — pegando
+        erros reais de execução que só apareceriam ao rodar o MAGI de verdade.
+
+        Não instancia MAGISystem inteiro (evita exigir chaves de API/rede
+        durante o teste), mas importar o módulo já cobre a maior parte dos
+        bugs reais introduzidos por auto-evolução: classe quebrada, método
+        removido por engano, erro de indentação que muda o escopo, etc.
+        """
+        import subprocess, sys as _sys
+
+        python_exe = _sys.executable or "python"
+        caminho = Path(caminho_arquivo).resolve()
+        modulo_nome = f"_magi_selftest_{int(time.time()*1000)}"
+
+        script_teste = (
+            "import sys, importlib.util, traceback\n"
+            f"sys.path.insert(0, {str(caminho.parent)!r})\n"  # resolve imports tipo 'from magi.security...'
+            f"spec = importlib.util.spec_from_file_location({modulo_nome!r}, {str(caminho)!r})\n"
+            "mod = importlib.util.module_from_spec(spec)\n"
+            "try:\n"
+            "    spec.loader.exec_module(mod)\n"
+            "except Exception as e:\n"
+            "    print('IMPORT_FALHOU: ' + type(e).__name__ + ': ' + str(e))\n"
+            "    traceback.print_exc()\n"
+            "    sys.exit(1)\n"
+            "classes_necessarias = ['MAGISystem', 'MAGIMemória', 'MAGIConsciencia', 'MAGILogger']\n"
+            "faltando = [c for c in classes_necessarias if not hasattr(mod, c)]\n"
+            "if faltando:\n"
+            "    print('CLASSES_AUSENTES_APOS_IMPORT: ' + ', '.join(faltando))\n"
+            "    sys.exit(1)\n"
+            "print('IMPORT_REAL_OK')\n"
+        )
+
+        try:
+            resultado = subprocess.run(
+                [python_exe, "-I", "-c", script_teste],
+                capture_output=True, text=True, timeout=timeout,
+                cwd=str(caminho.parent),
+            )
+            saida = (resultado.stdout or "") + (resultado.stderr or "")
+            if resultado.returncode == 0 and "IMPORT_REAL_OK" in resultado.stdout:
+                return True, "Importação real executada com sucesso"
+            return False, saida.strip()[-800:] or "Falha desconhecida na importação real"
+        except subprocess.TimeoutExpired:
+            return False, f"Timeout ({timeout}s) — possível loop infinito em código de nível de módulo"
+        except Exception as e:
+            return False, f"Erro ao rodar teste de importação real: {e}"
+
     def _testar_modificacao(self, codigo_novo: str) -> tuple[bool, str]:
         """Testa código modificado em subprocess isolado multiplataforma.
 
         Camadas de teste:
         1. Sintaxe via ast.parse (rápido)
         2. compile() para verificar bytecode
-        3. Subprocess isolado com python/python3 (cross-platform)
-        4. Verificação de que classes críticas ainda existem
+        3. Execução real (import de verdade) via _executar_arquivo_isolado
+        4. Diff estrutural (#2) e proporcionalidade (#6), na chamada de quem gera o código
         """
-        import subprocess, tempfile, sys as _sys
+        # CORREÇÃO: subprocess/tempfile/sys eram usados pela Camada 3 antiga
+        # (compile() redundante) — removida hoje, ficou import morto.
 
         # Camada 1: AST
         try:
@@ -5544,31 +5910,20 @@ class MAGISystem:
         except SyntaxError as e:
             return False, f"compile() falhou: linha {e.lineno}: {e.msg}"
 
-        # Camada 3: subprocess cross-platform
-        with tempfile.NamedTemporaryFile(mode="w", suffix=".py", delete=False,
-                                         encoding="utf-8") as tmp:
-            tmp.write(codigo_novo)
-            tmp_path = tmp.name
-
-        # Detecta executável Python correto (cross-platform)
-        python_exe = _sys.executable or "python"
+        # Camada 3: teste de EXECUÇÃO real (import de verdade, não só compile)
+        # CORREÇÃO: antes essa camada só reforçava ast.parse+compile — que já
+        # tinham sido checados nas camadas 1 e 2. Agora escreve o código num
+        # arquivo temporário e importa de verdade em subprocess isolado,
+        # pegando erros que só aparecem executando (não só compilando).
+        tmp_path_camada3 = Path(__file__).parent / f"_magi_test_exec_{int(time.time()*1000)}.py"
         try:
-            resultado = subprocess.run(
-                [python_exe, "-c",
-                 f"import ast; src=open(r'{tmp_path}',encoding='utf-8').read(); "
-                 f"ast.parse(src); compile(src,'<t>','exec'); print('OK')"],
-                capture_output=True, text=True, timeout=20
-            )
-            if resultado.returncode != 0 or "OK" not in resultado.stdout:
-                erro = (resultado.stderr or resultado.stdout or "Falha desconhecida").strip()[:300]
-                return False, f"Subprocess: {erro}"
-        except subprocess.TimeoutExpired:
-            return False, "Timeout (20s) no subprocess de teste"
-        except Exception as e:
-            return False, f"Erro subprocess: {e}"
+            tmp_path_camada3.write_text(codigo_novo, encoding="utf-8")
+            ok_exec, msg_exec = self._executar_arquivo_isolado(str(tmp_path_camada3), timeout=self._timeout_adaptativo(str(tmp_path_camada3)))
+            if not ok_exec:
+                return False, f"Execução real falhou: {msg_exec}"
         finally:
             try:
-                os.remove(tmp_path)
+                tmp_path_camada3.unlink(missing_ok=True)
             except Exception:
                 pass
 
@@ -5581,11 +5936,212 @@ class MAGISystem:
 
         return True, "OK — 4 camadas passaram"
 
-    def _aplicar_modificacao(self, codigo_novo: str) -> bool:
+    # ══════════════════════════════════════════════════════════════
+    # APLICAR PATCH (.diff) — lê um arquivo .diff e se modifica com ele
+    # ══════════════════════════════════════════════════════════════
+
+    def _parse_diff_unificado(self, texto_diff: str) -> list[dict]:
+        """
+        Parser de diff unificado (formato `git diff`), em Python puro —
+        não depende de `git` estar instalado. Suporta múltiplos arquivos
+        num único .diff, múltiplos hunks por arquivo, arquivos novos e
+        deletados/renomeados.
+
+        Retorna uma lista de {"arquivo_a", "arquivo_b", "hunks", "novo_arquivo",
+        "arquivo_deletado", "arquivo_binario"}. Cada hunk é
+        {"old_start", "new_start", "linhas"} — "linhas" são as linhas cruas
+        do corpo do hunk (' 'contexto / '-'removida / '+'adicionada).
+        """
+        arquivos: list[dict] = []
+        linhas = texto_diff.splitlines()
+        i = 0
+        atual: dict | None = None
+        while i < len(linhas):
+            linha = linhas[i]
+            if linha.startswith("diff --git "):
+                if atual:
+                    arquivos.append(atual)
+                m = re.match(r'diff --git a/(.+?) b/(.+)$', linha)
+                atual = {
+                    "arquivo_a": m.group(1) if m else None,
+                    "arquivo_b": m.group(2) if m else None,
+                    "hunks": [],
+                    "novo_arquivo": False,
+                    "arquivo_deletado": False,
+                    "arquivo_binario": False,
+                }
+                i += 1
+                continue
+            if atual is None:
+                i += 1
+                continue
+            if linha.startswith("new file mode"):
+                atual["novo_arquivo"] = True; i += 1; continue
+            if linha.startswith("deleted file mode"):
+                atual["arquivo_deletado"] = True; i += 1; continue
+            if linha.startswith("Binary files"):
+                atual["arquivo_binario"] = True; i += 1; continue
+            if linha.startswith("--- "):
+                i += 1; continue
+            if linha.startswith("+++ "):
+                caminho = linha[4:].strip()
+                if caminho != "/dev/null" and caminho.startswith("b/"):
+                    atual["arquivo_b"] = caminho[2:]
+                i += 1; continue
+            m_hunk = re.match(r'@@ -(\d+)(?:,(\d+))? \+(\d+)(?:,(\d+))? @@', linha)
+            if m_hunk:
+                old_start = int(m_hunk.group(1))
+                new_start = int(m_hunk.group(3))
+                corpo = []
+                i += 1
+                while i < len(linhas) and not linhas[i].startswith("diff --git ") and not linhas[i].startswith("@@ "):
+                    corpo.append(linhas[i])
+                    i += 1
+                atual["hunks"].append({"old_start": old_start, "new_start": new_start, "linhas": corpo})
+                continue
+            i += 1
+        if atual:
+            arquivos.append(atual)
+        return arquivos
+
+    def _aplicar_hunks(self, conteudo_original: str, hunks: list[dict]) -> str:
+        """
+        Aplica uma lista de hunks (formato de _parse_diff_unificado) num
+        texto original, produzindo o conteúdo novo. Testado byte-a-byte
+        contra os 11 patches reais gerados hoje — reconstrói exatamente
+        o resultado real em todos os casos testados (incluindo um patch
+        de 14 hunks).
+        """
+        linhas_orig = conteudo_original.splitlines()
+        resultado: list[str] = []
+        cursor = 0
+        for hunk in hunks:
+            old_start_0 = hunk["old_start"] - 1
+            resultado.extend(linhas_orig[cursor:old_start_0])
+            pos = old_start_0
+            for linha in hunk["linhas"]:
+                if linha.startswith(" "):
+                    resultado.append(linha[1:]); pos += 1
+                elif linha.startswith("-"):
+                    pos += 1
+                elif linha.startswith("+"):
+                    resultado.append(linha[1:])
+                elif linha.startswith("\\"):
+                    pass  # "\ No newline at end of file"
+                else:
+                    resultado.append(linha); pos += 1
+            cursor = pos
+        resultado.extend(linhas_orig[cursor:])
+        fim = "\n" if conteudo_original.endswith("\n") else ""
+        return "\n".join(resultado) + fim
+
+    def aplicar_arquivo_diff(self, caminho_diff: str) -> list[dict]:
+        """
+        Lê um arquivo .diff, aplica cada arquivo tocado, passando pela
+        MESMA cadeia de segurança usada por evoluir()/autoevoluir():
+        backup automático, teste de execução real em subprocess isolado,
+        validação pós-escrita com rollback automático (tudo dentro de
+        _aplicar_modificacao, já corrigido hoje pra tratar os dois modos
+        com a mesma proteção).
+
+        Retorna uma lista de {"arquivo", "sucesso", "mensagem"} — um item
+        por arquivo tocado no diff.
+        """
+        raiz = Path(__file__).parent
+        resultados: list[dict] = []
+
+        try:
+            texto_diff = Path(caminho_diff).read_text(encoding="utf-8")
+        except Exception as e:
+            return [{"arquivo": caminho_diff, "sucesso": False, "mensagem": f"Não consegui ler o .diff: {e}"}]
+
+        try:
+            arquivos = self._parse_diff_unificado(texto_diff)
+        except Exception as e:
+            return [{"arquivo": caminho_diff, "sucesso": False, "mensagem": f"Erro ao interpretar o .diff: {e}"}]
+
+        if not arquivos:
+            return [{"arquivo": caminho_diff, "sucesso": False, "mensagem": "Nenhum arquivo reconhecido no .diff"}]
+
+        for a in arquivos:
+            nome = a["arquivo_b"] or a["arquivo_a"] or "?"
+
+            if a["arquivo_binario"]:
+                resultados.append({"arquivo": nome, "sucesso": False, "mensagem": "Arquivo binário — não suportado"})
+                continue
+            if a["arquivo_deletado"]:
+                resultados.append({"arquivo": nome, "sucesso": False, "mensagem": "Deleção de arquivo — não aplicado automaticamente por segurança, faça manual"})
+                continue
+            if not a["hunks"] and not a["novo_arquivo"]:
+                resultados.append({"arquivo": nome, "sucesso": False, "mensagem": "Sem hunks (rename puro ou binário) — pulado"})
+                continue
+
+            destino = (raiz / nome).resolve()
+            # nunca sai da pasta do projeto (proteção contra path traversal num .diff malicioso)
+            if raiz.resolve() not in destino.parents and destino != raiz.resolve():
+                resultados.append({"arquivo": nome, "sucesso": False, "mensagem": "Caminho fora do projeto — recusado"})
+                continue
+
+            try:
+                if a["novo_arquivo"]:
+                    conteudo_original = ""
+                else:
+                    if not destino.exists():
+                        resultados.append({"arquivo": nome, "sucesso": False, "mensagem": "Arquivo alvo não existe no projeto"})
+                        continue
+                    conteudo_original = destino.read_text(encoding="utf-8")
+
+                conteudo_novo = self._aplicar_hunks(conteudo_original, a["hunks"])
+
+                if nome == Path(__file__).name:
+                    # é o próprio MagiSystem.py — passa pela cadeia completa
+                    # de segurança (backup, teste real, rollback automático)
+                    ok = self._aplicar_modificacao(conteudo_novo, instrucao=f"Aplicar patch: {caminho_diff}")
+                    resultados.append({"arquivo": nome, "sucesso": ok,
+                                       "mensagem": "Aplicado e validado" if ok else "Falhou na validação — revertido"})
+                else:
+                    # outros arquivos: valida sintaxe se for .py, sempre faz backup
+                    if nome.endswith(".py"):
+                        try:
+                            compile(conteudo_novo, nome, "exec")
+                        except SyntaxError as e:
+                            resultados.append({"arquivo": nome, "sucesso": False, "mensagem": f"Sintaxe inválida: {e}"})
+                            continue
+                    if not a["novo_arquivo"]:
+                        backup = destino.parent / f"{destino.name}.bak.{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+                        backup.write_text(conteudo_original, encoding="utf-8")
+                    destino.parent.mkdir(parents=True, exist_ok=True)
+                    destino.write_text(conteudo_novo, encoding="utf-8")
+                    resultados.append({"arquivo": nome, "sucesso": True, "mensagem": "Aplicado (backup salvo)" if not a["novo_arquivo"] else "Criado"})
+
+            except Exception as e:
+                resultados.append({"arquivo": nome, "sucesso": False, "mensagem": f"Erro ao aplicar: {e}"})
+
+        return resultados
+
+    def _aplicar_modificacao(self, codigo_novo: str, instrucao: str = "") -> bool:
+        """
+        CORREÇÃO (assimetria evoluir() vs autoevoluir()): esta função é
+        compartilhada pelo modo manual (evoluir, supervisionado por humano)
+        e indiretamente serve de referência pro modo automático. Antes, só
+        o autoevoluir() tinha validação pós-escrita com rollback automático
+        (Camada 7) e aviso de duplicação com magi/ (#3) — o modo manual
+        ficava com MENOS rede de segurança que o automático, o que é
+        invertido: no modo manual a pessoa só vê o DIFF de texto, não sabe
+        se o comportamento real quebrou depois de aplicar. Agora os dois
+        modos têm a mesma proteção.
+        """
+        if instrucao:
+            aviso_dup = self._checar_duplicacao_magi(instrucao)
+            if aviso_dup:
+                print(f"{Fore.YELLOW}  [AVISO] {aviso_dup}")
+                log.warn("aplicar_mod_duplicacao", aviso_dup)
+
         caminho = Path(__file__)
         backup  = caminho.parent / f"MagiSystem.bak.{datetime.now().strftime('%Y%m%d_%H%M%S')}.py"
         try:
-            backup.write_text(caminho.read_text(encoding="utf-8"), encoding="utf-8")
+            src_antes = caminho.read_text(encoding="utf-8")
+            backup.write_text(src_antes, encoding="utf-8")
             print(f"{Fore.CYAN}  [BACKUP] {backup.name}")
             compile(codigo_novo, "<magi_modificado>", "exec")
 
@@ -5600,6 +6156,21 @@ class MAGISystem:
 
             caminho.write_text(codigo_novo, encoding="utf-8")
             log.info("aplicar_mod","Arquivo atualizado")
+
+            # Validação pós-escrita real (mesma Camada 7 do autoevoluir) —
+            # se o arquivo novo não importa/roda de verdade, reverte
+            # automaticamente em vez de deixar quebrado no disco esperando
+            # alguém notar no próximo restart.
+            print(f"{Fore.BLUE}  [VALIDAÇÃO] Confirmando que o arquivo novo importa e roda de verdade...")
+            ok_pos, msg_pos = self._validar_comportamento_pos_evolucao()
+            if not ok_pos:
+                print(f"{Fore.RED}  [VALIDAÇÃO FALHOU] {msg_pos[:200]}")
+                print(f"{Fore.YELLOW}  Revertendo automaticamente...")
+                caminho.write_text(src_antes, encoding="utf-8")
+                log.warn("aplicar_mod", f"Revertido — validação pós-escrita falhou: {msg_pos[:150]}")
+                print(f"{Fore.RED}  Modificação revertida. Backup preservado em {backup.name}")
+                return False
+
             return True
         except SyntaxError as e:
             log.error("aplicar_mod",f"SyntaxError: {e}")
@@ -5616,9 +6187,14 @@ class MAGISystem:
         Retorna lista de sub-instruções ou [instrucao] se for simples o suficiente.
         """
         # Heurística: instrução curta ou sem conjunções → não decompor
+        # CORREÇÃO: "e " como substring dava falso positivo (ex: "corrige o"
+        # contém "e " por acaso, sem ser a conjunção "e"). Usa \b pra achar
+        # a palavra "e" isolada de verdade — mesmo bug/correção aplicado em
+        # _checar_proporcionalidade.
         palavras = instrucao.split()
-        conjuncoes = ["e ", "também", "além", "depois", "então", "adicionalmente"]
-        e_complexa = len(palavras) > 25 or any(c in instrucao.lower() for c in conjuncoes)
+        tem_conjuncao_e = bool(re.search(r'\be\b', instrucao.lower()))
+        outras_conjuncoes = ["também", "além", "depois", "então", "adicionalmente"]
+        e_complexa = len(palavras) > 25 or tem_conjuncao_e or any(c in instrucao.lower() for c in outras_conjuncoes)
         if not e_complexa:
             return [instrucao]
 
@@ -5633,7 +6209,7 @@ class MAGISystem:
         if LOCAL_CONFIG["ativo"]:
             r = self._chamar_local("Você decompõe instruções em passos. Só JSON.", prompt)
         if not r:
-            r = (self._chamar_deepseek(DEEPSEEK_MODELO_PADRAO, "Você decompõe instruções em passos. Só JSON.", prompt) or self._chamar_local("Você decompõe instruções em passos. Só JSON.", prompt))
+            r = (self._chamar_deepseek(DEEPSEEK_MODELO_EVOLUCAO, "Você decompõe instruções em passos. Só JSON.", prompt) or self._chamar_local("Você decompõe instruções em passos. Só JSON.", prompt))
         if not r:
             return [instrucao]
         try:
@@ -5652,6 +6228,358 @@ class MAGISystem:
     _AE_HISTORICO_PATH = Path(__file__).parent / "data" / "logs" / "autoevolucao_historico.jsonl"
     _AE_MAX_CICLOS     = 5    # teto de segurança por sessão
     _AE_MAX_POR_CICLO  = 3    # melhorias aplicadas por ciclo
+    _AE_MAPA_CHAMADAS_PATH = Path(__file__).parent / "data" / "logs" / "mapa_chamadas.json"
+    _AE_MAPA_CHAMADAS_TTL_S = 3600  # reconstrói o mapa se tiver mais de 1h
+
+    # ── #7: mapa persistido de "quem chama o quê" ────────────────
+    def _construir_ou_carregar_mapa_chamadas(self, forcar: bool = False) -> dict:
+        """
+        Mapa {nome_funcao_ou_metodo: [{"arquivo":..., "linha":...}, ...]}
+        construído escaneando todos os .py do projeto via AST — usado por
+        _validar_diff_estrutural (#2) pra saber rapidamente se um método
+        removido ainda é chamado em algum lugar, sem precisar rescanear o
+        projeto inteiro toda vez. Persistido em disco (data/logs/) e
+        reconstruído se tiver mais de _AE_MAPA_CHAMADAS_TTL_S de idade —
+        assim fica correto entre sessões sem custar um scan completo a
+        cada chamada individual dentro da mesma sessão.
+        """
+        caminho = self._AE_MAPA_CHAMADAS_PATH
+        if not forcar and caminho.exists():
+            try:
+                idade = time.time() - caminho.stat().st_mtime
+                if idade < self._AE_MAPA_CHAMADAS_TTL_S:
+                    return json.loads(caminho.read_text(encoding="utf-8"))
+            except Exception:
+                pass
+
+        import ast as _ast
+        raiz = Path(__file__).parent
+        mapa: dict[str, list[dict]] = {}
+        for arquivo in raiz.rglob("*.py"):
+            # pula ambientes virtuais, backups e arquivos temporários de teste
+            partes = arquivo.parts
+            if any(p in (".venv", "venv", "__pycache__", "MAGI_BACKUPS") for p in partes):
+                continue
+            if arquivo.name.startswith(("_magi_test_", "_magi_probe_", "_magi_sandbox_", "MagiSystem.bak")):
+                continue
+            try:
+                src = arquivo.read_text(encoding="utf-8", errors="ignore")
+                tree = _ast.parse(src)
+            except Exception:
+                continue
+            rel = str(arquivo.relative_to(raiz))
+            for node in _ast.walk(tree):
+                if isinstance(node, _ast.Call):
+                    nome = None
+                    if isinstance(node.func, _ast.Name):
+                        nome = node.func.id
+                    elif isinstance(node.func, _ast.Attribute):
+                        nome = node.func.attr
+                    if nome:
+                        mapa.setdefault(nome, []).append({"arquivo": rel, "linha": node.lineno})
+
+        try:
+            caminho.parent.mkdir(parents=True, exist_ok=True)
+            caminho.write_text(json.dumps(mapa, ensure_ascii=False), encoding="utf-8")
+        except Exception:
+            pass
+        return mapa
+
+    # ── #1: valida que o corte de linhas não parte uma declaração ao meio ──
+    def _validar_limites_ast(self, codigo_atual: str, linha_inicio: int, linha_fim: int) -> tuple[bool, str]:
+        """
+        CORREÇÃO (#1): a geração por linha (linha_inicio/linha_fim) é o
+        principal ponto de fragilidade da auto-evolução — um corte no meio
+        de uma declaração pode gerar um resultado que ainda compila (o
+        compile() não pega isso, porque o texto ao redor absorve o dano)
+        mas corrompe a indentação/escopo de verdade.
+
+        Aqui verificamos, via AST do arquivo ORIGINAL, que nenhuma
+        declaração de nível de função/classe/statement começa ANTES do
+        recorte e termina DEPOIS dele (ou vice-versa) — ou seja, o corte
+        respeita fronteiras reais de statement, não corta metade de um
+        `if`/`for`/`def` deixando a outra metade órfã.
+        """
+        import ast as _ast
+        try:
+            tree = _ast.parse(codigo_atual)
+        except SyntaxError:
+            return True, "código atual já tem erro de sintaxe — pulando checagem de limites"
+
+        for node in _ast.walk(tree):
+            ini = getattr(node, "lineno", None)
+            fim = getattr(node, "end_lineno", None)
+            if ini is None or fim is None or ini == fim:
+                continue
+            # o nó cruza a fronteira de início OU de fim do recorte, sem
+            # estar totalmente dentro nem totalmente fora → corte no meio
+            cruza_inicio = ini < linha_inicio <= fim < linha_fim
+            cruza_fim    = linha_inicio <= ini <= linha_fim < fim
+            if cruza_inicio or cruza_fim:
+                tipo = type(node).__name__
+                return False, (
+                    f"Corte no meio de um bloco {tipo} (linhas {ini}-{fim}), "
+                    f"recorte pedido foi {linha_inicio}-{linha_fim}. "
+                    f"Ajuste linha_inicio/linha_fim para cobrir o bloco inteiro."
+                )
+        return True, "Limites respeitam fronteiras de statement"
+
+    # ── #2: diff estrutural — método removido ainda é chamado em algum lugar? ──
+    def _validar_diff_estrutural(self, codigo_antigo: str, codigo_novo: str) -> tuple[bool, str]:
+        """
+        CORREÇÃO (#2): compara o AST antigo com o novo. Se um método que
+        existia sumiu, checa (via o mapa de #7) se ele ainda é chamado em
+        algum lugar do projeto — se for, bloqueia a modificação, porque
+        isso é receita certa pra AttributeError na próxima execução.
+        """
+        import ast as _ast
+
+        def _coletar_defs(codigo: str) -> set[str]:
+            try:
+                tree = _ast.parse(codigo)
+            except SyntaxError:
+                return set()
+            nomes = set()
+            for node in _ast.walk(tree):
+                if isinstance(node, (_ast.FunctionDef, _ast.AsyncFunctionDef)):
+                    nomes.add(node.name)
+            return nomes
+
+        defs_antigas = _coletar_defs(codigo_antigo)
+        defs_novas   = _coletar_defs(codigo_novo)
+        removidos = defs_antigas - defs_novas
+        if not removidos:
+            return True, "Nenhum método/função removido"
+
+        mapa = self._construir_ou_carregar_mapa_chamadas()
+        ainda_chamados = []
+        for nome in removidos:
+            chamadas = mapa.get(nome, [])
+            # ignora auto-referência (definição de si mesmo não conta como chamada)
+            if chamadas:
+                ainda_chamados.append(f"{nome} (chamado em {len(chamadas)} lugar(es), ex: {chamadas[0]['arquivo']}:{chamadas[0]['linha']})")
+
+        if ainda_chamados:
+            return False, "Removeu método(s) ainda referenciado(s): " + "; ".join(ainda_chamados[:3])
+        return True, f"{len(removidos)} método(s) removido(s), nenhum referenciado em outro lugar"
+
+    # ── #3: já existe uma versão disso em magi/ (evita duplicação silenciosa) ──
+    def _checar_duplicacao_magi(self, instrucao: str) -> str | None:
+        """
+        CORREÇÃO (#3): a gente encontrou, na prática, código em magi/ que
+        implementa uma versão "correta" de algo que o MagiSystem.py real
+        continuava fazendo do jeito antigo (o bug do eval() inseguro é
+        exemplo direto disso). Antes de gerar uma modificação, procura por
+        nomes de função/método mencionados na instrução dentro do pacote
+        magi/ — se achar, retorna um aviso (não bloqueia, só alerta) pra
+        não deixar a duplicação crescer sem ninguém perceber.
+        """
+        candidatos = re.findall(r'\b(?:método|function|def)\s+`?(\w+)`?', instrucao, re.IGNORECASE)
+        candidatos += re.findall(r'\b(_\w{4,})\b', instrucao)  # nomes tipo _chamar_algo
+        candidatos = list(dict.fromkeys(candidatos))  # dedup mantendo ordem
+        if not candidatos:
+            return None
+
+        pasta_magi = Path(__file__).parent / "magi"
+        if not pasta_magi.exists():
+            return None
+
+        achados = []
+        for nome in candidatos[:5]:
+            for arquivo in pasta_magi.rglob("*.py"):
+                try:
+                    src = arquivo.read_text(encoding="utf-8", errors="ignore")
+                except Exception:
+                    continue
+                if re.search(rf'\bdef\s+{re.escape(nome)}\s*\(', src):
+                    achados.append(f"{nome} já existe em {arquivo.relative_to(Path(__file__).parent)}")
+        if achados:
+            return "Possível duplicação com magi/: " + "; ".join(achados[:3])
+        return None
+
+    # ── #6: diff desproporcional à instrução (typo vs. reescrita inteira) ──
+    def _checar_proporcionalidade(self, instrucao: str, codigo_antigo: str, codigo_novo: str) -> tuple[bool, str]:
+        """
+        CORREÇÃO (#6): se a instrução é curta e simples ("corrige o typo
+        na linha X") mas o diff resultante mexe em dezenas de linhas, isso
+        é um sinal de alerta — o modelo pode ter reescrito mais do que foi
+        pedido. Heurística simples: instrução curta (<12 palavras, sem
+        conjunção indicando mudança composta) deveria gerar um diff pequeno.
+        """
+        palavras = instrucao.split()
+        # CORREÇÃO: usar "e " como substring dá falso positivo em quase
+        # qualquer frase em português (ex: "corrige" termina em "e", seguido
+        # de espaço — "corrige o" já contém "e " sem ter nada a ver com a
+        # conjunção "e"). Usa \b (fronteira de palavra) pra achar a palavra
+        # "e" isolada de verdade.
+        tem_conjuncao_e = bool(re.search(r'\be\b', instrucao.lower()))
+        outras_conjuncoes = ("também", "além", "depois", "então", "adicionalmente", "refator")
+        instrucao_simples = len(palavras) < 12 and not tem_conjuncao_e and not any(c in instrucao.lower() for c in outras_conjuncoes)
+
+        linhas_antigas = codigo_antigo.splitlines()
+        linhas_novas   = codigo_novo.splitlines()
+        import difflib
+        diff = list(difflib.unified_diff(linhas_antigas, linhas_novas, n=0))
+        linhas_mudadas = sum(1 for l in diff if l.startswith(("+", "-")) and not l.startswith(("+++", "---")))
+
+        LIMITE_INSTRUCAO_SIMPLES = 40
+        if instrucao_simples and linhas_mudadas > LIMITE_INSTRUCAO_SIMPLES:
+            return False, (
+                f"Instrução parece simples ({len(palavras)} palavras) mas o diff mexe em "
+                f"{linhas_mudadas} linhas (limite: {LIMITE_INSTRUCAO_SIMPLES}) — "
+                f"desproporcional, pode ter reescrito mais que o pedido."
+            )
+        return True, f"Diff de {linhas_mudadas} linhas proporcional à instrução"
+
+    # ── #9: timeout adaptativo conforme tamanho do arquivo ──────────
+    def _timeout_adaptativo(self, caminho_arquivo: str, base: int = 15, maximo: int = 90) -> int:
+        """CORREÇÃO (#9): arquivo maior = mais tempo pra importar/testar.
+        Timeout fixo (15-30s) tanto faz pra um arquivo de 200 linhas quanto
+        pra um de 8000 — escala pelo tamanho em KB, com piso e teto."""
+        try:
+            tamanho_kb = Path(caminho_arquivo).stat().st_size / 1024
+        except Exception:
+            return base
+        return int(max(base, min(maximo, base + tamanho_kb / 15)))
+
+    # ── #5: teste de regressão automático para funções puras ────────
+    _PADROES_IMPUROS = (
+        "self._chamar_", "self.magi._chamar_", "requests.", "subprocess.",
+        "open(", "time.sleep", "random.", "os.system", "os.remove",
+        "os.getenv", ".write(", "urllib.", "socket.", "input(",
+    )
+
+    def _eh_funcao_pura(self, codigo: str, nome_funcao: str) -> bool:
+        """
+        Detecta (de forma conservadora) se uma função/método não faz
+        chamadas de rede, I/O, ou tem efeitos colaterais óbvios — candidata
+        segura pra rodar um teste de entrada/saída automático de verdade
+        (não só confirmar que importa, mas que o RESULTADO está certo).
+        Conservador de propósito: qualquer chamada suspeita ou incerteza
+        já marca como impura (falso negativo é seguro aqui, falso positivo
+        rodando algo com efeito colateral no teste não é).
+        """
+        import ast as _ast
+        try:
+            tree = _ast.parse(codigo)
+        except SyntaxError:
+            return False
+        alvo = None
+        for node in _ast.walk(tree):
+            if isinstance(node, (_ast.FunctionDef, _ast.AsyncFunctionDef)) and node.name == nome_funcao:
+                alvo = node
+                break
+        if alvo is None:
+            return False
+        trecho = _ast.get_source_segment(codigo, alvo) or ""
+        return not any(p in trecho for p in self._PADROES_IMPUROS)
+
+    def _rodar_teste_rapido(self, caminho_arquivo: str, nome_funcao: str,
+                            entrada_repr: str, saida_esperada_repr: str) -> tuple[bool, str]:
+        """
+        CORREÇÃO (#5): as camadas anteriores confirmam que o código
+        IMPORTA e RODA — não confirmam que o RESULTADO está certo. Pra
+        funções puras (sem rede/IO, ver _eh_funcao_pura), roda de verdade
+        com uma entrada de exemplo e compara com a saída esperada — só
+        vale pra funções de nível de MÓDULO (não métodos de instância,
+        que exigiriam instanciar MAGISystem inteiro com chaves de API).
+        `entrada_repr`/`saida_esperada_repr` são literais Python em texto
+        (ex: entrada_repr="(2, 3)", saida_esperada_repr="5"), avaliados
+        com ast.literal_eval — nunca eval() bruto.
+        """
+        script = f'''
+import sys, importlib.util, ast
+sys.path.insert(0, {str(Path(caminho_arquivo).parent)!r})
+spec = importlib.util.spec_from_file_location("magi_quicktest", {str(caminho_arquivo)!r})
+mod = importlib.util.module_from_spec(spec)
+try:
+    spec.loader.exec_module(mod)
+except Exception as e:
+    print("TESTE_RAPIDO_ERRO_IMPORT: " + str(e)); sys.exit(1)
+
+fn = getattr(mod, {nome_funcao!r}, None)
+if fn is None or not callable(fn):
+    print("TESTE_RAPIDO_FUNCAO_NAO_ENCONTRADA"); sys.exit(1)
+
+try:
+    entrada = ast.literal_eval({entrada_repr!r})
+    esperado = ast.literal_eval({saida_esperada_repr!r})
+    args = entrada if isinstance(entrada, tuple) else (entrada,)
+    resultado = fn(*args)
+    if resultado == esperado:
+        print("TESTE_RAPIDO_OK")
+    else:
+        print("TESTE_RAPIDO_DIVERGIU: esperado=" + repr(esperado) + " obtido=" + repr(resultado))
+        sys.exit(1)
+except Exception as e:
+    print("TESTE_RAPIDO_EXCECAO: " + type(e).__name__ + ": " + str(e))
+    sys.exit(1)
+'''
+        try:
+            proc = subprocess.run(
+                [sys.executable or "python", "-c", script],
+                capture_output=True, text=True,
+                timeout=self._timeout_adaptativo(caminho_arquivo),
+            )
+            if proc.returncode == 0 and "TESTE_RAPIDO_OK" in proc.stdout:
+                return True, "Teste rápido (entrada→saída) passou"
+            return False, (proc.stdout + proc.stderr).strip()[-300:]
+        except subprocess.TimeoutExpired:
+            return False, "Timeout no teste rápido"
+        except Exception as e:
+            return False, f"Erro ao rodar teste rápido: {e}"
+
+    # ── #10: relatório/dashboard de histórico de auto-evolução ──────
+    def relatorio_evolucao(self) -> str:
+        """
+        CORREÇÃO (#10): dá visibilidade de quão bem a auto-evolução está
+        indo ao longo do tempo — taxa de sucesso, motivos mais comuns de
+        reversão, e as últimas tentativas. Lê _AE_HISTORICO_PATH (já
+        persistido por _ae_registrar em todo ciclo).
+        """
+        if not self._AE_HISTORICO_PATH.exists():
+            return "Nenhum histórico de auto-evolução ainda (rode 'autoevoluir' pelo menos uma vez)."
+
+        registros = []
+        with open(self._AE_HISTORICO_PATH, encoding="utf-8") as f:
+            for ln in f:
+                try:
+                    registros.append(json.loads(ln))
+                except Exception:
+                    pass
+
+        if not registros:
+            return "Histórico vazio."
+
+        total     = len(registros)
+        sucessos  = [r for r in registros if r.get("sucesso")]
+        falhas    = [r for r in registros if not r.get("sucesso")]
+        taxa      = (len(sucessos) / total * 100) if total else 0
+
+        from collections import Counter
+        motivos_falha = Counter()
+        for r in falhas:
+            msg = r.get("mensagem", "")[:60]
+            motivos_falha[msg] += 1
+
+        linhas = [
+            "═══ RELATÓRIO DE AUTO-EVOLUÇÃO ═══",
+            f"Total de tentativas : {total}",
+            f"Sucesso             : {len(sucessos)} ({taxa:.0f}%)",
+            f"Revertidas/falhadas : {len(falhas)}",
+            "",
+            "Motivos de reversão mais comuns:",
+        ]
+        for motivo, count in motivos_falha.most_common(5):
+            linhas.append(f"  {count}x — {motivo}")
+
+        linhas.append("")
+        linhas.append("Últimas 5 tentativas:")
+        for r in registros[-5:]:
+            status = "✓" if r.get("sucesso") else "✗"
+            linhas.append(f"  [{status}] {r.get('ts','?')} — {r.get('titulo','?')[:60]}")
+
+        return "\n".join(linhas)
 
     def _ae_analisar_codigo(self) -> dict:
         """
@@ -5672,7 +6600,6 @@ class MAGISystem:
         # Funções longas (>60 linhas) e complexidade ciclomática simples
         funcoes_longas: list[dict] = []
         complexidade:   list[dict] = []
-        _CC_KEYWORDS = {"if", "elif", "for", "while", "except", "with", "assert", "and", "or"}
 
         for node in _ast.walk(tree):
             if not isinstance(node, (_ast.FunctionDef, _ast.AsyncFunctionDef)):
@@ -5767,12 +6694,24 @@ class MAGISystem:
             "score_saude":        max(0, int(score)),
         }
 
-    def _ae_planejar(self, analise: dict, historico_ids: list[str]) -> list[dict]:
+    def _ae_planejar(self, analise: dict, historico_ids: list[str],
+                     resultado_anterior: dict | None = None) -> dict | None:
         """
-        Fase 2 — Planejamento: envia a análise ao modelo e recebe uma lista
-        priorizada de melhorias concretas a aplicar, filtrando as já tentadas.
+        Fase 2 — Planejamento incremental: pede UMA única melhoria por vez
+        (não mais uma lista fechada de várias de uma vez).
+
+        CORREÇÃO (#4): antes, um ciclo inteiro de melhorias era decidido de
+        uma vez só, no escuro, sem saber se a primeira melhoria do lote ia
+        sequer funcionar. Agora cada melhoria é planejada já sabendo o
+        resultado da anterior (sucesso ou por que falhou) — mais parecido
+        com como eu (Claude) trabalho de verdade: uma mudança, valida,
+        só então decide a próxima com base no que aconteceu.
+
+        CORREÇÃO (#8): a melhoria agora TEM que vir com 'causa_raiz'
+        (o PORQUÊ do problema, não só o "o quê") — obriga o planejamento
+        a justificar a mudança com base na análise real, em vez de só
+        descrever a ação.
         """
-        # Filtra análise para campos mais acionáveis (não sobrecarrega o prompt)
         analise_filtrada = {
             k: v for k, v in analise.items()
             if v and v != [] and k != "imports_nao_usados"
@@ -5780,22 +6719,36 @@ class MAGISystem:
         resumo_analise = json.dumps(analise_filtrada, ensure_ascii=False, indent=2)
         resumo_hist    = json.dumps(historico_ids[-20:]) if historico_ids else "[]"
 
+        contexto_anterior = ""
+        if resultado_anterior:
+            status = "SUCESSO" if resultado_anterior.get("sucesso") else "FALHOU"
+            contexto_anterior = (
+                f"\nÚLTIMA MELHORIA DO CICLO ATUAL — {status}:\n"
+                f"  Título: {resultado_anterior.get('titulo','?')}\n"
+                f"  Resultado: {resultado_anterior.get('mensagem','?')[:200]}\n"
+                f"Considere isso ao propor a próxima — se falhou, não repita a mesma abordagem; "
+                f"se teve sucesso, pode propor algo que se baseie nessa mudança.\n"
+            )
+
         prompt = (
             f"Análise estrutural do código MAGI:\n{resumo_analise}\n\n"
-            f"IDs de melhorias já aplicadas/tentadas (não repetir):\n{resumo_hist}\n\n"
-            f"Com base SOMENTE no que a análise acima revela, proponha até {self._AE_MAX_POR_CICLO} "
-            f"melhorias concretas e independentes, ordenadas por impacto.\n"
-            f"Para cada uma:\n"
+            f"IDs de melhorias já aplicadas/tentadas (não repetir):\n{resumo_hist}\n"
+            f"{contexto_anterior}\n"
+            f"Com base SOMENTE no que a análise acima revela, proponha a PRÓXIMA "
+            f"melhoria concreta mais importante — só UMA, não uma lista.\n"
             f"  - 'id': slug único (ex: 'refat_processar_sources')\n"
             f"  - 'titulo': 1 linha descritiva\n"
+            f"  - 'causa_raiz': POR QUE esse problema existe (não é o que fazer, é a causa de fundo — "
+            f"ex: 'função cresceu organicamente sem refatoração, hoje tem 3 responsabilidades misturadas')\n"
             f"  - 'instrucao': instrução CIRÚRGICA para _gerar_modificacao:\n"
             f"    OBRIGATÓRIO: mencione o nome EXATO do método Python a modificar (ex: 'no método _cache_buscar')\n"
             f"    OBRIGATÓRIO: descreva a mudança em termos de código (ex: 'substitua o loop por numpy vetorizado')\n"
             f"    PROIBIDO: instruções genéricas como 'melhore performance' sem especificar onde e como\n"
             f"  - 'impacto': 'alto'|'medio'\n"
             f"  - 'categoria': 'performance'|'qualidade'|'segurança'|'legibilidade'\n\n"
-            f"Responda APENAS com JSON válido:\n"
-            f'[{{"id":"...","titulo":"...","instrucao":"...","impacto":"alto","categoria":"..."}}]'
+            f"Se não houver mais nenhuma melhoria genuína a propor, responda null.\n"
+            f"Responda APENAS com JSON válido (objeto único, não lista):\n"
+            f'{{"id":"...","titulo":"...","causa_raiz":"...","instrucao":"...","impacto":"alto","categoria":"..."}}'
         )
         system = (
             "Você é o CASPER-3 do MAGI em modo de auto-avaliação cirúrgica. "
@@ -5803,27 +6756,29 @@ class MAGISystem:
             "Nunca invente problemas. Só JSON, sem explicações."
         )
         r = (
-            self._chamar_deepseek(DEEPSEEK_MODELO_PADRAO, system, prompt)
+            self._chamar_deepseek(DEEPSEEK_MODELO_EVOLUCAO, system, prompt)
             or self._chamar_local(system, prompt)
         )
         if not r:
-            return []
+            return None
         try:
             limpo = re.sub(r"```[a-z]*\n?|```", "", r).strip()
-            # extrai apenas o array JSON
-            m = re.search(r"\[.*\]", limpo, re.DOTALL)
+            if limpo.strip().lower() in ("null", "none", ""):
+                return None
+            m = re.search(r"\{.*\}", limpo, re.DOTALL)
             if m:
                 limpo = m.group(0)
-            plano = json.loads(limpo)
-            if not isinstance(plano, list):
-                return []
-            # filtra os já tentados
-            return [p for p in plano if p.get("id") not in historico_ids]
+            melhoria = json.loads(limpo)
+            if not isinstance(melhoria, dict) or not melhoria.get("id"):
+                return None
+            if melhoria.get("id") in historico_ids:
+                return None
+            return melhoria
         except Exception:
-            return []
+            return None
 
     def _ae_executar_melhoria(self, melhoria: dict) -> tuple[bool, str]:
-        """Executa uma melhoria de forma completamente autônoma com 6 camadas de segurança.
+        """Executa uma melhoria de forma completamente autônoma com 7 camadas de segurança.
 
         Camadas:
         1. Geração com CoT estruturado
@@ -5832,6 +6787,9 @@ class MAGISystem:
         4. Teste de modificação em subprocess multiplataforma (4 sub-camadas)
         5. Diff semântico — garante mudança real e não-destrutiva
         6. Backup atômico + escrita + auditoria SHA-256
+        7. Validação pós-escrita DESTA melhoria (import real + testes) — se
+           falhar, reverte só esta melhoria via o backup da camada 6, sem
+           descartar as outras melhorias já aplicadas no mesmo ciclo.
         """
         instrucao = melhoria.get("instrucao", "")
         titulo    = melhoria.get("titulo", instrucao[:60])
@@ -5847,6 +6805,16 @@ class MAGISystem:
 
         # Instrução vaga → enriquece com análise do código antes de gerar
         instrucao_enriquecida = self._enriquecer_instrucao(instrucao)
+
+        # CORREÇÃO (#3): já existe uma versão disso em magi/? Não bloqueia
+        # (pode ser intencional), só avisa — pra não deixar a duplicação
+        # entre MagiSystem.py e magi/ crescer sem ninguém perceber (foi
+        # assim que o bug do eval() inseguro escapou: existia uma versão
+        # segura em magi/security/ que nunca foi conectada).
+        aviso_dup = self._checar_duplicacao_magi(instrucao_enriquecida)
+        if aviso_dup:
+            print(f"{Fore.YELLOW}  │  [AVISO] {aviso_dup}")
+            log.warn("ae_duplicacao", aviso_dup)
 
         codigo_novo, descricao = self._gerar_modificacao(instrucao_enriquecida)
         if not codigo_novo:
@@ -5901,9 +6869,30 @@ class MAGISystem:
             print(f"{Fore.CYAN}  └─ {Fore.RED}✗ {msg}")
             return False, msg
 
+        # Camada 7: validação pós-escrita DESTA melhoria (não do ciclo inteiro).
+        # Antes, a validação só rodava no fim de todo o ciclo — se uma entre
+        # várias melhorias quebrasse algo, o ciclo INTEIRO era revertido,
+        # jogando fora também as melhorias boas que vieram junto. Agora cada
+        # melhoria é confirmada individualmente: se ESTA quebrar, só ELA é
+        # desfeita (via o backup que acabou de ser criado acima), e a próxima
+        # melhoria do ciclo é gerada em cima de uma base já confirmada boa.
+        print(f"{Fore.BLUE}  │  [VALIDAÇÃO] Confirmando que o arquivo novo importa e roda de verdade...")
+        ok_pos, msg_pos = self._validar_comportamento_pos_evolucao()
+        if not ok_pos:
+            print(f"{Fore.RED}  │  ✗ Validação pós-escrita falhou: {msg_pos[:200]}")
+            print(f"{Fore.YELLOW}  │  Revertendo SÓ esta melhoria (as anteriores do ciclo continuam aplicadas)...")
+            try:
+                caminho.write_text(src_atual, encoding="utf-8")
+                log.warn("ae_melhoria", f"'{titulo[:60]}' revertida — falhou validação pós-escrita: {msg_pos[:150]}")
+            except Exception as e_rb:
+                print(f"{Fore.RED}  │  ERRO ao reverter: {e_rb} — verifique o backup {backup.name}")
+            msg = f"Aplicada mas revertida — validação pós-escrita falhou: {msg_pos[:150]}"
+            print(f"{Fore.CYAN}  └─ {Fore.RED}✗ {msg}")
+            return False, msg
+
         linhas_delta = len(codigo_novo.splitlines()) - len(src_atual.splitlines())
         delta_str    = f"+{linhas_delta}" if linhas_delta >= 0 else str(linhas_delta)
-        print(f"{Fore.CYAN}  └─ {Fore.GREEN}✓ Aplicada! ({delta_str} linhas) Backup: {backup.name}")
+        print(f"{Fore.CYAN}  └─ {Fore.GREEN}✓ Aplicada e validada! ({delta_str} linhas) Backup: {backup.name}")
         self.consciencia.adicionar_aprendizado(f"[AUTO-EVOLUÇÃO] {descricao[:120]}")
         return True, descricao
 
@@ -6002,46 +6991,53 @@ class MAGISystem:
         return True, "Diff semântico OK"
 
     def _validar_comportamento_pos_evolucao(self) -> tuple[bool, str]:
-        """Validação semântica pós-evolução: envia queries de referência e compara respostas.
+        """Validação pós-evolução: confirma que o ARQUIVO NOVO (já em disco)
+        importa e executa de verdade, e roda os testes estruturais contra ele.
 
-        Complementa os testes estruturais — verifica se o comportamento mudou
-        de forma não esperada após uma auto-evolução.
+        CORREÇÃO CRÍTICA: a versão antiga mandava perguntas genéricas
+        ("o que é você?", "2+2?") pro LLM em self._chamar_deepseek(...) —
+        isso chamava o MÉTODO do objeto atual, que ainda tem o código ANTIGO
+        carregado em memória (Python não recarrega um módulo só porque o
+        arquivo em disco mudou). Ou seja: a "validação semântica" nunca
+        testou o código que de fato acabou de ser escrito — testava um LLM
+        respondendo trivia, sem nenhuma relação com a modificação aplicada.
+        Por isso o sistema conseguia "passar" na validação e mesmo assim
+        quebrar na próxima vez que alguém reiniciasse o MAGI.
+
+        Agora: importa o arquivo NOVO de verdade (subprocess isolado) e roda
+        MAGITestes contra o conteúdo dele — testando o código que
+        efetivamente vai rodar da próxima vez que o MAGI for iniciado.
         """
-        queries_referencia = [
-            ("o que é você?",                  ["MAGI", "núcleo", "sistema"]),
-            ("qual é 2+2?",                     ["4", "quatro"]),
-            ("liste os seus núcleos internos",  ["MELCHIOR", "BALTHASAR", "CASPER"]),
-        ]
-        falhas: list[str] = []
-        for query, esperados in queries_referencia:
-            try:
-                system = "Responda brevemente."
-                r = (
-                    self._chamar_deepseek(DEEPSEEK_MODELO_PADRAO, system, query)
-                    or self._chamar_local(system, query)
-                )
-                if r:
-                    r_lower = r.lower()
-                    if not any(e.lower() in r_lower for e in esperados):
-                        falhas.append(f"Query '{query[:30]}' não contém esperados {esperados}")
-            except Exception as e:
-                falhas.append(f"Erro em query de referência: {e}")
+        caminho_atual = str(Path(__file__).resolve())
 
-        if falhas:
-            return False, " | ".join(falhas[:3])
-        return True, "Comportamento pós-evolução validado"
+        ok_import, msg_import = self._executar_arquivo_isolado(caminho_atual, timeout=30)
+        if not ok_import:
+            return False, f"Arquivo novo não importa de verdade: {msg_import[:300]}"
+
+        try:
+            codigo_novo = Path(__file__).read_text(encoding="utf-8")
+            testes = MAGITestes(codigo_novo)
+            ok_testes, resultados = testes.rodar(silencioso=True)
+            if not ok_testes:
+                falhas = [r["teste"] + ": " + r["msg"] for r in resultados if not r["ok"]]
+                return False, " | ".join(falhas[:3])
+        except Exception as e:
+            return False, f"Erro ao rodar MAGITestes pós-evolução: {e}"
+
+        return True, "Arquivo novo importado e testado com sucesso (execução real, não só sintaxe)"
 
     def _ae_registrar(self, ciclo: int, melhoria: dict, sucesso: bool, mensagem: str):
         """Persiste o resultado de cada tentativa de auto-evolução."""
         self._AE_HISTORICO_PATH.parent.mkdir(parents=True, exist_ok=True)
         reg = {
-            "ts":       datetime.now().isoformat(timespec="seconds"),
-            "ciclo":    ciclo,
-            "id":       melhoria.get("id", "?"),
-            "titulo":   melhoria.get("titulo", "?")[:100],
-            "impacto":  melhoria.get("impacto", "?"),
-            "sucesso":  sucesso,
-            "mensagem": mensagem[:200],
+            "ts":         datetime.now().isoformat(timespec="seconds"),
+            "ciclo":      ciclo,
+            "id":         melhoria.get("id", "?"),
+            "titulo":     melhoria.get("titulo", "?")[:100],
+            "causa_raiz": melhoria.get("causa_raiz", "")[:200],  # #8
+            "impacto":    melhoria.get("impacto", "?"),
+            "sucesso":    sucesso,
+            "mensagem":   mensagem[:200],
         }
         try:
             with open(self._AE_HISTORICO_PATH, "a", encoding="utf-8") as f:
@@ -6099,38 +7095,44 @@ class MAGISystem:
         for ciclo in range(1, ciclos + 1):
             MAGIInterface.separador(f"CICLO {ciclo}/{ciclos}", Fore.MAGENTA)
 
-            # ── Fase 1: análise ──────────────────────────────────
-            print(f"{Fore.BLUE}  [1/3] Analisando código via AST...")
-            analise = self._ae_analisar_codigo()
-            if "erro" in analise:
-                print(f"{Fore.RED}  Análise falhou: {analise['erro']}")
-                break
-            score_saude = analise.get("score_saude", "?")
-            print(f"{Fore.GREEN}  {analise['total_linhas']} linhas · "
-                  f"{len(analise['funcoes_longas'])} funções longas · "
-                  f"{len(analise['alta_complexidade'])} alta CC · "
-                  f"{len(analise['duplicatas'])} duplicatas")
-            print(f"{Fore.CYAN}  Score de saúde: {Fore.YELLOW}{score_saude}/100")
+            # ── CORREÇÃO (#4): planejamento incremental ──────────
+            # Antes: analisa uma vez, planeja um LOTE inteiro de até
+            # _AE_MAX_POR_CICLO melhorias de uma vez, só então executa todas.
+            # Agora: analisa → planeja UMA → executa → valida → analisa nível
+            # de novo (o código mudou!) → planeja a próxima já sabendo o que
+            # aconteceu com a anterior. Mais lento, mas cada decisão é
+            # tomada em cima do estado real e mais recente do código, igual
+            # eu (Claude) faço: mudança pequena, confirma, só então a próxima.
+            aplicadas_ciclo   = 0
+            src_pre_ciclo     = self._ler_proprio_codigo()
+            resultado_anterior = None
 
-            # ── Fase 2: planejamento ─────────────────────────────
-            print(f"\n{Fore.BLUE}  [2/3] Planejando melhorias...")
-            plano = self._ae_planejar(analise, historico_ids)
-            if not plano:
-                print(f"{Fore.YELLOW}  Nenhuma melhoria nova identificada. Encerrando.")
-                break
-            print(f"{Fore.GREEN}  {len(plano)} melhoria(s) planejada(s):")
-            for i, m in enumerate(plano, 1):
-                cor_imp = Fore.RED if m.get("impacto") == "alto" else Fore.YELLOW
-                print(f"  {Fore.CYAN}  {i}. [{cor_imp}{m.get('impacto','?').upper()}{Fore.CYAN}] "
-                      f"{Fore.WHITE}{m.get('titulo','?')}")
+            for slot in range(1, self._AE_MAX_POR_CICLO + 1):
+                print(f"\n{Fore.BLUE}  [{slot}/{self._AE_MAX_POR_CICLO}] Analisando código via AST...")
+                analise = self._ae_analisar_codigo()
+                if "erro" in analise:
+                    print(f"{Fore.RED}  Análise falhou: {analise['erro']}")
+                    break
+                score_saude = analise.get("score_saude", "?")
+                print(f"{Fore.GREEN}  {analise['total_linhas']} linhas · "
+                      f"{len(analise['funcoes_longas'])} funções longas · "
+                      f"{len(analise['alta_complexidade'])} alta CC · "
+                      f"{len(analise['duplicatas'])} duplicatas")
+                print(f"{Fore.CYAN}  Score de saúde: {Fore.YELLOW}{score_saude}/100")
 
-            # ── Fase 3: execução ─────────────────────────────────
-            print(f"\n{Fore.BLUE}  [3/3] Executando melhorias...\n")
-            aplicadas_ciclo = 0
-            src_pre_ciclo   = self._ler_proprio_codigo()
+                print(f"{Fore.BLUE}  Planejando próxima melhoria...")
+                melhoria = self._ae_planejar(analise, historico_ids, resultado_anterior)
+                if not melhoria:
+                    print(f"{Fore.YELLOW}  Nenhuma melhoria nova identificada. Encerrando ciclo.")
+                    break
 
-            for melhoria in plano:
                 mid = melhoria.get("id", "?")
+                cor_imp = Fore.RED if melhoria.get("impacto") == "alto" else Fore.YELLOW
+                print(f"  {Fore.CYAN}[{cor_imp}{melhoria.get('impacto','?').upper()}{Fore.CYAN}] "
+                      f"{Fore.WHITE}{melhoria.get('titulo','?')}")
+                if melhoria.get("causa_raiz"):
+                    print(f"  {Fore.MAGENTA}Causa raiz: {Fore.WHITE}{melhoria['causa_raiz'][:150]}")
+
                 # Timeout por melhoria individual (evita travar indefinidamente)
                 import concurrent.futures as _cf
                 with _cf.ThreadPoolExecutor(max_workers=1) as _ex_ae:
@@ -6140,21 +7142,40 @@ class MAGISystem:
                     except _cf.TimeoutError:
                         sucesso, mensagem = False, "Timeout (180s) na execução da melhoria"
                         print(f"{Fore.RED}  │ TIMEOUT — melhoria cancelada")
+
                 self._ae_registrar(ciclo, melhoria, sucesso, mensagem)
                 historico_ids.append(mid)
+                resultado_anterior = {"titulo": melhoria.get("titulo", "?"), "sucesso": sucesso, "mensagem": mensagem}
                 if sucesso:
                     aplicadas_ciclo  += 1
                     total_aplicadas  += 1
+                    # CORREÇÃO (bug encontrado na revisão pós-#7): o mapa de
+                    # chamadas tem TTL de 1h, mas dentro do MESMO ciclo o
+                    # código muda a cada melhoria aplicada — a melhoria
+                    # seguinte não pode confiar num mapa que ainda reflete
+                    # quem chamava o quê ANTES desta mudança. Força
+                    # reconstrução só quando uma melhoria é de fato aplicada
+                    # (não a cada tentativa, pra não desperdiçar o scan
+                    # quando nada mudou de verdade).
+                    self._construir_ou_carregar_mapa_chamadas(forcar=True)
 
             # ── Validação pós-ciclo ──────────────────────────────
+            # CORREÇÃO: cada melhoria individual já é validada (import real +
+            # MAGITestes) logo depois de ser escrita, dentro de
+            # _ae_executar_melhoria — se UMA quebrar, só ELA é revertida, as
+            # outras do ciclo continuam de pé. Esta validação de pós-ciclo
+            # agora serve pra um caso mais raro: bugs de INTERAÇÃO entre
+            # melhorias que passam individualmente mas quebram algo quando
+            # combinadas. Como não dá pra saber qual delas causou o problema
+            # nesse caso, o rollback aqui continua sendo do ciclo inteiro.
             if aplicadas_ciclo > 0:
                 print(f"\n{Fore.BLUE}  ◈ Rodando suite de testes pós-ciclo {ciclo}...")
                 src_pos = self._ler_proprio_codigo()
                 ts = MAGITestes(src_pos)
                 ok_ts, _ = ts.rodar(silencioso=True)
                 if ok_ts:
-                    # Validação semântica adicional pós-ciclo
-                    print(f"{Fore.BLUE}  ◈ Validação de comportamento pós-evolução...")
+                    # Validação semântica adicional pós-ciclo (pega interação entre melhorias)
+                    print(f"{Fore.BLUE}  ◈ Validação de comportamento pós-ciclo (interação entre melhorias)...")
                     ok_comp, msg_comp = self._validar_comportamento_pos_evolucao()
                     if not ok_comp:
                         print(f"{Fore.RED}  ✗ Comportamento alterado: {msg_comp}")
@@ -6240,7 +7261,7 @@ class MAGISystem:
                 print(f"{Fore.YELLOW}  Passo descartado.")
                 continue
 
-            sucesso = self._aplicar_modificacao(codigo_novo)
+            sucesso = self._aplicar_modificacao(codigo_novo, instrucao=passo)
             if sucesso:
                 sucessos += 1
                 beep(1000, 100); time.sleep(0.08); beep(1200, 100)
@@ -8235,6 +9256,10 @@ if __name__ == "__main__":
                 continue
             agente = MAGICodeAgent(magi)
             agente.executar(tarefa)
+            continue
+
+        if cmd.lower().startswith('relatorio evolucao') or cmd.lower().startswith('relatório evolução'):
+            print(magi.relatorio_evolucao())
             continue
 
         if cmd.lower().startswith('autoevoluir'):
